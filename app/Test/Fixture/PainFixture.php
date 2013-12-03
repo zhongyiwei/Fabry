@@ -1,0 +1,42 @@
+<?php
+/**
+ * PainFixture
+ *
+ */
+class PainFixture extends CakeTestFixture {
+
+/**
+ * Fields
+ *
+ * @var array
+ */
+	public $fields = array(
+		'id' => array('type' => 'integer', 'null' => false, 'default' => null, 'key' => 'primary'),
+		'date' => array('type' => 'date', 'null' => false, 'default' => null),
+		'medication' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 70, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
+		'illness' => array('type' => 'string', 'null' => true, 'default' => null, 'length' => 70, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
+		'users_id' => array('type' => 'integer', 'null' => false, 'default' => null, 'length' => 10, 'key' => 'primary'),
+		'indexes' => array(
+			'PRIMARY' => array('column' => array('id', 'users_id'), 'unique' => 1),
+			'id_UNIQUE' => array('column' => 'id', 'unique' => 1),
+			'fk_pains_users1_idx' => array('column' => 'users_id', 'unique' => 0)
+		),
+		'tableParameters' => array('charset' => 'utf8', 'collate' => 'utf8_general_ci', 'engine' => 'InnoDB')
+	);
+
+/**
+ * Records
+ *
+ * @var array
+ */
+	public $records = array(
+		array(
+			'id' => 1,
+			'date' => '2013-10-03',
+			'medication' => 'Lorem ipsum dolor sit amet',
+			'illness' => 'Lorem ipsum dolor sit amet',
+			'users_id' => 1
+		),
+	);
+
+}
