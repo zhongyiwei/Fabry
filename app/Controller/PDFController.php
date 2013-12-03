@@ -382,7 +382,8 @@ class PDFController extends AppController {
         if ($this->request->is(array('post', 'put'))) {
             $start = $this->request->data['Pain']['start'];
             $end = $this->request->data['Pain']['end'];
-
+            $start = date('Y-m-d', strtotime($start));
+            $end = date('Y-m-d', strtotime($end));
 //            $conditions = array(
 //                'conditions' => array(
 //                    'and' => array(
@@ -397,7 +398,7 @@ class PDFController extends AppController {
             $PDFTableData = NULL;
             $takeMedicineDays = 0;
             for ($i = 0; $i < count($painData); $i++) {
-                $PDFTableData[$i][0] = $painData[$i]['Pain']['date'];
+                $PDFTableData[$i][0] = date('d-m-Y', strtotime($painData[$i]['Pain']['date'])); 
                 $PDFTableData[$i][1] = $painData[$i]['Pain']['painLevel'];
                 $status = ($painData[$i]['Pain']['medication'] == 1 ? "Taken" : "Not Taken");
                 $PDFTableData[$i][2] = $status;
@@ -420,6 +421,8 @@ class PDFController extends AppController {
             $pdf->Cell(70, 10, $title, 0, 1);
             $pdf->Ln(2);
             $pdf->SetFont('Arial', '', 12);
+            $start = date('d-m-Y', strtotime($start));
+            $end = date('d-m-Y', strtotime($end));
             $pdf->Cell(180, 10, "Date: Between " . $start . " and " . $end, 0, 1);
             $pdf->Ln(1);
             $pdf->Cell(180, 10, "Number of Days Take medicine: " . $takeMedicineDays . " Days", 0, 1);
@@ -464,7 +467,8 @@ class PDFController extends AppController {
         if ($this->request->is(array('post', 'put'))) {
             $start = $this->request->data['Bowel']['start'];
             $end = $this->request->data['Bowel']['end'];
-
+            $start = date('Y-m-d', strtotime($start));
+            $end = date('Y-m-d', strtotime($end));
             $uid = $this->current_user['id'];
             $bowelData = $this->Bowel->find('all', array('conditions' => array('date BETWEEN ? AND ?' => array($start, $end), 'users_id' => $uid), 'order' => array('date')));
 
@@ -476,7 +480,7 @@ class PDFController extends AppController {
 
             for ($i = 0; $i < count($bowelData); $i++) {
 
-                $PDFTableData[$i][0] = $bowelData[$i]['Bowel']['date'];
+                $PDFTableData[$i][0] =  date('d-m-Y', strtotime($bowelData[$i]['Bowel']['date'])); 
                 $PDFTableData[$i][1] = $bowelData[$i]['Bowel']['count'];
                 $PDFTableData[$i][2] = $bowelData[$i]['Bowel']['comment'];
 
@@ -498,6 +502,8 @@ class PDFController extends AppController {
             $pdf->Cell(70, 10, $title, 0, 1);
             $pdf->Ln(2);
             $pdf->SetFont('Arial', '', 12);
+            $start = date('d-m-Y', strtotime($start));
+            $end = date('d-m-Y', strtotime($end));
             $pdf->Cell(180, 10, "Date: Between " . $start . " and " . $end, 0, 1);
             $pdf->Ln(1);
             for ($j = 1; $j < 7; $j++) {
@@ -522,7 +528,8 @@ class PDFController extends AppController {
         if ($this->request->is(array('post', 'put'))) {
             $start = $this->request->data['Exercise']['start'];
             $end = $this->request->data['Exercise']['end'];
-
+            $start = date('Y-m-d', strtotime($start));
+            $end = date('Y-m-d', strtotime($end));
             $uid = $this->current_user['id'];
             $exerciseData = $this->Exercise->find('all', array('conditions' => array('date BETWEEN ? AND ?' => array($start, $end), 'users_id' => $uid), 'order' => array('date')));
 
@@ -531,7 +538,7 @@ class PDFController extends AppController {
 
             for ($i = 0; $i < count($exerciseData); $i++) {
 
-                $PDFTableData[$i][0] = $exerciseData[$i]['Exercise']['date'];
+                $PDFTableData[$i][0] = date('d-m-Y', strtotime($exerciseData[$i]['Exercise']['date']));
                 $PDFTableData[$i][1] = $exerciseData[$i]['Exercise']['durationMinute'];
                 $PDFTableData[$i][2] = $exerciseData[$i]['Exercise']['comment'];
             }
@@ -547,6 +554,9 @@ class PDFController extends AppController {
             $pdf->Cell(70, 10, $title, 0, 1);
             $pdf->Ln(2);
             $pdf->SetFont('Arial', '', 12);
+
+            $start = date('d-m-Y', strtotime($start));
+            $end = date('d-m-Y', strtotime($end));
             $pdf->Cell(180, 10, "Date: Between " . $start . " and " . $end, 0, 1);
             $pdf->Ln(1);
 

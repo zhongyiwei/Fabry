@@ -114,7 +114,6 @@ $this->Html->image('cake.logo.png');
                                 </ul>
                             </li>
                             <li><?php echo $this->Html->link('Profile Update', array('controller' => 'users', 'action' => "view/$users_id")); ?></a></li>
-                            <li><?php echo $this->Html->link('Health Tips', '/addressbooks'); ?></a></li>
                             <li><?php echo $this->Html->link('Medical Records', ''); ?></a>
                                 <ul> 
                                     <li><?php echo $this->Html->link('Exercise Chart', '/exercises'); ?></a></li>
@@ -143,7 +142,6 @@ $this->Html->image('cake.logo.png');
                                 </ul>-->
                             </li>
                             <li><?php echo $this->Html->link('Calendar', '/calendarEvents/calendarEvent'); ?></a></li>
-                            <li><?php echo $this->Html->link('Contact Us', '/addressbooks'); ?></a></li>
                         </ul>
                     </nav>
 

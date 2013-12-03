@@ -151,13 +151,14 @@ div.view {
     padding:10px 2%;
 }
 div.actions {
-    /*float:right;*/
-    text-align:right;
+
+    float:right;
 }
 
 div.actions h3 {
     padding-top:0;
     color:#777;
+    display:none;
 }
 div.actions ul {
     margin-right:-1px;		
@@ -170,7 +171,7 @@ div.actions ul li {
 }
 .usersview {
     margin-bottom:-200px;
-
+    margin-top: 25px;
 }
 .usersform {
 }
@@ -266,7 +267,7 @@ td.actions {
 }
 table td.actions a {
     margin: 0px 6px;
-    padding:10px 5px;
+    padding:5px 5px;
 }
 
 /* SQL log */
@@ -645,7 +646,7 @@ input[type=submit],
     -moz-border-radius: 1px;
     border-radius: 1px;
     text-decoration: none;
-    /*text-shadow: #fff 0px 1px 0px;*/
+    text-shadow: #fff 0px 1px 0px;
     min-width: 0;
     -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3), 0px 1px 1px rgba(0, 0, 0, 0.2);
     -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3), 0px 1px 1px rgba(0, 0, 0, 0.2);
@@ -963,4 +964,19 @@ div.soon a img {
     background-image: -o-linear-gradient(top, #76BF6B, #3B8230);
     background-image: linear-gradient(top, #76BF6B, #3B8230);
     text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3);
+}
+.userTable tr td{
+    width:50%;
+
+}
+.userTable tr td label{
+    display: block;
+    float:left;
+    width:120px;
+    /*clear:left;*/
+    text-align: left;
+    cursor:hand;
+}
+.userTable tr td:nth-child(2) label{
+    width:200px;
 }

@@ -1,3 +1,10 @@
+    <div class="actions">
+        <h3><?php echo __('Actions'); ?></h3>
+        <ul>
+            <li><?php echo $this->Html->link(__('New News'), array('action' => 'add')); ?></li>
+        </ul>
+    </div
+
 <div class="news index">
     <table cellpadding="0" cellspacing="0" id="js-datatable">
         <thead>
@@ -49,11 +56,3 @@
     </div>
     -->
 
-    <div class="actions">
-        <h3><?php echo __('Actions'); ?></h3>
-        <ul>
-            <li><?php echo $this->Html->link(__('New News'), array('action' => 'add')); ?></li>
-            <li><?php echo $this->Html->link(__('List Users'), array('controller' => 'users', 'action' => 'index')); ?> </li>
-            <li><?php echo $this->Html->link(__('New User'), array('controller' => 'users', 'action' => 'add')); ?> </li>
-        </ul>
-    </div

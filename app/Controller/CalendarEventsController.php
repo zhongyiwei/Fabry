@@ -126,7 +126,7 @@ class CalendarEventsController extends AppController {
 //        $contactId = $this->Contact->find('all', array('conditions' => array('users_id' => $id)));
 //        $appointmentData = $this->Appointment->find('all', array('conditions' => array('users_id' => $contactId)));
 
-        $appointmentData = $this->Appointment->find('all', array('conditions' => array('users_id' => $id)));
+        $appointmentData = $this->Appointment->find('all', array('conditions' => array('Appointment.users_id' => $id)));
 
         $invitationData = $this->Invitation->find('all', array('conditions' => array('users_id' => $id, 'response_status' => 'Attend')));
         $medicationData = $this->Medication->find('all', array('conditions' => array('users_id' => $id),'limit'=>10));

@@ -11,7 +11,7 @@ echo $this->Html->script('fullcalendar.js');
 <?php
 echo nl2br(" \n ");
 ?>
-<?php echo $this->Html->link(__('New Appoinment Event'), array('controller' => 'appointments', 'action' => 'add')); ?>
+<?php echo $this->Html->link(__('New Appoinment Event'), array('controller' => 'appointments', 'action' => 'add?redirect=calendar')); ?>
 <?php
 echo $this->Html->image("legend.png", array("alt" => "Calendar Legend", 'name' => "Calendar Legend", 'height' => "110", 'style' => "float:right;margin-top: -25px;margin-bottom: 15px;"));
 ?>
