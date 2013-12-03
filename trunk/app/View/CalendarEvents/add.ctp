@@ -13,10 +13,16 @@ echo $this->Html->script('jquery-ui-timepicker-addon.js');
     <fieldset>
         <legend><?php echo __('Add Calendar Event'); ?></legend>
         <?php
-                $date = $this->params['url']['date'];
+        if (!empty($this->params['url']['date'])) {
+            $date = $this->params['url']['date'];
+        }
         echo $this->Form->input('title');
-        echo $this->Form->input('start', array('id' => 'dateTimePickerStart','type'=>'text','value'=>$date));
-        echo $this->Form->input('end', array('id' => 'dateTimePickerEnd','type'=>'text'));
+        if (!empty($this->params['url']['date'])) {
+            echo $this->Form->input('start', array('id' => 'dateTimePickerStart', 'type' => 'text', 'value' => $date));
+        } else {
+            echo $this->Form->input('start', array('id' => 'dateTimePickerStart', 'type' => 'text'));
+        }
+        echo $this->Form->input('end', array('id' => 'dateTimePickerEnd', 'type' => 'text'));
         echo $this->Form->input('allDay');
         echo $this->Form->input('repeat');
         ?>

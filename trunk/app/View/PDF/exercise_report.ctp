@@ -19,6 +19,6 @@ echo $this->Html->script('jquery-ui-timepicker-addon.js');
     <?php echo $this->Form->end(__('Generate')); ?>
 </div>
 <script type="text/javascript">
-    $('#dateTimePickerStart').datetimepicker();
-    $('#dateTimePickerEnd').datetimepicker();
+    $('#dateTimePickerStart').datepicker({ dateFormat: 'dd-mm-yy' }).val()
+    $('#dateTimePickerEnd').datepicker({ dateFormat: 'dd-mm-yy' }).val()
 </script>

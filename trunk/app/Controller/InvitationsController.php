@@ -57,8 +57,8 @@ class InvitationsController extends AppController {
                 $this->Session->setFlash(__('The invitation could not be saved. Please, try again.'));
             }
         }
-        $users = $this->Invitation->User->find('list');
-        $events = $this->Invitation->Event->find('list');
+//        $users = $this->Invitation->User->find('list');
+//        $events = $this->Invitation->Event->find('list');
         $this->set(compact('users', 'events'));
     }
 
@@ -76,7 +76,11 @@ class InvitationsController extends AppController {
         if ($this->request->is(array('post', 'put'))) {
             if ($this->Invitation->save($this->request->data)) {
                 $this->Session->setFlash(__('The invitation has been saved.'));
+//                if ($this->current_user['role'] == "admin") {
                 return $this->redirect(array('action' => 'index'));
+//                } else {
+//                    return $this->redirect(array('action' => 'eventParticipation'));
+//                }
             } else {
                 $this->Session->setFlash(__('The invitation could not be saved. Please, try again.'));
             }
@@ -84,8 +88,8 @@ class InvitationsController extends AppController {
             $options = array('conditions' => array('Invitation.' . $this->Invitation->primaryKey => $id));
             $this->request->data = $this->Invitation->find('first', $options);
         }
-        $users = $this->Invitation->User->find('list');
-        $events = $this->Invitation->Event->find('list');
+//        $users = $this->Invitation->User->find('list');
+//        $events = $this->Invitation->Event->find('list');
         $this->set(compact('users', 'events'));
     }
 
@@ -138,6 +142,26 @@ class InvitationsController extends AppController {
         $id = $this->current_user['id'];
         $invitationData = $this->Invitation->find('all', array('conditions' => array('users_id' => $id)));
         $this->set(compact("invitationData"));
+    }
+
+    public function editResponse($id = null) {
+        if (!$this->Invitation->exists($id)) {
+            throw new NotFoundException(__('Invalid invitation'));
+        }
+        if ($this->request->is(array('post', 'put'))) {
+            if ($this->Invitation->save($this->request->data)) {
+                $this->Session->setFlash(__('The invitation has been saved.'));
+                return $this->redirect(array('action' => 'eventParticipation'));
+            } else {
+                $this->Session->setFlash(__('The invitation could not be saved. Please, try again.'));
+            }
+        } else {
+            $options = array('conditions' => array('Invitation.' . $this->Invitation->primaryKey => $id));
+            $this->request->data = $this->Invitation->find('first', $options);
+        }
+//        $users = $this->Invitation->User->find('list');
+//        $events = $this->Invitation->Event->find('list');
+        $this->set(compact('users', 'events'));
     }
 
 }

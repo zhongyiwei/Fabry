@@ -28,8 +28,12 @@ class ContactsController extends AppController {
     }
 
     public function memindex() {
-        $this->Contact->recursive = 0;
-        $this->set('contacts', $this->Paginator->paginate());
+//        $this->Contact->recursive = 0;
+//        $this->set('contacts', $this->Paginator->paginate());
+        $id = $this->current_user['id'];
+        $contacts = $this->Contact->find('all', array('conditions' => array('OR' => array(array('Contact.users_id' => $id), array('isOfficial' => 1)))));
+//        debug($contacts);
+        $this->set(compact('contacts'));
     }
 
     /**
@@ -59,11 +63,16 @@ class ContactsController extends AppController {
 //            $data_save = array('Contact' => array_merge($this->request->data['Contact'], $data_save));
             //debug($data_save);
             //die;
-//            $this->request->data['Appointment']['users_id'] = $this->current_user['id'];
+            $this->request->data['Contact']['users_id'] = $this->current_user['id'];
 
             if ($this->Contact->save($this->request->data)) {
                 $this->Session->setFlash(__('The contact has been saved.'), 'default', array(), 'good');
-                return $this->redirect(array('controller' => 'pages', 'action' => 'display', 'home'));
+                $redirect = $this->params['url']['redirect'];
+                if ($redirect == "event") {
+                    return $this->redirect(array('action' => 'add','controller'=>'appointments'));
+                } else {
+                    return $this->redirect(array('controller' => 'pages', 'action' => 'display', 'home'));
+                }
             } else {
                 $this->Session->setFlash(__('The contact could not be saved. Please, try again.'), 'default', array(), 'bad');
             }
@@ -85,8 +94,8 @@ class ContactsController extends AppController {
      */
     public function admadd() {
         if ($this->request->is('post')) {
-//            $this->request->data['Appointment']['users_id'] = $this->current_user['id'];
-//            $this->Contact->create();
+            $this->request->data['Contact']['users_id'] = $this->current_user['id'];
+            $this->Contact->create();
             if ($this->Contact->save($this->request->data)) {
                 $this->Session->setFlash(__('The contact has been saved.'), 'default', array(), 'good');
                 return $this->redirect(array('controller' => 'pages', 'action' => 'display', 'home'));
