@@ -163,5 +163,4 @@ class InvitationsController extends AppController {
 //        $events = $this->Invitation->Event->find('list');
         $this->set(compact('users', 'events'));
     }
-
 }
