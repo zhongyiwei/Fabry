@@ -1,5 +1,8 @@
 <?php
 
+App::uses('CakeEmail', 'Network/Email');
+App::uses('AppController', 'Controller');
+App::import('Vendor', 'phpMailer', array('file' => 'phpMailer/PHPMailerAutoload.php'));
 App::import('Vendor', 'PDFGenerator', array('file' => 'PDFGenerator/fpdf.php'));
 
 class PDF extends FPDF {
@@ -373,15 +376,13 @@ class PDF extends FPDF {
 
 }
 
-App::uses('AppController', 'Controller');
-
 class PDFController extends AppController {
 
-    public function painReport() {
+    public function painReport($type) {
 
         if ($this->request->is(array('post', 'put'))) {
-            $start = $this->request->data['Pain']['start'];
-            $end = $this->request->data['Pain']['end'];
+            $start = $this->request->data['Report']['start'];
+            $end = $this->request->data['Report']['end'];
             $start = date('Y-m-d', strtotime($start));
             $end = date('Y-m-d', strtotime($end));
 //            $conditions = array(
@@ -458,15 +459,15 @@ class PDFController extends AppController {
 //            $this->render('painReport');
             $pdf->SetCreator('Fabry');
 
-            $pdf->Output('Pain Report.pdf', 'I');
+            $pdf->Output('Pain Report.pdf', "$type");
         }
     }
 
-    public function bowelReport() {
+    public function bowelReport($type) {
 
         if ($this->request->is(array('post', 'put'))) {
-            $start = $this->request->data['Bowel']['start'];
-            $end = $this->request->data['Bowel']['end'];
+            $start = $this->request->data['Report']['start'];
+            $end = $this->request->data['Report']['end'];
             $start = date('Y-m-d', strtotime($start));
             $end = date('Y-m-d', strtotime($end));
             $uid = $this->current_user['id'];
@@ -511,9 +512,9 @@ class PDFController extends AppController {
 //                $pdf->Cell(180, 10, "Number of Days having  $j movement: " . $Move['Bowel'][$j] . " Days", 0, 1);
 //            }
             $pdf->Cell(180, 10, "Number of Days having  n movement: ", 0, 1);
-            $movementHeader = array('1 Move', '2 Move', '3 Move', '4 Move','5 Move','6 Move');
+            $movementHeader = array('1 Move', '2 Move', '3 Move', '4 Move', '5 Move', '6 Move');
             $pdf->BasicTable($movementHeader, $Move, 20);
-            
+
             $pdf->Ln(10);
             $PDFTableHeader = array('Date', 'Bowel Movement (0 - 6)', 'Comments');
 
@@ -523,15 +524,15 @@ class PDFController extends AppController {
 //            $this->render('painReport');
             $pdf->SetCreator('Fabry');
 
-            $pdf->Output('Bowel Report.pdf', 'I');
+            $pdf->Output('Bowel Report.pdf', "$type");
         }
     }
 
-    public function exerciseReport() {
+    public function exerciseReport($type) {
 
         if ($this->request->is(array('post', 'put'))) {
-            $start = $this->request->data['Exercise']['start'];
-            $end = $this->request->data['Exercise']['end'];
+            $start = $this->request->data['Report']['start'];
+            $end = $this->request->data['Report']['end'];
             $start = date('Y-m-d', strtotime($start));
             $end = date('Y-m-d', strtotime($end));
             $uid = $this->current_user['id'];
@@ -585,14 +586,14 @@ class PDFController extends AppController {
 //            $this->render('painReport');
             $pdf->SetCreator('Fabry');
 
-            $pdf->Output('Exercise Report.pdf', 'I');
+            $pdf->Output('Exercise Report.pdf', "$type");
         }
     }
 
-    public function medicationReport() {
+    public function medicationReport($type) {
         if ($this->request->is(array('post', 'put'))) {
-            $start = $this->request->data['Medication']['start'];
-            $end = $this->request->data['Medication']['end'];
+            $start = $this->request->data['Report']['start'];
+            $end = $this->request->data['Report']['end'];
             $start = date('Y-m-d', strtotime($start));
             $end = date('Y-m-d', strtotime($end));
 
@@ -626,14 +627,88 @@ class PDFController extends AppController {
 
             $PDFTableHeader = array('Medication Name', 'Strength', 'DOSE', 'Frequency', 'Medicine Commence Time');
 
-            $pdf->BasicTable($PDFTableHeader, $PDFTableData,52);
+            $pdf->BasicTable($PDFTableHeader, $PDFTableData, 52);
             $pdf->Ln(10);
 
 //            $this->render('painReport');
             $pdf->SetCreator('Fabry');
 
-            $pdf->Output('Medication Report.pdf', 'I');
+            $pdf->Output('Medication Report.pdf', "$type");
         }
+    }
+
+    public function emailPdfs() {
+        $uid = $this->current_user['id'];
+        $userName = $this->Contact->find("list", array('fields' => array('id', 'doctor'), 'conditions' => array('OR' => array(array('users_id' => $uid), array('isOfficial' => 1)))));
+//        $userName = $this->Contact->find("list", array('fields' => array('id', 'doctor'), 'conditions' => array('isOfficial' => 1)));
+//        $userName = Set::combine($users, '{n}.User.id', array('{0} {1} ( {2} )', '{n}.User.firstName', '{n}.User.lastName', '{n}.User.email'));
+
+        if ($this->request->is(array('post', 'put'))) {
+            $selectedUsers = $this->request->data['Report']['users'];
+
+
+            $start = $this->request->data['Report']['start'];
+            $end = $this->request->data['Report']['end'];
+            $start = date('Y-m-d', strtotime($start));
+            $end = date('Y-m-d', strtotime($end));
+
+            $this->Session->setFlash(__('The emails has been successfully sent.'), 'default', array(), 'good');
+
+//            $userEmails = $this->User->find('all', array('conditions' => array('role' => "admin")));
+
+            for ($i = 0; $i < count($selectedUsers); $i++) {
+                $docEmails = $this->Contact->find('all', array('conditions' => array('contact.id' => $selectedUsers[$i])));
+//                debug($docEmails);
+                $doctorsName = $docEmails[$i]['Contact']['email'];
+
+                $userEmail = $this->User->find('all', array('conditions' => array('id' => $uid)));
+
+
+                $emailTitle = "Customer: " . $userEmail[$i]['User']['firstName'] . " " . $userEmail[$i]['User']['lastName'] . " has sent you all his record between " . $start . " and " . $end;
+                $emailDesc = "Please check attachment to see more detailed information";
+
+//                $pdfName = $news['News']['pdf_name'];
+
+                $mail = new PHPMailer;
+                $mail->isSMTP();                                      // Set mailer to use SMTP
+                $mail->Host = 'ssl://smtp.gmail.com';  // Specify main and backup server
+                $mail->SMTPAuth = true;                               // Enable SMTP authentication
+                $mail->Username = 'team61fabry';                            // SMTP username
+                $mail->Password = 'ieteam61';                           // SMTP password
+                $mail->SMTPSecure = 'tls';                            // Enable encryption, 'ssl' also accepted
+                $mail->Port = 465;
+
+                $mail->isHTML(true);
+                $mail->From = "$this->sender";
+                $mail->FromName = $this->senderTag;
+                $mail->addAddress($doctorsName);
+
+//                $path = $_SERVER['DOCUMENT_ROOT'] . "$this->webroot" . "app/webroot/$pdfName";
+                $this->medicationReport("F");
+                $this->painReport("F");
+                $this->exerciseReport("F");
+                $this->bowelReport("F");
+
+                $mail->addAttachment("Medication Report.pdf");
+                $mail->addAttachment("Pain Report.pdf");
+                $mail->addAttachment("Exercise Report.pdf");
+                $mail->addAttachment("Bowel Report.pdf");
+
+                $mail->Subject = $emailTitle;
+                $mail->Body = $emailDesc;
+
+//            debug($path);
+                $timeLimits = 60 * 60;
+                set_time_limit($timeLimits);
+                if (!$mail->send()) {
+                    echo 'Message could not be sent.';
+                    echo 'Mailer Error: ' . $mail->ErrorInfo;
+                    exit;
+                }
+            }
+            $this->redirect(array('controller' => 'PDF', 'action' => 'emailPdfs'));
+        }
+        $this->set(compact("userName"));
     }
 
 }

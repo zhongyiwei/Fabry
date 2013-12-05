@@ -60,7 +60,7 @@ Examples:
 
 ATTENTION: The trailing slash is required.
 */
-$baseUrl = '/Uploads/';
+$baseUrl = 'info/';
 
 /*
 $baseDir : the path to the local directory (in the server) which points to the
@@ -80,7 +80,7 @@ Examples:
 ATTENTION: The trailing slash is required.
 */
 //$baseDir = resolveUrl($baseUrl);
-$baseDir = 'E:/xampp/htdocs/build2/app/webroot/Uploads/';
+$baseDir = 'E:/xampp/htdocs/build2/app/webroot/info/';
 /*$baseDir = 'E:/Note2/FIT3047 Industrial Experience Project/IEProject/app/webroot/uploads';*/
 
 /*
@@ -305,7 +305,7 @@ Force ASCII names for files and folders.
 If enabled, characters with diactric marks, like å, ä, ö, ć, č, đ, š
 will be automatically converted to ASCII letters.
 */
-$config['ForceAscii'] = false;
+$config['ForceAscii'] = true;
 
 /*
 Send files using X-Sendfile module

@@ -21,118 +21,22 @@ echo $this->Html->image("legend.png", array("alt" => "Calendar Legend", 'name' =
         var source = new Array();
         source [0] = [
 <?php
-for ($i = 0; $i < count($eventData); $i++) {
-    $status = ($eventData[$i]['CalendarEvent']['allDay'] == 1 ? "true" : "false");
-    if ($eventData[$i]['CalendarEvent']['repeat'] == 0) {
-        echo "\n{\n";
-        echo "title:'" . $eventData[$i]['CalendarEvent']['title'] . "',\n";
-        echo "start:'" . $eventData[$i]['CalendarEvent']['start'] . "',\n";
-        echo "end:'" . $eventData[$i]['CalendarEvent']['end'] . "',\n";
-        echo "allDay:" . $status . ",\n";
-        echo "url:'" . $this->webroot . "calendarEvents/edit/" . $eventData[$i]['CalendarEvent']['id'] . "'";
-        if ($i != (count($eventData) - 1)) {
-            echo "\n},\n";
-        } else {
-            echo "\n}\n";
-        }
-    } else {
-        $repeatingWeeks = 54;
-        for ($j = 0; $j < $repeatingWeeks; $j++) {
-            $newStartDate = date('Y-m-d h:i:s', strtotime($eventData[$i]['CalendarEvent']['start']) + 7 * 24 * 3600 * $j);
-            $newEndDate = date('Y-m-d h:i:s', strtotime($eventData[$i]['CalendarEvent']['end']) + 7 * 24 * 3600 * $j);
-            echo "\n{\n";
-            echo "title:'" . $eventData[$i]['CalendarEvent']['title'] . "',\n";
-            echo "start:'" . $newStartDate . "',\n";
-            echo "end:'" . $newEndDate . "',\n";
-            echo "allDay:" . $status . ",\n";
-            echo "url:'" . $this->webroot . "calendarEvents/edit/" . $eventData[$i]['CalendarEvent']['id'] . "'";
-//            if ($i != ($repeatingWeeks - 1)) {
-            echo "\n},\n";
-//            } else {
-//                echo "\n}\n";
-//            }
-        }
-    }
-}
+echo $calendarEvent;
 ?>
         ];
         source [1] = [
 <?php
-for ($j = 0; $j < count($appointmentData); $j++) {
-    echo "\n{\n";
-    echo "title:'" . $appointmentData[$j]['Appointment']['description'] . "',\n";
-    echo "start:'" . $appointmentData[$j]['Appointment']['date'] . "',\n";
-    echo "allDay:false,\n";
-    echo "url:'" . $this->webroot . "appointments/edit/" . $appointmentData[$j]['Appointment']['id'] . "'";
-//    if ($j != (count($appointmentData) - 1)) {
-    echo "\n},\n";
-//    } else {
-//        echo "\n}\n";
-//    }
-}
-//    $eventVariable['title'] = $eventData[$i]['CalendarEvent']['title'];
-//    $eventVariable['start'] = $eventData[$i]['CalendarEvent']['start'];
-//    $eventVariable['end'] = $eventData[$i]['CalendarEvent']['end'];
-//    $eventVariable['allDay'] = ($eventData[$i]['CalendarEvent']['start'] == 0 ? true : false);
-//
-//    echo json_encode($eventVariable);
+echo $appointmentEvent;
 ?>
         ];
         source [2] = [
 <?php
-for ($p = 0; $p < count($invitationData); $p++) {
-    $InviteAllDayStatus = ($invitationData[$p]['Events']['allDay'] == 1 ? "true" : "false");
-
-    echo "\n{\n";
-    echo "title:'" . $invitationData[$p]['Events']['title'] . "',\n";
-    echo "start:'" . $invitationData[$p]['Events']['start'] . "',\n";
-    echo "end:'" . $invitationData[$p]['Events']['end'] . "',\n";
-    echo "allDay:" . $InviteAllDayStatus . ",\n";
-//    echo "url:'" . $this->webroot . "invitation/edit/" . $invitationData[$p]['Appointment']['id'] . "'";
-    if ($p != (count($invitationData) - 1)) {
-        echo "\n},\n";
-    } else {
-        echo "\n}\n";
-    }
-}
-//    $eventVariable['title'] = $eventData[$i]['CalendarEvent']['title'];
-//    $eventVariable['start'] = $eventData[$i]['CalendarEvent']['start'];
-//    $eventVariable['end'] = $eventData[$i]['CalendarEvent']['end'];
-//    $eventVariable['allDay'] = ($eventData[$i]['CalendarEvent']['start'] == 0 ? true : false);
-//
-//    echo json_encode($eventVariable);
+echo $eventGoingAttend;
 ?>
         ];
         source [3] = [
 <?php
-for ($q = 0; $q < count($medicationData); $q++) {
-    $repeatingTimes = $medicationData[$q]['Medication']['repeatTimes'];
-    
-    $repeatingHours = $medicationData[$q]['Medication']['frequency'];
-    if ($repeatingHours == "Daily"){
-        $repeatingHours = 24;
-    }else if ($repeatingHours == "Once in two days"){
-        $repeatingHours = 48;
-    }else if ($repeatingHours == "Once in three days"){
-        $repeatingHours = 72;
-    }else if ($repeatingHours == "Weekly"){
-        $repeatingHours = 168;
-    }
-    for ($j = 0; $j < $repeatingTimes; $j++) {
-        $newStartDate = date('Y-m-d h:i:s', strtotime($medicationData[$q]['Medication']['start']) + $repeatingHours * 3600 * $j);
-        
-        echo "\n{\n";
-        echo "title:' Take " . $medicationData[$q]['Medication']['medicationName'] . "',\n";
-        echo "start:'" . $newStartDate . "',\n";
-        echo "allDay:false,\n";
-        echo "url:'" . $this->webroot . "medications/edit/" . $medicationData[$q]['Medication']['id'] . "'";
-//        if ($q != (count($medicationData) - 1)) {
-            echo "\n},\n";
-//        } else {
-//            echo "\n}\n";
-//        }
-    }
-}
+echo $medicationEvent;
 ?>
         ];
         //        var date = new Date();

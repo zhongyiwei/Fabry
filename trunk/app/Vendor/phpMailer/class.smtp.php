@@ -102,13 +102,13 @@ class SMTP
      * Default of 5 minutes (300sec) is from RFC2821 section 4.5.3.2
      * @type int
      */
-    public $Timeout = 300;
+    public $Timeout = 3000;
 
     /**
      * The SMTP timelimit value for reads, in seconds.
      * @type int
      */
-    public $Timelimit = 30;
+    public $Timelimit = 3000;
 
     /**
      * The socket for the server connection.

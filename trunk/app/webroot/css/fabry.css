@@ -134,7 +134,7 @@ p {
     margin-top:10px;
     background-color:#FFF;
     clear: both;
-    padding: 60px 20px;
+    /*padding: 60px 20px;*/
     text-align: right;
     visibility: hidden;
 }
@@ -196,7 +196,7 @@ div.actions ul li {
 }
 div.navi ul{
     list-style:none;
-    margin-right:-150px;		
+    /*margin-right:-150px;*/		
 
 }
 div.navi ul li{
@@ -979,4 +979,24 @@ div.soon a img {
 }
 .userTable tr td:nth-child(2) label{
     width:200px;
+}
+.navHome{
+    float:left;
+    text-align:center;
+    color:#003D4C;
+    font-size:large;
+    margin: 25px 30px;
+    
+}
+#content{
+    /*float:left;*/
+    padding: 50px 0;
+    width:98%;
+    margin:0 auto;
+}
+#container{
+    background:#fff;
+}
+.home ul{
+    list-style: none;
 }

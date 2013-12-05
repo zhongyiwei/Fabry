@@ -8,7 +8,7 @@ echo $this->Html->script('jquery.ui.datepicker.js');
 echo $this->Html->script('jquery-ui-timepicker-addon.js');
 ?>
 <div class="painReport form">
-    <?php echo $this->Form->create('Exercise'); ?>
+    <?php echo $this->Form->create('Report',array('url'=>'exerciseReport/I')); ?>
     <fieldset>
         <legend><?php echo __('Create Exercise Report'); ?></legend>
         <?php
