@@ -2,8 +2,6 @@
     <h3><?php echo __('Actions'); ?></h3>
     <ul>
         <li><?php echo $this->Html->link(__('New Bowel'), array('action' => 'add')); ?></li>
-        <li><?php echo $this->Html->link(__('List Users'), array('controller' => 'users', 'action' => 'index')); ?> </li>
-        <li><?php echo $this->Html->link(__('New Users'), array('controller' => 'users', 'action' => 'add')); ?> </li>
         <li><?php echo $this->Html->link(__('Generate Bowel Report'), array('controller' => 'PDF', 'action' => 'bowelReport')); ?> </li>
     </ul>
 </div>
@@ -22,7 +20,8 @@
         <tbody>
             <?php foreach ($bowels as $bowel): ?>
                 <tr>
-                    <td><?php echo h($bowel['Bowel']['date']); ?>&nbsp;</td>
+                    <td><?php $timestamp = strtotime($bowel['Bowel']['date']);
+							 echo date('d-m-Y', $timestamp) ?>&nbsp;</td>
                     <td><?php echo h($bowel['Bowel']['count']); ?>&nbsp;</td>
                     <td><?php echo h($bowel['Bowel']['comment']); ?>&nbsp;</td>
 <!--                    <td>
