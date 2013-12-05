@@ -2,8 +2,6 @@
     <h3><?php echo __('Actions'); ?></h3>
     <ul>
         <li><?php echo $this->Html->link(__('New Exercise'), array('action' => 'add')); ?></li>
-        <li><?php echo $this->Html->link(__('List Users'), array('controller' => 'users', 'action' => 'index')); ?> </li>
-        <li><?php echo $this->Html->link(__('New Users'), array('controller' => 'users', 'action' => 'add')); ?> </li>
         <li><?php echo $this->Html->link(__('Generate Exercise Report'), array('controller' => 'PDF', 'action' => 'exerciseReport')); ?> </li>
     </ul>
 </div>
@@ -22,7 +20,8 @@
         <tbody>
             <?php foreach ($exercises as $exercise): ?>
                 <tr>
-                    <td><?php echo h($exercise['Exercise']['date']); ?>&nbsp;</td>
+                    <td><?php $timestamp = strtotime($exercise['Exercise']['date']);
+			 echo date('d-m-Y', $timestamp) ?>&nbsp;</td>
                     <td><?php echo h($exercise['Exercise']['durationMinute']); ?>&nbsp;</td>
                     <td><?php echo h($exercise['Exercise']['comment']); ?>&nbsp;</td>
     <!--                    <td>
@@ -31,7 +30,7 @@
                     <td class="actions">
                         <?php echo $this->Html->link(__('View'), array('action' => 'view', $exercise['Exercise']['id'])); ?>
                         <?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $exercise['Exercise']['id'])); ?>
-                        <?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $exercise['Exercise']['id']), null, __('Are you sure you want to delete # %s?', $exercise['Exercise']['id'])); ?>
+                        <?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $exercise['Exercise']['id']), null, __('Are you sure you want to delete your exercise session on '.$exercise['Exercise']['date'].'?', $exercise['Exercise']['id'])); ?>
                     </td>
                 </tr>
             <?php endforeach; ?>
