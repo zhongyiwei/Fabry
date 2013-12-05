@@ -6,7 +6,11 @@
         <?php elseif ($current_user['role'] == 'member'): ?>
             <li><?php echo $this->Html->link(__('Go Back'), array('controller' => 'contacts', 'action' => 'memindex')); ?></a></li>
         <?php endif; ?>
-    </ul>
+       		 <li><?php echo $this->Html->link(__('List Contacts'), array('action' => 'index')); ?></li>
+    <ul>
+
+        
+
 
 </div>
 
@@ -41,10 +45,4 @@
         ?>
     </fieldset>
     <?php echo $this->Form->end(__('Submit')); ?>
-</div>
-<div class="actions">
-    <ul>
-
-        <li><?php echo $this->Html->link(__('List Contacts'), array('action' => 'index')); ?></li>
-    </ul>
 </div>
