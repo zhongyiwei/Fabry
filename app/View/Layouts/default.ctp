@@ -120,8 +120,7 @@ $this->Html->image('cake.logo.png');
                                     <li><?php echo $this->Html->link('Bowel Chart', '/bowels'); ?></a></li>
                                     <li><?php echo $this->Html->link('Pain Chart', '/pains'); ?></a></li>
                                     <li><?php echo $this->Html->link('Medication Chart', '/medications'); ?></a></li>
-                                    <li><?php echo $this->Html->link('Email GP', '/medications'); ?></a></li>
-
+                                    <li><?php echo $this->Html->link('Email GP', '/PDF/emailPdfs'); ?></a></li>
                                 </ul>
                             </li>
                             <li><?php echo $this->Html->link('Appointments', '/appointments'); ?></a>
@@ -151,9 +150,7 @@ $this->Html->image('cake.logo.png');
 
 
             <div id="content">
-                <div id="content">
 
-                </div>
                 <!-- for good /bad flash message colors --> 
                 <?php echo $this->Session->flash('good'); ?>
                 <?php echo $this->Session->flash('bad'); ?>

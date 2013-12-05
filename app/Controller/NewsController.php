@@ -3,6 +3,7 @@
 App::uses('AppController', 'Controller');
 App::uses('CakeEmail', 'Network/Email');
 App::import('Vendor', 'phpMailer', array('file' => 'phpMailer/PHPMailerAutoload.php'));
+
 /**
  * News Controller
  *
@@ -170,12 +171,16 @@ class NewsController extends AppController {
             $mail->isHTML(true);
             $mail->From = "$this->sender";
             $mail->FromName = $this->senderTag;
-            $mail->addAddress( $subscribersName);
+            $mail->addAddress($subscribersName);
 
-            $mail->addAttachment($_SERVER["DOCUMENT_ROOT"]."Uploads/files/Resume%20-%20Yi%20Wei%20Zhong.pdf", "news.pdf");
+            $path = $_SERVER['DOCUMENT_ROOT']."$this->webroot"."app/webroot/$pdfName";
+            $mail->addAttachment($path);
             $mail->Subject = $newsTitle;
             $mail->Body = $newsDesc;
 
+//            debug($path);
+            $timeLimits = 60*60;
+            set_time_limit($timeLimits);
             if (!$mail->send()) {
                 echo 'Message could not be sent.';
                 echo 'Mailer Error: ' . $mail->ErrorInfo;

@@ -129,8 +129,117 @@ class CalendarEventsController extends AppController {
         $appointmentData = $this->Appointment->find('all', array('conditions' => array('Appointment.users_id' => $id)));
 
         $invitationData = $this->Invitation->find('all', array('conditions' => array('users_id' => $id, 'response_status' => 'Attend')));
-        $medicationData = $this->Medication->find('all', array('conditions' => array('users_id' => $id),'limit'=>10));
-        $this->set(compact('eventData', 'appointmentData', 'invitationData','medicationData'));
+        $medicationData = $this->Medication->find('all', array('conditions' => array('users_id' => $id), 'limit' => 10));
+
+        $calendarEvent = "";
+        for ($i = 0; $i < count($eventData); $i++) {
+            $status = ($eventData[$i]['CalendarEvent']['allDay'] == 1 ? "true" : "false");
+            if ($eventData[$i]['CalendarEvent']['repeat'] == 0) {
+                $calendarEvent .= "\n{\n";
+                $calendarEvent .= "title:'" . $eventData[$i]['CalendarEvent']['title'] . "',\n";
+                $calendarEvent .= "start:'" . $eventData[$i]['CalendarEvent']['start'] . "',\n";
+                $calendarEvent .= "end:'" . $eventData[$i]['CalendarEvent']['end'] . "',\n";
+                $calendarEvent .= "allDay:" . $status . ",\n";
+                $calendarEvent .= "url:'" . $this->webroot . "calendarEvents/edit/" . $eventData[$i]['CalendarEvent']['id'] . "'";
+                if ($i != (count($eventData) - 1)) {
+                    $calendarEvent .= "\n},\n";
+                } else {
+                    $calendarEvent .= "\n}\n";
+                }
+            } else {
+                $repeatingWeeks = 54;
+                for ($j = 0; $j < $repeatingWeeks; $j++) {
+                    $newStartDate = date('Y-m-d h:i:s', strtotime($eventData[$i]['CalendarEvent']['start']) + 7 * 24 * 3600 * $j);
+                    $newEndDate = date('Y-m-d h:i:s', strtotime($eventData[$i]['CalendarEvent']['end']) + 7 * 24 * 3600 * $j);
+                    $calendarEvent .= "\n{\n";
+                    $calendarEvent .= "title:'" . $eventData[$i]['CalendarEvent']['title'] . "',\n";
+                    $calendarEvent .= "start:'" . $newStartDate . "',\n";
+                    $calendarEvent .= "end:'" . $newEndDate . "',\n";
+                    $calendarEvent .= "allDay:" . $status . ",\n";
+                    $calendarEvent .= "url:'" . $this->webroot . "calendarEvents/edit/" . $eventData[$i]['CalendarEvent']['id'] . "'";
+//            if ($i != ($repeatingWeeks - 1)) {
+                    $calendarEvent .= "\n},\n";
+//            } else {
+//                 $calendarEvent .= "\n}\n";
+//            }
+                }
+            }
+        }
+
+        $appointmentEvent = "";
+        for ($j = 0; $j < count($appointmentData); $j++) {
+            $appointmentEvent .= "\n{\n";
+            $appointmentEvent .= "title:'" . $appointmentData[$j]['Appointment']['description'] . "',\n";
+            $appointmentEvent .= "start:'" . $appointmentData[$j]['Appointment']['date'] . "',\n";
+            $appointmentEvent .= "allDay:false,\n";
+            $appointmentEvent .= "url:'" . $this->webroot . "appointments/edit/" . $appointmentData[$j]['Appointment']['id'] . "'";
+//    if ($j != (count($appointmentData) - 1)) {
+            $appointmentEvent .= "\n},\n";
+//    } else {
+//        $appointmentEvent .= "\n}\n";
+//    }
+        }
+//    $eventVariable['title'] = $eventData[$i]['CalendarEvent']['title'];
+//    $eventVariable['start'] = $eventData[$i]['CalendarEvent']['start'];
+//    $eventVariable['end'] = $eventData[$i]['CalendarEvent']['end'];
+//    $eventVariable['allDay'] = ($eventData[$i]['CalendarEvent']['start'] == 0 ? true : false);
+//
+//    $appointmentEvent .= json_encode($eventVariable);
+
+        $medicationEvent = "";
+        for ($q = 0; $q < count($medicationData); $q++) {
+            $repeatingTimes = $medicationData[$q]['Medication']['repeatTimes'];
+
+            $repeatingHours = $medicationData[$q]['Medication']['frequency'];
+            if ($repeatingHours == "Daily") {
+                $repeatingHours = 24;
+            } else if ($repeatingHours == "Once in two days") {
+                $repeatingHours = 48;
+            } else if ($repeatingHours == "Once in three days") {
+                $repeatingHours = 72;
+            } else if ($repeatingHours == "Weekly") {
+                $repeatingHours = 168;
+            }
+            for ($j = 0; $j < $repeatingTimes; $j++) {
+                $newStartDate = date('Y-m-d h:i:s', strtotime($medicationData[$q]['Medication']['start']) + $repeatingHours * 3600 * $j);
+
+                $medicationEvent .= "\n{\n";
+                $medicationEvent .= "title:' Take " . $medicationData[$q]['Medication']['medicationName'] . "',\n";
+                $medicationEvent .= "start:'" . $newStartDate . "',\n";
+                $medicationEvent .= "allDay:false,\n";
+                $medicationEvent .= "url:'" . $this->webroot . "medications/edit/" . $medicationData[$q]['Medication']['id'] . "'";
+//        if ($q != (count($medicationData) - 1)) {
+                $medicationEvent .= "\n},\n";
+//        } else {
+//            $medicationEvent .= "\n}\n";
+//        }
+            }
+        }
+
+        $eventGoingAttend = "";
+        for ($p = 0; $p < count($invitationData); $p++) {
+            $InviteAllDayStatus = ($invitationData[$p]['Events']['allDay'] == 1 ? "true" : "false");
+
+            $eventGoingAttend .= "\n{\n";
+            $eventGoingAttend .= "title:'" . $invitationData[$p]['Events']['title'] . "',\n";
+            $eventGoingAttend .= "start:'" . $invitationData[$p]['Events']['start'] . "',\n";
+            $eventGoingAttend .= "end:'" . $invitationData[$p]['Events']['end'] . "',\n";
+            $eventGoingAttend .= "allDay:" . $InviteAllDayStatus . ",\n";
+//    $eventGoingAttend .= "url:'" . $this->webroot . "invitation/edit/" . $invitationData[$p]['Appointment']['id'] . "'";
+            if ($p != (count($invitationData) - 1)) {
+                $eventGoingAttend .= "\n},\n";
+            } else {
+                $eventGoingAttend .= "\n}\n";
+            }
+        }
+//    $eventVariable['title'] = $eventData[$i]['CalendarEvent']['title'];
+//    $eventVariable['start'] = $eventData[$i]['CalendarEvent']['start'];
+//    $eventVariable['end'] = $eventData[$i]['CalendarEvent']['end'];
+//    $eventVariable['allDay'] = ($eventData[$i]['CalendarEvent']['start'] == 0 ? true : false);
+//
+//    $eventGoingAttend .= json_encode($eventVariable);
+
+        $this->set(compact('eventData', 'appointmentData', 'invitationData', 'medicationData', 'calendarEvent', 'appointmentEvent', 'medicationEvent','eventGoingAttend'));
     }
 
 }
