@@ -12,13 +12,13 @@
 <div class="usersform">
     <?php echo $this->Form->create('User', array('novalidate' => true)); ?>
     <fieldset>
+                    <h3 style="color:#f00;"><?php echo "*Mandatory Fields"; ?></h3>
 
         <table width="200" border="0" class="userTable">
             <tr>
                 <td>       
 
                     <h2 class="title"><span class="underline"><?php echo "Personal Information"; ?></span></h2>
-                    <h3 style="color:#f00;"><?php echo "*Mandatory Fields"; ?></h3>
                     <?php
                     echo $this->Form->input('firstName');
                     echo $this->Form->input('lastName');
@@ -34,7 +34,6 @@
                 </td>
                 <td>
                     <h2 class="title"><span class="underline"><?php echo "Membership details"; ?></span></h2>
-
                     <?php
                     echo $this->Form->input('username');
                     echo $this->Form->input('password');
