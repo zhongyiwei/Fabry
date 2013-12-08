@@ -193,12 +193,14 @@ class CalendarEventsController extends AppController {
             $repeatingHours = $medicationData[$q]['Medication']['frequency'];
             if ($repeatingHours == "Daily") {
                 $repeatingHours = 24;
-            } else if ($repeatingHours == "Once in two days") {
+            } else if ($repeatingHours == "Every second day") {
                 $repeatingHours = 48;
             } else if ($repeatingHours == "Once in three days") {
                 $repeatingHours = 72;
             } else if ($repeatingHours == "Weekly") {
                 $repeatingHours = 168;
+            } else if ($repeatingHours == "Fortnightly") {
+                $repeatingHours = 336;
             }
             for ($j = 0; $j < $repeatingTimes; $j++) {
                 $newStartDate = date('Y-m-d h:i:s', strtotime($medicationData[$q]['Medication']['start']) + $repeatingHours * 3600 * $j);
@@ -239,7 +241,7 @@ class CalendarEventsController extends AppController {
 //
 //    $eventGoingAttend .= json_encode($eventVariable);
 
-        $this->set(compact('eventData', 'appointmentData', 'invitationData', 'medicationData', 'calendarEvent', 'appointmentEvent', 'medicationEvent','eventGoingAttend'));
+        $this->set(compact('eventData', 'appointmentData', 'invitationData', 'medicationData', 'calendarEvent', 'appointmentEvent', 'medicationEvent', 'eventGoingAttend'));
     }
 
 }

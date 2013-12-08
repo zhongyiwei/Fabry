@@ -13,6 +13,7 @@
             <tr>
                 <th>Date</th>
                 <th>Duration in Minutes</th>
+                <th>Exercise Type</th>
                 <th>Comment</th>
                 <th class="actions"><?php echo __('Actions'); ?></th>
             </tr>
@@ -20,20 +21,23 @@
         <tbody>
             <?php foreach ($exercises as $exercise): ?>
                 <tr>
-                    <td><?php $timestamp = strtotime($exercise['Exercise']['date']);
-			 echo date('d-m-Y', $timestamp) ?>&nbsp;</td>
+                    <td><?php
+                        $timestamp = strtotime($exercise['Exercise']['date']);
+                        echo date('d-m-Y', $timestamp)
+                        ?>&nbsp;</td>
                     <td><?php echo h($exercise['Exercise']['durationMinute']); ?>&nbsp;</td>
+                    <td><?php echo h($exercise['Exercise']['exercise_type']); ?>&nbsp;</td>
                     <td><?php echo h($exercise['Exercise']['comment']); ?>&nbsp;</td>
     <!--                    <td>
-                    <?php // echo $this->Html->link($exercise['Users']['id'], array('controller' => 'users', 'action' => 'view', $exercise['Users']['id'])); ?>
+    <?php // echo $this->Html->link($exercise['Users']['id'], array('controller' => 'users', 'action' => 'view', $exercise['Users']['id']));   ?>
                     </td>-->
                     <td class="actions">
                         <?php echo $this->Html->link(__('View'), array('action' => 'view', $exercise['Exercise']['id'])); ?>
                         <?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $exercise['Exercise']['id'])); ?>
-                        <?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $exercise['Exercise']['id']), null, __('Are you sure you want to delete your exercise session on '.$exercise['Exercise']['date'].'?', $exercise['Exercise']['id'])); ?>
+    <?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $exercise['Exercise']['id']), null, __('Are you sure you want to delete your exercise session on ' . $exercise['Exercise']['date'] . '?', $exercise['Exercise']['id'])); ?>
                     </td>
                 </tr>
-            <?php endforeach; ?>
+<?php endforeach; ?>
         </tbody>
     </table>
 </div>

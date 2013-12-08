@@ -76,6 +76,10 @@ class MedicationsController extends AppController {
             throw new NotFoundException(__('Invalid medication'));
         }
         if ($this->request->is(array('post', 'put'))) {
+
+            $uid = $this->current_user['id'];
+            $this->request->data['Medication']['users_id'] = $uid;
+            $this->request->data['Medication']['id'] = $id;
             if ($this->Medication->save($this->request->data)) {
                 $this->Session->setFlash(__('The medication has been saved.'), 'default', array(), 'good');
                 return $this->redirect(array('action' => 'index'));
