@@ -77,7 +77,7 @@
 
 <div class="contacts index">
 
-    <h2><?php echo __('Contacts'); ?></h2>
+    <h2><?php echo __('Official Contacts'); ?></h2>
 
     <div class="actions">
 
@@ -96,22 +96,22 @@
             <?php // admin page dispaly all official contacts and member's contacts, but only diplay official cotacts in member's page?>
             <?php if ($current_user['role'] == 'admin' || $current_user['role'] == 'super'): ?>
                 <tr>
-                    <th><?php echo $this->Paginator->sort('centerName', 'Center Name'); ?></th>
-                    <th><?php echo $this->Paginator->sort('doctor'); ?></th>
-                    <th><?php echo $this->Paginator->sort('department'); ?></th>
-                    <th><?php echo $this->Paginator->sort('state'); ?></th>
-                    <th><?php echo $this->Paginator->sort('country'); ?></th>
-                    <th><?php echo $this->Paginator->sort('phone'); ?></th>
+                    <th>Centre Name</th>
+                    <th>Doctor</th>
+                    <th>Department</th>
+                    <th>State</th>
+                    <th>Country</th>
+                    <th>Phone</th>
                     <th class="actions"><?php echo __('Actions'); ?></th>
                 </tr>
             <?php elseif ($current_user['role'] == 'member') : ?>
                 <tr>
-                    <th><?php echo $this->Paginator->sort('centerName', 'center Name'); ?></th>
-                    <th><?php echo $this->Paginator->sort('doctor'); ?></th>
-                    <th><?php echo $this->Paginator->sort('department'); ?></th>
-                    <th><?php echo $this->Paginator->sort('state'); ?></th>
-                    <th><?php echo $this->Paginator->sort('country'); ?></th>
-                    <th><?php echo $this->Paginator->sort('phone'); ?></th>
+                    <th>Centre Name</th>
+                    <th>Doctor</th>
+                    <th>Department</th>
+                    <th>State</th>
+                    <th>Country</th>
+                    <th>Phone</th>
                     <th class="actions"><?php echo __('Actions'); ?></th>
                 </tr>
             <?php endif ?>
@@ -169,7 +169,7 @@
                     </tr>
 
 
-    <?php endif ?>
+                <?php endif ?>
 
             <?php endforeach; ?>
         </tbody>

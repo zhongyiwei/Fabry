@@ -69,10 +69,9 @@
 
 <div class="contacts index">
 
-    <h2><?php echo __('Contacts'); ?></h2>
+    <h2><?php echo __('Personal Contacts'); ?></h2>
 
-       <div class="actions">
-
+    <div class="actions">
         <ul>
             <li><?php echo $this->Html->link(__('New Contact'), array('action' => 'add')); ?></li>
         </ul>
@@ -84,37 +83,35 @@
             <?php // admin page dispaly all official contacts and member's contacts, but only diplay official cotacts in member's page?>
             <?php if ($current_user['role'] == 'admin' || $current_user['role'] == 'super'): ?>
                 <tr>
-                    <th>Center Name</th>
+                    <th>Centre Name</th>
                     <th>Doctor</th>
                     <th>Department</th>
                     <th>State</th>
-                    <th>Country</th>
                     <th>Phone</th>
                     <th>Is Official</th>
                     <th class="actions"><?php echo __('Actions'); ?></th>
                 </tr>
             <?php elseif ($current_user['role'] == 'member'): ?>
                 <tr>
-                    <th>Center Name</th>
+                    <th>Centre Name</th>
                     <th>Doctor</th>
                     <th>Department</th>
                     <th>State</th>
-                    <th>Country</th>
                     <th>Phone</th>
                     <th class="actions"><?php echo __('Actions'); ?></th>
                 </tr>
             <?php endif ?>
-
+        </thead>
+        <tbody>
             <?php foreach ($contacts as $contact): ?>
-            </thead>
-            <tbody>
+
+
                 <?php if ($current_user['role'] == 'admin'): ?>
                     <tr>
                         <td><?php echo h($contact['Contact']['centerName']); ?>&nbsp;</td>
                         <td><?php echo h($contact['Contact']['doctor']); ?>&nbsp;</td>
                         <td><?php echo h($contact['Contact']['department']); ?>&nbsp;</td>
                         <td><?php echo h($contact['Contact']['state']); ?>&nbsp;</td>
-                        <td><?php echo h($contact['Contact']['country']); ?>&nbsp;</td>
                         <td><?php echo h($contact['Contact']['phone']); ?>&nbsp;</td>
                         <td><?php echo h($contact['Contact']['isOfficial']); ?>&nbsp;</td>
 
@@ -137,7 +134,6 @@
                         <td><?php echo h($contact['Contact']['doctor']); ?>&nbsp;</td>
                         <td><?php echo h($contact['Contact']['department']); ?>&nbsp;</td>
                         <td><?php echo h($contact['Contact']['state']); ?>&nbsp;</td>
-                        <td><?php echo h($contact['Contact']['country']); ?>&nbsp;</td>
                         <td><?php echo h($contact['Contact']['phone']); ?>&nbsp;</td>
                         <td class="actions">
                             <?php if ($current_user['role'] == 'admin'): ?>   <?php // only admin could edit and delete contacts, member could only view ?>
@@ -152,7 +148,7 @@
                             <?php endif; ?>
                         </td>
                     </tr>
-    <?php endif ?>
+                <?php endif ?>
 
             <?php endforeach; ?>
         </tbody>
