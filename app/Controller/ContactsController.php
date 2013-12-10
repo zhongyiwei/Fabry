@@ -146,11 +146,15 @@ class ContactsController extends AppController {
         }
         $this->request->onlyAllow('post', 'delete');
         if ($this->Contact->delete()) {
+		
             $this->Session->setFlash(__('The contact has been deleted.'), 'default', array(), 'good');
         } else {
             $this->Session->setFlash(__('The contact could not be deleted. Please, try again.'), 'default', array(), 'bad');
         }
+		if ($current_user['role'] == 'admin')
         return $this->redirect(array('action' => 'index'));
+		else 
+		return $this->redirect(array('action' => 'memindex'));
     }
 
 }

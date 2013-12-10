@@ -24,7 +24,7 @@
                     echo $this->Form->input('centerName');
                     echo $this->Form->input('doctor');
                     echo $this->Form->input('department');
-                    echo $this->Form->input('address', array('label' => 'Street Number / Name'));
+                    echo $this->Form->input('address');
                     echo $this->Form->input('suburb');
                     echo $this->Form->input('postal', array('label' => 'Post code'));
                     ?></td>

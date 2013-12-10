@@ -1,13 +1,15 @@
 <div class="actions">
 
     <ul>
-        <?php if ($current_user['role'] == 'super'): ?>									<?php // this if statement used to control the content will be displayed to user (The member can not delete any user account while the admin allow to delete members' account).  ?>
-            <li><?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $this->Form->value('User.id')), null, __('Are you sure you want to delete the username' . $user['User']['username'] . '?', $this->Form->value('User.id'))); ?></li>
+        <?php if ($current_user['role'] == 'super'): ?>									
+            <?php // this if statement used to control the content will be displayed to user (The member can not delete any user account while the admin allow to delete members' account).  ?>
+            <li><?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $this->Form->value('User.id')), null, __('Are you sure you want to delete the user' . '?', $this->Form->value('User.id'))); ?></li>
 
             <li><?php echo $this->Html->link(__('Members profile '), array('action' => 'index')); ?></li>
 
-<?php endif; ?>
-        <?php if ($current_user['role'] == 'admin'): ?>									<?php // this if statement used to control the content will be displayed to user (The member can not delete any user account while the admin allow to delete members' account).  ?>
+        <?php endif; ?>
+        <?php if ($current_user['role'] == 'admin'): ?>									
+            <?php // this if statement used to control the content will be displayed to user (The member can not delete any user account while the admin allow to delete members' account).  ?>
 
 
             <li><?php echo $this->Html->link(__('Members profile '), array('action' => 'index')); ?></li>
@@ -18,7 +20,7 @@
             $userId = $current_user['id'];
             ?>
             <li><?php echo $this->Html->link(__('Members profile '), array('controller' => 'users', 'action' => "view/$userId")); ?></li>
-<?php endif; ?>
+        <?php endif; ?>
     </ul>
 </div>
 
@@ -31,9 +33,9 @@
             $userId = $current_user['id'];
             ?>
 
-<!--            <h3><?php echo __('Profile of '), h($current_user['username']); ?></h3>-->
+    <!--            <h3><?php echo __('Profile of '), h($current_user['username']); ?></h3>-->
             <!--<dd>
-                    <h3><?php // echo h($current_user['username']); ?></h3>
+                    <h3><?php // echo h($current_user['username']);  ?></h3>
                     &nbsp;
             </dd>-->
         <?php endif; ?>
@@ -47,7 +49,7 @@
             echo $this->Form->input('role', array('label' => 'Define the role', 'options' => array('member' => 'Member', 'admin' => 'Admin')));
         endif;
         ?>
-                            <h3 style="color:#f00;"><?php echo "*Mandatory Fields"; ?></h3>
+        <h3 style="color:#f00;"><?php echo "*Mandatory Fields"; ?></h3>
 
         <table width="200" border="0" class="userTable">
             <tr>
@@ -99,22 +101,22 @@
     if ($current_user['role'] == 'super'):
         $userId = $current_user['id'];
         ?>	
-        <li><?php echo $this->Form->end(__('Submit'), array('controller' => 'users', 'action' => 'index')); ?>
+        <?php echo $this->Form->end(__('Submit'), array('controller' => 'users', 'action' => 'index')); ?>
 
-        <?php endif; ?>
-        <?php
-        if ($current_user['role'] == 'admin'):
-            $userId = $current_user['id'];
-            ?>	
-            <?php echo $this->Form->end(__('Submit'), array('controller' => 'users', 'action' => 'index')); ?>
+    <?php endif; ?>
+    <?php
+    if ($current_user['role'] == 'admin'):
+        $userId = $current_user['id'];
+        ?>	
+        <?php echo $this->Form->end(__('Submit'), array('controller' => 'users', 'action' => 'index')); ?>
 
-        <?php endif; ?>
-        <?php
-        if ($current_user['role'] == 'member'):
-            $userId = $current_user['id'];
-            ?>
-    <?php echo $this->Form->end(__('Submit'), array('controller' => 'users', 'action' => "view/$userId")); ?>
-<?php endif; ?>
+    <?php endif; ?>
+    <?php
+    if ($current_user['role'] == 'member'):
+        $userId = $current_user['id'];
+        ?>
+        <?php echo $this->Form->end(__('Submit'), array('controller' => 'users', 'action' => "view/$userId")); ?>
+    <?php endif; ?>
 
 </div>
 

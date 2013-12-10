@@ -71,15 +71,11 @@
 
     <h2><?php echo __('Contacts'); ?></h2>
 
-    <div class="actions">
+       <div class="actions">
 
-
-
-        <?php if ($current_user['role'] == 'admin'): ?>
-            <ul>
-                <li><?php echo $this->Html->link(__('New Contact'), array('controller' => 'contacts', 'action' => 'add')); ?></li>
-            </ul>
-        <?php endif ?>
+        <ul>
+            <li><?php echo $this->Html->link(__('New Contact'), array('action' => 'add')); ?></li>
+        </ul>
     </div>
 
 

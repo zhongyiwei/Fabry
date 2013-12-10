@@ -108,7 +108,7 @@ $this->Html->image('cake.logo.png');
                             <li><?php echo $this->Html->link('Address Book', "/contacts/memindex"); ?></a>
                                 <ul>
                                     <li><?php echo $this->Html->link('List Current Contacts', array('controller' => 'contacts', 'action' => 'memindex')); ?></a></li>
-                                    <li><?php echo $this->Html->link('New Doctor', array('controller' => 'contacts', 'action' => "add", $users_id)); ?></a></li>
+                                    <li><?php echo $this->Html->link('New Contact', array('controller' => 'contacts', 'action' => "add", $users_id)); ?></a></li>
                                     <li><?php echo $this->Html->link('Official Treatment Centres', array('controller' => 'contacts', 'action' => 'index')); ?></a></li>
                                     <li><?php echo $this->Html->link('Learn More', '/contacts'); ?></a></li>
                                 </ul>

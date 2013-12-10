@@ -197,14 +197,20 @@ class UsersController extends AppController {
                     $email = new CakeEmail();
                     $email->config('default');
                     $email->emailFormat('html');
-                    $email->from("lpabcdefgh@gmail.com");
+                    $email->from("team61fabry@gmail.com");
                     $email->to($user_email);
+
+                    $userName = $user[0]['User']['firstName'] . " " . $user[0]['User']['lastName'];
+                    ;
                     $email->subject("Your New Password from FSGA");
                     $body = "
-	                <div style='font-family:Century Gothic; color:#06496e; width:620px;'><p>Dear user,</p>
-	                <p>Your new password is:</p>
-	                <p style='font-weight:bold'>$tempPassword </p>
-	              
+	                <div style='font-family:Century Gothic; color:#06496e; width:620px;'><p>Dear $userName</p>
+	                <p>Your new fabry system password is </p>
+	                <p style='font-weight:bold'>$tempPassword</p>
+	                <p>Please go to profile update to change your password once you login</p>
+                                 
+                                    <p style='margin-top:30px;'>Kind regards, </p>
+                                    <p>Fabry Support Group Australia</p>
 	                </div>
 	                ";
                     $email->send($body);
