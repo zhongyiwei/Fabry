@@ -69,79 +69,92 @@ $this->Html->image('cake.logo.png');
 
 
             <div class = "navigation">
-                <?php if ($current_user['role'] == 'admin' || $current_user['role'] == 'super'): ?>
+                <?php if ($current_user['role'] == 'super'): ?>
 
                     <nav>
                         <ul>
                             <li><?php echo $this->Html->link('Home', '/pages/home'); ?></a></li>
-                            <li><?php echo $this->Html->link('Address Book', '/contacts'); ?></a>
-                                <ul>
-                                    <li><?php echo $this->Html->link('Doctors and Centres Management', '/contacts'); ?></a></li>
-                                    <li><?php echo $this->Html->link('Learn More', '/addressbooks'); ?></a></li>
-                                </ul>
-                            </li>
-                            <li><?php echo $this->Html->link('Health Tips And Videos', '/addressbooks'); ?></a></li>
-                            <li><?php echo $this->Html->link('Events', '/events'); ?></a>
-                                <!--                                <ul>
-                                                                    <li><?php echo $this->Html->link('Manage Event', '/events'); ?></a></li>
-                                                                    <li><?php echo $this->Html->link('View RSVP', '/addressbooks'); ?></a></li>
-                                                                </ul>-->
-                            </li>
-                            <li><?php echo $this->Html->link('Member Management', array('controller' => 'users', 'action' => 'index')); ?></a>
-                                <ul>
-                                    <li><?php echo $this->Html->link('Profile Update', array('controller' => 'users', 'action' => 'index')); ?></a></li>
-                                </ul>
-                            </li>
-                            <li><?php echo $this->Html->link('Reports', '/users/loginReport'); ?></a></li>
-                            <li><?php echo $this->Html->link('Calendar', '/calendarEvents/calendarEvent'); ?></a></li>
-                            <li><?php echo $this->Html->link('News', '/news'); ?></a></li>
+                            <li><?php echo $this->Html->link('Manage Accounts', array('controller' => 'users', 'action' => 'index')); ?></a></li>
                         </ul>
                     </nav>
-                    <?php
-                elseif ($current_user['role'] == 'member'):
-                    $users_id = $current_user['id'];
-                    ?>
+                    
+                    
+                    
+                <?php elseif ($current_user['role'] == 'admin'): ?>
+
+                    <nav>
+                        <ul>
+                            <li><?php echo $this->Html->link('Home', '/pages/home'); ?></a></li>
+                            <li><?php echo $this->Html->link('Members Management', array('controller' => 'users', 'action' => 'index')); ?></a></li>
+                            <li><?php echo $this->Html->link('Doctors and Centres Management', '/contacts'); ?></a></li>
+                            <li><?php echo $this->Html->link('Events', '/events'); ?></a>
+                                <ul>
+                                    <li><?php echo $this->Html->link('Manage Event', '/events'); ?></a></li>
+                                    <li><?php echo $this->Html->link('View in Calendar', '/calendarEvents/calendarEvent'); ?></a></li>
+                                </ul>
+                                <!--   <ul>   
+                                           <li><?php echo $this->Html->link('View RSVP', '/addressbooks'); ?></a></li>
+                                       </ul>    -->
+                            </li>
+                            <li><?php echo $this->Html->link('Newsletters', '/news'); ?></a></li>
+                            <li><?php echo $this->Html->link('Health Tips And Videos', '/addressbooks'); ?></a></li>
+                            <li><?php echo $this->Html->link('Reports', '/addressbooks'); ?></a></li>      
+                        </ul>
+                    </nav>
+                    
+                    
+                    
+                    <?php elseif ($current_user['role'] == 'member'):
+                        $users_id = $current_user['id'];
+                        ?>
 
                     <nav>
                         <ul>
                             <li><?php echo $this->Html->link('Home', '/pages/home'); ?></a></li>
                             <li><?php echo $this->Html->link('Address Book', "/contacts/memindex"); ?></a>
                                 <ul>
-                                    <li><?php echo $this->Html->link('List Current Contacts', array('controller' => 'contacts', 'action' => 'memindex')); ?></a></li>
+                                    <li><?php echo $this->Html->link('List Personal Contacts', array('controller' => 'contacts', 'action' => 'memindex')); ?></a></li>
                                     <li><?php echo $this->Html->link('New Contact', array('controller' => 'contacts', 'action' => "add", $users_id)); ?></a></li>
                                     <li><?php echo $this->Html->link('Official Treatment Centres', array('controller' => 'contacts', 'action' => 'index')); ?></a></li>
-                                    <li><?php echo $this->Html->link('Learn More', '/contacts'); ?></a></li>
+                                    <!--<li><?php echo $this->Html->link('Learn More', '/contacts'); ?></a></li>-->
                                 </ul>
                             </li>
-                            <li><?php echo $this->Html->link('Profile Update', array('controller' => 'users', 'action' => "view/$users_id")); ?></a></li>
                             <li><?php echo $this->Html->link('Medical Records', ''); ?></a>
-                                <ul> 
+                                <ul>
                                     <li><?php echo $this->Html->link('Exercise Chart', '/exercises'); ?></a></li>
                                     <li><?php echo $this->Html->link('Bowel Chart', '/bowels'); ?></a></li>
                                     <li><?php echo $this->Html->link('Pain Chart', '/pains'); ?></a></li>
-                                    <li><?php echo $this->Html->link('Pain with medicine', '/painmedis'); ?></a></li>
                                     <li><?php echo $this->Html->link('Medication Chart', '/medications'); ?></a></li>
+                                    <li><?php echo $this->Html->link('External Medical Records', '/uploads'); ?></a></li>
                                     <li><?php echo $this->Html->link('Email GP', '/PDF/emailPdfs'); ?></a></li>
                                 </ul>
                             </li>
-                            <li><?php echo $this->Html->link('Appointments', '/appointments'); ?></a>
+                            <li><?php echo $this->Html->link('Calendar', '/calendarEvents/calendarEvent'); ?></a>
                                 <ul>
-                                    <li><?php echo $this->Html->link('List All Appointments', '/appointments'); ?></a></li>
-                                    <li><?php echo $this->Html->link('New Appointment', '/appointments/add'); ?></a></li>
-
-                                    <li><?php echo $this->Html->link('Remainder to attend appointment/ take medication', '/addressbooks'); ?></a></li>
-
+                                    <li><?php echo $this->Html->link('View Calendar', '/calendarEvents/calendarEvent'); ?></a>
+                                    <li><?php echo $this->Html->link('My Events', '/calendarEvents/calendarEvent'); ?></a>
+                                    <li><?php echo $this->Html->link('My Appointments', '/appointments'); ?></a>
+                                        <ul>
+                                            <li><?php echo $this->Html->link('List All Appointments', '/appointments'); ?></a></li>
+                                            <li><?php echo $this->Html->link('New Appointment', '/appointments/add'); ?></a></li>
+                                            <li><?php echo $this->Html->link('Remainder to attend appointment/ take medication', '/addressbooks'); ?></a></li>
+                                        </ul>
+                                    </li>
                                 </ul>
                             </li>
                             <li><?php echo $this->Html->link('Event', '/invitations/eventParticipation'); ?></a>
-                                <!--                                <ul>
-                                                                    <li><?php echo $this->Html->link('RSVP', '/addressbooks'); ?></a></li>
-                                                                    <li><?php echo $this->Html->link('Remainder to make booking', '/addressbooks'); ?></a></li>
-                                                                    <li><?php echo $this->Html->link('Remainder to attend appointment/ take medication', '/addressbooks'); ?></a></li>
-                                
-                                                                </ul>-->
+<!--                                <ul>
+                                    <li><?php echo $this->Html->link('RSVP', '/addressbooks'); ?></a></li>
+                                    <li><?php echo $this->Html->link('Remainder to make booking', '/addressbooks'); ?></a></li>
+                                    <li><?php echo $this->Html->link('Remainder to attend appointment/ take medication', '/addressbooks'); ?></a></li>
+
+                                </ul>-->
                             </li>
-                            <li><?php echo $this->Html->link('Calendar', '/calendarEvents/calendarEvent'); ?></a></li>
+                            <li><?php echo $this->Html->link('Profile Update', array('controller' => 'users', 'action' => "view/$users_id")); ?></a></li>
+                            
+                            
+                            
+                            
                         </ul>
                     </nav>
 
