@@ -92,7 +92,7 @@ $this->Html->image('cake.logo.png');
                                     <li><?php echo $this->Html->link('Profile Update', array('controller' => 'users', 'action' => 'index')); ?></a></li>
                                 </ul>
                             </li>
-                            <li><?php echo $this->Html->link('Reports', '/addressbooks'); ?></a></li>
+                            <li><?php echo $this->Html->link('Reports', '/users/loginReport'); ?></a></li>
                             <li><?php echo $this->Html->link('Calendar', '/calendarEvents/calendarEvent'); ?></a></li>
                             <li><?php echo $this->Html->link('News', '/news'); ?></a></li>
                         </ul>
@@ -119,6 +119,7 @@ $this->Html->image('cake.logo.png');
                                     <li><?php echo $this->Html->link('Exercise Chart', '/exercises'); ?></a></li>
                                     <li><?php echo $this->Html->link('Bowel Chart', '/bowels'); ?></a></li>
                                     <li><?php echo $this->Html->link('Pain Chart', '/pains'); ?></a></li>
+                                    <li><?php echo $this->Html->link('Pain with medicine', '/painmedis'); ?></a></li>
                                     <li><?php echo $this->Html->link('Medication Chart', '/medications'); ?></a></li>
                                     <li><?php echo $this->Html->link('Email GP', '/PDF/emailPdfs'); ?></a></li>
                                 </ul>
@@ -133,12 +134,12 @@ $this->Html->image('cake.logo.png');
                                 </ul>
                             </li>
                             <li><?php echo $this->Html->link('Event', '/invitations/eventParticipation'); ?></a>
-<!--                                <ul>
-                                    <li><?php echo $this->Html->link('RSVP', '/addressbooks'); ?></a></li>
-                                    <li><?php echo $this->Html->link('Remainder to make booking', '/addressbooks'); ?></a></li>
-                                    <li><?php echo $this->Html->link('Remainder to attend appointment/ take medication', '/addressbooks'); ?></a></li>
-
-                                </ul>-->
+                                <!--                                <ul>
+                                                                    <li><?php echo $this->Html->link('RSVP', '/addressbooks'); ?></a></li>
+                                                                    <li><?php echo $this->Html->link('Remainder to make booking', '/addressbooks'); ?></a></li>
+                                                                    <li><?php echo $this->Html->link('Remainder to attend appointment/ take medication', '/addressbooks'); ?></a></li>
+                                
+                                                                </ul>-->
                             </li>
                             <li><?php echo $this->Html->link('Calendar', '/calendarEvents/calendarEvent'); ?></a></li>
                         </ul>

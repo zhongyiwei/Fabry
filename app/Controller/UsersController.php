@@ -103,6 +103,9 @@ class UsersController extends AppController {
     public function login() {
         if ($this->request->is('post')) {          // check the request type, if it is post, means they are trying to login.
             if ($this->Auth->login()) {          // if the login is successful, we just redirect the user to the index page(because location we set in AppController is index ) 	
+                $user = $this->Auth->user();
+                $this->User->id = $user['id'];
+                $this->User->saveField('lastLogin', date(DATE_ATOM));
                 $this->redirect($this->Auth->redirect(array('controller' => 'pages', 'action' => 'display', 'home')));
             } else {
                 $this->Session->setFlash(__('Your username/password combination was incorrect'), 'default', array(), 'bad');    //if the login failed, we just give this message to user.  
@@ -273,6 +276,14 @@ class UsersController extends AppController {
             }
             throw new NotFoundException();
         }
+    }
+
+    public function loginReport() {
+        $start = date('Y-m-d');
+        $deadLine = date('Y-m-d', strtotime($start - 60 * 60 * 24 * 365 * 24));
+        $users = $this->User->find('all', array('conditions' => array('User.lastLogin <' => $deadLine)));
+
+        $this->set(compact("users"));
     }
 
 }

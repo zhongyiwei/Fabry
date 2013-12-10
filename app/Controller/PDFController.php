@@ -14,11 +14,11 @@ class PDF extends FPDF {
 
 // Simple table
     function BasicTable($header, $data, $width) {
-        // Header
+// Header
         foreach ($header as $col)
             $this->Cell($width, 7, $col, 1, 0, 'C');
         $this->Ln();
-        // Data
+// Data
         foreach ($data as $row) {
             foreach ($row as $col)
                 $this->Cell($width, 6, $col, 1, 0, 'L');
@@ -27,35 +27,50 @@ class PDF extends FPDF {
     }
 
     function BasicTableForPain($header, $data) {
-        // Header
+// Header
 //        foreach ($header as $col)
 
         for ($i = 0; $i < count($header); $i++) {
-            if ($i != 1) {
+            if ($i == 0) {
                 $this->Cell(40, 7, $header[$i], 1, 0, 'C');
+            } else if ($i == 2) {
+                $this->Cell(60, 7, $header[$i], 1, 0, 'C');
+            } else if ($i == 3) {
+                $this->Cell(80, 7, $header[$i], 1, 0, 'C');
             } else {
                 $this->Cell(66, 7, $header[$i], 1, 0, 'C');
             }
         }
         $this->Ln();
-        // Data
+// Data
+
+        $nb = 0;
         for ($i = 0; $i < count($data); $i++) {
             for ($j = 0; $j < count($data[$i]); $j++) {
-                if ($j != 1 && $j != 3) {
+                $nb = max($nb, $this->NbLines($this->widths[$j], $data[$i][$j]));
+                $h = 6 * $nb;
+            }
+        }
+
+        for ($i = 0; $i < count($data); $i++) {
+            for ($j = 0; $j < count($data[$i]); $j++) {
+                if ($j != 1 && $j != 3 && $j != 2) {
                     $this->SetFillColor(255, 255, 255);
-                    $this->Cell(40, 6, $data[$i][$j], 1, 0, 'L');
+                    $this->Cell(40, $h, $data[$i][$j], 1, 0, 'L');
                 } else if ($j == 1) {
-                    $this->Cell(6, 6, $data[$i][$j], 1, 0, 'L', true);
+                    $this->Cell(6, $h, $data[$i][$j], 1, 0, 'L', true);
                     for ($p = 0; $p < $data[$i][$j]; $p++) {
                         $this->SetFillColor(205, 205, 205);
-                        $this->Cell(6, 6, "", 1, 0, 'L', true);
+                        $this->Cell(6, $h, "", 1, 0, 'L', true);
                     }
                     for ($p = 0; $p < (10 - $data[$i][$j]); $p++) {
                         $this->SetFillColor(255, 255, 255);
-                        $this->Cell(6, 6, "", 1, 0, 'L', true);
+                        $this->Cell(6, $h, "", 1, 0, 'L', true);
                     }
+                } else if ($j == 2) {
+                    $this->Cell(60, $h, $data[$i][$j], 1,0, 'L', true);
                 } else if ($j == 3) {
-                    $this->MultiCell(40, 6, $data[$i][$j], 1, 'L', true);
+                    $this->MultiCell(80, $h, $data[$i][$j], 1, 'L', true);
                 }
             }
 //            $this->Ln();
@@ -68,7 +83,7 @@ class PDF extends FPDF {
     }
 
     function BasicTableBowel($header, $data) {
-        // Header
+// Header
 //        foreach ($header as $col)
 
         for ($i = 0; $i < count($header); $i++) {
@@ -81,8 +96,8 @@ class PDF extends FPDF {
             }
         }
         $this->Ln();
-        // Data
-        //Calculate the height of the row
+// Data
+//Calculate the height of the row
         $nb = 0;
         for ($i = 0; $i < count($data); $i++) {
             for ($j = 0; $j < count($data[$i]); $j++) {
@@ -126,7 +141,7 @@ class PDF extends FPDF {
     }
 
     function BasicTableExercise($header, $data) {
-        // Header
+// Header
 //        foreach ($header as $col)
 
         for ($i = 0; $i < count($header); $i++) {
@@ -134,15 +149,15 @@ class PDF extends FPDF {
                 $this->Cell(80, 7, $header[$i], 1, 0, 'C');
             } else if ($i == 0) {
                 $this->Cell(40, 7, $header[$i], 1, 0, 'C');
-            } else if ($i==6){
+            } else if ($i == 6) {
                 $this->Cell(40, 7, $header[$i], 1, 0, 'C');
             } else {
                 $this->Cell(15, 7, $header[$i], 1, 0, 'C');
             }
         }
         $this->Ln();
-        // Data
-        //Calculate the height of the row
+// Data
+//Calculate the height of the row
         $nb = 0;
         for ($i = 0; $i < count($data); $i++) {
             for ($j = 0; $j < count($data[$i]); $j++) {
@@ -162,7 +177,7 @@ class PDF extends FPDF {
 
                     $this->MultiCell(80, $h, $data[$i][$j], 1, 'L');
 //                    $this->Ln();
-                } else if ($j == 0 || $j==2) {
+                } else if ($j == 0 || $j == 2) {
                     $this->SetFillColor(255, 255, 255);
                     $this->Cell(40, $h, $data[$i][$j], 1, 0, 'L', true);
                 } else {
@@ -200,7 +215,7 @@ class PDF extends FPDF {
 //            $this->Ln();
 //        }
 //        
-        // Data
+// Data
         foreach ($data[$i] as $row) {
             foreach ($row as $col) {
                 $this->SetFont('Arial', '', 12);
@@ -212,7 +227,7 @@ class PDF extends FPDF {
     }
 
     function NbLines($w, $txt) {
-        //Computes the number of lines a MultiCell of width w will take
+//Computes the number of lines a MultiCell of width w will take
         $cw = &$this->CurrentFont['cw'];
         if ($w == 0)
             $w = $this->w - $this->rMargin - $this->x;
@@ -261,33 +276,33 @@ class PDF extends FPDF {
     var $aligns;
 
     function SetWidths($w) {
-        //Set the array of column widths
+//Set the array of column widths
         $this->widths = $w;
     }
 
     function SetAligns($a) {
-        //Set the array of column alignments
+//Set the array of column alignments
         $this->aligns = $a;
     }
 
     function WriteHTML($html) {
-        // HTML parser
+// HTML parser
         $html = str_replace("\n", ' ', $html);
         $a = preg_split('/<(.*)>/U', $html, -1, PREG_SPLIT_DELIM_CAPTURE);
         foreach ($a as $i => $e) {
             if ($i % 2 == 0) {
-                // Text
+// Text
                 if ($this->HREF)
                     $this->PutLink($this->HREF, $e);
                 else
                     $this->Write(5, $e);
             }
             else {
-                // Tag
+// Tag
                 if ($e[0] == '/')
                     $this->CloseTag(strtoupper(substr($e, 1)));
                 else {
-                    // Extract attributes
+// Extract attributes
                     $a2 = explode(' ', $e);
                     $tag = strtoupper(array_shift($a2));
                     $attr = array();
@@ -302,7 +317,7 @@ class PDF extends FPDF {
     }
 
     function OpenTag($tag, $attr) {
-        // Opening tag
+// Opening tag
         if ($tag == 'B' || $tag == 'I' || $tag == 'U')
             $this->SetStyle($tag, true);
         if ($tag == 'A')
@@ -312,7 +327,7 @@ class PDF extends FPDF {
     }
 
     function PutLink($URL, $txt) {
-        // Put a hyperlink
+// Put a hyperlink
         $this->SetTextColor(0, 0, 255);
         $this->SetStyle('U', true);
         $this->Write(5, $txt, $URL);
@@ -321,7 +336,7 @@ class PDF extends FPDF {
     }
 
     function SetStyle($tag, $enable) {
-        // Modify style and select corresponding font
+// Modify style and select corresponding font
         $this->$tag += ($enable ? 1 : -1);
         $style = '';
         foreach (array('B', 'I', 'U') as $s) {
@@ -332,7 +347,7 @@ class PDF extends FPDF {
     }
 
     function CloseTag($tag) {
-        // Closing tag
+// Closing tag
         if ($tag == 'B' || $tag == 'I' || $tag == 'U')
             $this->SetStyle($tag, false);
         if ($tag == 'A')
@@ -340,17 +355,17 @@ class PDF extends FPDF {
     }
 
     function Footer() {
-        // Position at 1.5 cm from bottom
+// Position at 1.5 cm from bottom
         $this->SetY(-15);
-        // Arial italic 8
+// Arial italic 8
         $this->SetFont('Arial', 'I', 8);
-        // Page number
+// Page number
         $this->Cell(0, 10, '~Page ' . $this->PageNo() . '~', 0, 0, 'C');
     }
 
-    // Page header
+// Page header
     function Header() {
-        // Logo
+// Logo
         $this->SetTextColor(200);
 //        $this->SetFont('Arial', 'I', 50);
 //        $this->Cell(14, 20, 'O');
@@ -358,15 +373,15 @@ class PDF extends FPDF {
 //        $this->Image('CSS/images/O2_logoPDF.png', 10, 6, 20);
         $this->Cell(5);
         $this->SetFont('Arial', '', 15);
-        // Move to the right
-        // Title
+// Move to the right
+// Title
         $this->Cell(33, 25, 'Fabry Support Group of Australia');
 
 
         $this->Cell(88);
         $this->SetFont('Arial', 'I', 10);
         $this->Cell(50, 25, 'Fabry.com.au');
-        // Line break
+// Line break
         $this->Ln(16);
         $this->SetFillColor(200, 200, 200);
         $this->Cell(200, 1, '', 0.1, 1, 'C', true);
@@ -398,51 +413,62 @@ class PDFController extends AppController {
             $painData = $this->Pain->find('all', array('conditions' => array('date BETWEEN ? AND ?' => array($start, $end), 'users_id' => $uid), 'order' => array('date')));
 
 //        $this->layout = 'pdf'; //this will use the pdf.ctp layout
-            $PDFTableData = NULL;
-            $takeMedicineDays = 0;
-            for ($i = 0; $i < count($painData); $i++) {
-                $PDFTableData[$i][0] = date('d-m-Y', strtotime($painData[$i]['Pain']['date']));
-                $PDFTableData[$i][1] = $painData[$i]['Pain']['painLevel'];
-                $status = ($painData[$i]['Pain']['medication'] == 1 ? "Taken" : "Not Taken");
-                $PDFTableData[$i][2] = $status;
-                $PDFTableData[$i][3] = $painData[$i]['Pain']['illness'];
+            if (!empty($painData)) {
+                $PDFTableData = NULL;
+                $takeMedicineDays = 0;
 
 
-                if ($painData[$i]['Pain']['medication'] == 1) {
-                    $takeMedicineDays++;
+                for ($i = 0; $i < count($painData); $i++) {
+                    $medicationPainData = $this->PainMedi->find('all', array('conditions' => array('painmedi.pains_id' => $painData[$i]['Pain']['id'], 'painmedi.users_id' => $uid)));
+//                    debug($medicationPainData);
+                    $takenName = "";
+                    for ($p = 0; $p < count($medicationPainData); $p++) {
+                        $takenName .= $medicationPainData[$p]['Medications']['medicationName'] . ", ";
+                    }
+
+                    $PDFTableData[$i][0] = date('d-m-Y', strtotime($painData[$i]['Pain']['date']));
+                    $PDFTableData[$i][1] = $painData[$i]['Pain']['painLevel'];
+//                    $status = ($painData[$i]['Pain']['medication'] == 1 ? "Taken" : "Not Taken");
+
+                    $PDFTableData[$i][2] = $painData[$i]['Pain']['illness'];
+                    $PDFTableData[$i][3] = $takenName;
+
+
+                    if ($painData[$i]['Pain']['medication'] == 1) {
+                        $takeMedicineDays++;
+                    }
                 }
-            }
 
-            $this->response->type('pdf');
+                $this->response->type('pdf');
 
 //            $this->set('fpdf', new FPDF('P', 'mm', 'A4'));
-            $pdf = new PDF("L");
-            $pdf->AddPage();
+                $pdf = new PDF("L");
+                $pdf->AddPage();
 
-            $pdf->SetFont('Arial', 'B', 16);
-            $title = 'Fabry Pain Chart';
-            $pdf->Cell(70, 10, $title, 0, 1);
-            $pdf->Ln(2);
-            $pdf->SetFont('Arial', '', 12);
-            $start = date('d-m-Y', strtotime($start));
-            $end = date('d-m-Y', strtotime($end));
-            $pdf->Cell(180, 10, "Date: Between " . $start . " and " . $end, 0, 1);
-            $pdf->Ln(1);
+                $pdf->SetFont('Arial', 'B', 16);
+                $title = 'Fabry Pain Chart';
+                $pdf->Cell(70, 10, $title, 0, 1);
+                $pdf->Ln(2);
+                $pdf->SetFont('Arial', '', 12);
+                $start = date('d-m-Y', strtotime($start));
+                $end = date('d-m-Y', strtotime($end));
+                $pdf->Cell(180, 10, "Date: Between " . $start . " and " . $end, 0, 1);
+                $pdf->Ln(1);
 //            $pdf->Cell(180, 10, "Number of Days Take medicine: " . $takeMedicineDays . " Days", 0, 1);
 //            $pdf->Ln(1);
 
-            $painLevelSmall = 0;
-            $painLevelMedium = 0;
-            $painLevelBig = 0;
-            for ($i = 0; $i < count($painData); $i++) {
-                if ($painData[$i]['Pain']['painLevel'] <= 3) {
-                    $painLevelSmall++;
-                } else if ($painData[$i]['Pain']['painLevel'] <= 6) {
-                    $painLevelMedium++;
-                } else {
-                    $painLevelBig++;
+                $painLevelSmall = 0;
+                $painLevelMedium = 0;
+                $painLevelBig = 0;
+                for ($i = 0; $i < count($painData); $i++) {
+                    if ($painData[$i]['Pain']['painLevel'] <= 3) {
+                        $painLevelSmall++;
+                    } else if ($painData[$i]['Pain']['painLevel'] <= 6) {
+                        $painLevelMedium++;
+                    } else {
+                        $painLevelBig++;
+                    }
                 }
-            }
 
 //            $pdf->Cell(180, 10, "Number of Days Low Pain Level (0-3) : " . $painLevelSmall . " Days", 0, 1);
 //
@@ -451,43 +477,68 @@ class PDFController extends AppController {
 //            $pdf->Cell(180, 10, "Number of Days High Pain Level (7-10) : " . $painLevelBig . " Days", 0, 1);
 //            $pdf->Ln();
 
-            $PDFTableHeader = array('Date', 'Pain Level (1-10)', 'Medications Taken', 'Illness');
+                $PDFTableHeader = array('Date', 'Pain Level (1-10)', 'Illness', 'Medications Taken');
 //            $levelDiagram = "";
-            $start = date('Y-m-d', strtotime($start));
-            $end = date('Y-m-d', strtotime($end));
+                $start = date('Y-m-d', strtotime($start));
+                $end = date('Y-m-d', strtotime($end));
 
-            $pdf->BasicTableForPain($PDFTableHeader, $PDFTableData);
-            $pdf->Ln(5);
+                $pdf->BasicTableForPain($PDFTableHeader, $PDFTableData);
+                $pdf->Ln(5);
 
-            $title2 = 'Medication Related information';
-            $pdf->Cell(70, 10, $title2, 0, 1);
+                $title2 = 'Medication Reference information';
+                $pdf->Cell(70, 10, $title2, 0, 1);
 
-            $medicationData = $this->Medication->find('all', array('conditions' => array('start BETWEEN ? AND ?' => array($start, $end), 'users_id' => $uid), 'order' => array('start')));
-            $PDFTableData2 = NULL;
+                for ($t = 0; $t < count($painData); $t++) {
+                    $pdata[$t] = $painData[$t]['Pain']['id'];
+                }
+//                debug($pdata);
+                $medicationPainData = $this->PainMedi->find('all', array('conditions' => array('painmedi.pains_id' => $pdata, 'painmedi.users_id' => $uid)));
+//                debug($medicationPainData);
+                $medidata = NULL;
+                for ($t = 0; $t < count($medicationPainData); $t++) {
+                    $medidata[$t] = $medicationPainData[$t]['PainMedi']['medications_id'];
+                }
 
-            for ($j = 0; $j < count($medicationData); $j++) {
-                $startMedi = date('d-m-Y h:m:s', strtotime($medicationData[$j]['Medication']['start']));
-
-                $PDFTableData2[$j][0] = $medicationData[$j]['Medication']['medicationName'];
-                $PDFTableData2[$j][1] = $medicationData[$j]['Medication']['strengthEachPill'];
-                $PDFTableData2[$j][2] = $medicationData[$j]['Medication']['doseEachTime'];
-                $PDFTableData2[$j][3] = $medicationData[$j]['Medication']['frequency'];
-                $PDFTableData2[$j][4] = $startMedi;
-            }
+                $medicationData = $this->Medication->find("all", array('conditions' => array('medication.id' => $medidata, 'medication.users_id' => $uid), 'order' => array('start')));
 
 
-            $PDFTableHeader2 = array('Medication Name', 'Strength', 'DOSE', 'Frequency', 'Medicine Commence Time');
+                if (!empty($medicationData)) {
+                    $PDFTableData2 = NULL;
+
+                    for ($j = 0; $j < count($medicationData); $j++) {
+                        $startMedi = date('d-m-Y h:m:s', strtotime($medicationData[$j]['Medication']['start']));
+
+                        $PDFTableData2[$j][0] = $medicationData[$j]['Medication']['medicationName'];
+                        $PDFTableData2[$j][1] = $medicationData[$j]['Medication']['strengthEachPill'];
+                        $PDFTableData2[$j][2] = $medicationData[$j]['Medication']['doseEachTime'];
+                        $PDFTableData2[$j][3] = $medicationData[$j]['Medication']['frequency'];
+                        $PDFTableData2[$j][4] = $startMedi;
+                    }
+
+
+                    $PDFTableHeader2 = array('Medication Name', 'Strength', 'DOSE', 'Frequency', 'Medicine Commence Time');
 //            debug($PDFTableData2);
 //            debug($PDFTableHeader2);
 
-            $pdf->BasicTable($PDFTableHeader2, $PDFTableData2, 52);
-            $pdf->Ln(10);
+                    $pdf->BasicTable($PDFTableHeader2, $PDFTableData2, 52);
+                    $pdf->Ln(10);
+                }
 
 
 //            $this->render('painReport');
-            $pdf->SetCreator('Fabry');
+                $pdf->SetCreator('Fabry');
 
-            $pdf->Output('Pain Report.pdf', "$type");
+                $pdf->Output('Pain Report.pdf', "$type");
+            } else {
+                $pdf = new PDF("L");
+                $pdf->AddPage();
+                $this->response->type('pdf');
+                $pdf->SetFont('Arial', 'B', 16);
+                $title = 'Sorry there is no data related from your request';
+                $pdf->Cell(70, 10, $title, 0, 1);
+                $pdf->Ln(2);
+                $pdf->Output('Pain Report.pdf', "$type");
+            }
         }
     }
 
@@ -502,57 +553,69 @@ class PDFController extends AppController {
             $bowelData = $this->Bowel->find('all', array('conditions' => array('date BETWEEN ? AND ?' => array($start, $end), 'users_id' => $uid), 'order' => array('date')));
 
 //        $this->layout = 'pdf'; //this will use the pdf.ctp layout
-            $PDFTableData = NULL;
-            for ($j = 1; $j < 7; $j++) {
-                $Move['Bowel'][$j] = 0;
-            }
-
-            for ($i = 0; $i < count($bowelData); $i++) {
-
-                $PDFTableData[$i][0] = date('d-m-Y', strtotime($bowelData[$i]['Bowel']['date']));
-                $PDFTableData[$i][1] = $bowelData[$i]['Bowel']['count'];
-                $PDFTableData[$i][2] = $bowelData[$i]['Bowel']['comment'];
-
+            if (!empty($bowelData)) {
+                $PDFTableData = NULL;
                 for ($j = 1; $j < 7; $j++) {
-                    if ($bowelData[$i]['Bowel']['count'] == $j) {
-                        $Move['Bowel'][$j]++;
+                    $Move['Bowel'][$j] = 0;
+                }
+
+                for ($i = 0; $i < count($bowelData); $i++) {
+
+                    $PDFTableData[$i][0] = date('d-m-Y', strtotime($bowelData[$i]['Bowel']['date']));
+                    $PDFTableData[$i][1] = $bowelData[$i]['Bowel']['count'];
+                    $PDFTableData[$i][2] = $bowelData[$i]['Bowel']['comment'];
+
+                    for ($j = 1; $j < 7; $j++) {
+                        if ($bowelData[$i]['Bowel']['count'] == $j) {
+                            $Move['Bowel'][$j]++;
+                        }
                     }
                 }
-            }
 
-            $this->response->type('pdf');
+                $this->response->type('pdf');
 
 //            $this->set('fpdf', new FPDF('P', 'mm', 'A4'));
-            $pdf = new PDF();
-            $pdf->AddPage();
+                $pdf = new PDF();
+                $pdf->AddPage();
 
-            $pdf->SetFont('Arial', 'B', 16);
-            $title = 'Fabry Bowel Chart';
-            $pdf->Cell(70, 10, $title, 0, 1);
-            $pdf->Ln(2);
-            $pdf->SetFont('Arial', '', 12);
-            $start = date('d-m-Y', strtotime($start));
-            $end = date('d-m-Y', strtotime($end));
-            $pdf->Cell(180, 10, "Date: Between " . $start . " and " . $end, 0, 1);
-            $pdf->Ln(1);
+                $pdf->SetFont('Arial', 'B', 16);
+                $title = 'Fabry Bowel Chart';
+                $pdf->Cell(70, 10, $title, 0, 1);
+                $pdf->Ln(2);
+                $pdf->SetFont('Arial', '', 12);
+                $start = date('d-m-Y', strtotime($start));
+                $end = date('d-m-Y', strtotime($end));
+                $pdf->Cell(180, 10, "Date: Between " . $start . " and " . $end, 0, 1);
+                $pdf->Ln(1);
 //            for ($j = 1; $j < 7; $j++) {
 ////                $temp = $j+1;
 //                $pdf->Cell(180, 10, "Number of Days having  $j movement: " . $Move['Bowel'][$j] . " Days", 0, 1);
 //            }
-            $pdf->Cell(180, 10, "Number of Days having  n movement: ", 0, 1);
-            $movementHeader = array('1 Move', '2 Move', '3 Move', '4 Move', '5 Move', '6 Move');
-            $pdf->BasicTable($movementHeader, $Move, 20);
+                $pdf->Cell(180, 10, "Number of Days having  n movement: ", 0, 1);
+                $movementHeader = array('1 Move', '2 Move', '3 Move', '4 Move', '5 Move', '6 Move');
+                $pdf->BasicTable($movementHeader, $Move, 20);
 
-            $pdf->Ln(10);
-            $PDFTableHeader = array('Date', 'Bowel Movement (0 - 6)', 'Comments');
+                $pdf->Ln(10);
+                $PDFTableHeader = array('Date', 'Bowel Movement (0 - 6)', 'Comments');
 
-            $pdf->BasicTableBowel($PDFTableHeader, $PDFTableData);
-            $pdf->Ln(10);
+                $pdf->BasicTableBowel($PDFTableHeader, $PDFTableData);
+                $pdf->Ln(10);
 
 //            $this->render('painReport');
-            $pdf->SetCreator('Fabry');
+                $pdf->SetCreator('Fabry');
 
-            $pdf->Output('Bowel Report.pdf', "$type");
+                $pdf->Output('Bowel Report.pdf', "$type");
+            } else {
+                $pdf = new PDF("L");
+                $pdf->AddPage();
+                $this->response->type('pdf');
+                $pdf->SetFont('Arial', 'B', 16);
+                $title = 'Sorry there is no data related from your request';
+                $pdf->Cell(70, 10, $title, 0, 1);
+                $pdf->Ln(2);
+                $pdf->SetCreator('Fabry');
+                $pdf->Output('Bowel Report.pdf', "$type");
+            }
         }
     }
 
@@ -568,55 +631,66 @@ class PDFController extends AppController {
             $exerciseData = $this->Exercise->find('all', array('conditions' => array('date BETWEEN ? AND ?' => array($start, $end), 'users_id' => $uid), 'order' => array('date')));
 
 //        $this->layout = 'pdf'; //this will use the pdf.ctp layout
-            $PDFTableData = NULL;
+            if (!empty($exerciseData)) {
+                $PDFTableData = NULL;
 
-            for ($i = 0; $i < count($exerciseData); $i++) {
+                for ($i = 0; $i < count($exerciseData); $i++) {
 
-                $PDFTableData[$i][0] = date('d-m-Y', strtotime($exerciseData[$i]['Exercise']['date']));
-                $PDFTableData[$i][1] = $exerciseData[$i]['Exercise']['durationMinute'];
-                $PDFTableData[$i][2] = $exerciseData[$i]['Exercise']['exercise_type'];
-                $PDFTableData[$i][3] = $exerciseData[$i]['Exercise']['comment'];
-            }
+                    $PDFTableData[$i][0] = date('d-m-Y', strtotime($exerciseData[$i]['Exercise']['date']));
+                    $PDFTableData[$i][1] = $exerciseData[$i]['Exercise']['durationMinute'];
+                    $PDFTableData[$i][2] = $exerciseData[$i]['Exercise']['exercise_type'];
+                    $PDFTableData[$i][3] = $exerciseData[$i]['Exercise']['comment'];
+                }
 
-            $this->response->type('pdf');
+                $this->response->type('pdf');
 
 //            $this->set('fpdf', new FPDF('P', 'mm', 'A4'));
-            $pdf = new PDF("L");
-            $pdf->AddPage();
+                $pdf = new PDF("L");
+                $pdf->AddPage();
 
-            $pdf->SetFont('Arial', 'B', 16);
-            $title = 'Fabry Exercise Chart';
-            $pdf->Cell(70, 10, $title, 0, 1);
-            $pdf->Ln(2);
-            $pdf->SetFont('Arial', '', 12);
+                $pdf->SetFont('Arial', 'B', 16);
+                $title = 'Fabry Exercise Chart';
+                $pdf->Cell(70, 10, $title, 0, 1);
+                $pdf->Ln(2);
+                $pdf->SetFont('Arial', '', 12);
 
-            $start = date('d-m-Y', strtotime($start));
-            $end = date('d-m-Y', strtotime($end));
-            $pdf->Cell(180, 10, "Date: Between " . $start . " and " . $end, 0, 1);
-            $pdf->Ln(1);
+                $start = date('d-m-Y', strtotime($start));
+                $end = date('d-m-Y', strtotime($end));
+                $pdf->Cell(180, 10, "Date: Between " . $start . " and " . $end, 0, 1);
+                $pdf->Ln(1);
 
-            $missingDays = 0;
-            for ($j = 0; $j < count($exerciseData); $j++) {
-                if ($exerciseData[$j]['Exercise']['durationMinute'] == "none") {
-                    $missingDays++;
+                $missingDays = 0;
+                for ($j = 0; $j < count($exerciseData); $j++) {
+                    if ($exerciseData[$j]['Exercise']['durationMinute'] == "none") {
+                        $missingDays++;
+                    }
                 }
-            }
-            $pdf->Cell(180, 10, "Number of Days missed exercise: " . $missingDays . " Days", 0, 1);
+                $pdf->Cell(180, 10, "Number of Days missed exercise: " . $missingDays . " Days", 0, 1);
 
-            $pdf->Ln(1);
-            $PDFTableHeader = array('Date', 'None', '0-15', '15-30', '30-60', '>60', 'Exercise Type', 'Comments');
+                $pdf->Ln(1);
+                $PDFTableHeader = array('Date', 'None', '0-15', '15-30', '30-60', '>60', 'Exercise Type', 'Comments');
 
-            $pdf->Cell(40, 7, "", 1, 0, 'C');
-            $pdf->Cell(75, 7, "Exercise Hours", 1, 0, 'C');
-            $pdf->Cell(120, 7, "", 1, 0, 'C');
-            $pdf->Ln(7);
-            $pdf->BasicTableExercise($PDFTableHeader, $PDFTableData);
-            $pdf->Ln(10);
+                $pdf->Cell(40, 7, "", 1, 0, 'C');
+                $pdf->Cell(75, 7, "Exercise Hours", 1, 0, 'C');
+                $pdf->Cell(120, 7, "", 1, 0, 'C');
+                $pdf->Ln(7);
+                $pdf->BasicTableExercise($PDFTableHeader, $PDFTableData);
+                $pdf->Ln(10);
 
 //            $this->render('painReport');
-            $pdf->SetCreator('Fabry');
+                $pdf->SetCreator('Fabry');
 
-            $pdf->Output('Exercise Report.pdf', "$type");
+                $pdf->Output('Exercise Report.pdf', "$type");
+            } else {
+                $pdf = new PDF();
+                $pdf->AddPage();
+                $this->response->type('pdf');
+                $pdf->SetFont('Arial', 'B', 16);
+                $title = 'Sorry there is no data related from your request';
+                $pdf->Cell(70, 10, $title, 0, 1);
+                $pdf->Ln(2);
+                $pdf->Output('Exercise Report.pdf', "$type");
+            }
         }
     }
 
@@ -632,38 +706,49 @@ class PDFController extends AppController {
             $medicationData = $this->Medication->find('all', array('conditions' => array('start BETWEEN ? AND ?' => array($start, $end), 'users_id' => $uid), 'order' => array('start')));
 
 //        $this->layout = 'pdf'; //this will use the pdf.ctp layout
-            $PDFTableData = NULL;
+            if (!empty($medicationData)) {
+                $PDFTableData = NULL;
 
-            for ($i = 0; $i < count($medicationData); $i++) {
+                for ($i = 0; $i < count($medicationData); $i++) {
 
-                $PDFTableData[$i][0] = $medicationData[$i]['Medication']['medicationName'];
-                $PDFTableData[$i][1] = $medicationData[$i]['Medication']['strengthEachPill'];
-                $PDFTableData[$i][2] = $medicationData[$i]['Medication']['doseEachTime'];
-                $PDFTableData[$i][3] = $medicationData[$i]['Medication']['frequency'];
-                $PDFTableData[$i][4] = $medicationData[$i]['Medication']['start'];
-            }
+                    $PDFTableData[$i][0] = $medicationData[$i]['Medication']['medicationName'];
+                    $PDFTableData[$i][1] = $medicationData[$i]['Medication']['strengthEachPill'];
+                    $PDFTableData[$i][2] = $medicationData[$i]['Medication']['doseEachTime'];
+                    $PDFTableData[$i][3] = $medicationData[$i]['Medication']['frequency'];
+                    $PDFTableData[$i][4] = $medicationData[$i]['Medication']['start'];
+                }
 
-            $this->response->type('pdf');
+                $this->response->type('pdf');
 
 //            $this->set('fpdf', new FPDF('P', 'mm', 'A4'));
-            $pdf = new PDF("L");
-            $pdf->AddPage();
+                $pdf = new PDF("L");
+                $pdf->AddPage();
 
-            $pdf->SetFont('Arial', 'B', 16);
-            $title = 'Fabry Medication Chart';
-            $pdf->Cell(70, 10, $title, 0, 1);
-            $pdf->Ln(2);
-            $pdf->SetFont('Arial', '', 12);
+                $pdf->SetFont('Arial', 'B', 16);
+                $title = 'Fabry Medication Chart';
+                $pdf->Cell(70, 10, $title, 0, 1);
+                $pdf->Ln(2);
+                $pdf->SetFont('Arial', '', 12);
 
-            $PDFTableHeader = array('Medication Name', 'Strength', 'DOSE', 'Frequency', 'Medicine Commence Time');
+                $PDFTableHeader = array('Medication Name', 'Strength', 'DOSE', 'Frequency', 'Medicine Commence Time');
 
-            $pdf->BasicTable($PDFTableHeader, $PDFTableData, 52);
-            $pdf->Ln(10);
+                $pdf->BasicTable($PDFTableHeader, $PDFTableData, 52);
+                $pdf->Ln(10);
 
 //            $this->render('painReport');
-            $pdf->SetCreator('Fabry');
+                $pdf->SetCreator('Fabry');
 
-            $pdf->Output('Medication Report.pdf', "$type");
+                $pdf->Output('Medication Report.pdf', "$type");
+            } else {
+                $pdf = new PDF("L");
+                $pdf->AddPage();
+                $this->response->type('pdf');
+                $pdf->SetFont('Arial', 'B', 16);
+                $title = 'Sorry there is no data related from your request';
+                $pdf->Cell(70, 10, $title, 0, 1);
+                $pdf->Ln(2);
+                $pdf->Output('Medication Report.pdf', "$type");
+            }
         }
     }
 
