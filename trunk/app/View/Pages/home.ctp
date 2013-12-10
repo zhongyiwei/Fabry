@@ -12,10 +12,10 @@
         if ($current_user['role'] == 'admin' || $current_user['role'] == 'super') {
             ?>
 
+            <li><div class="navHome"> <?php echo $this->Html->image("profileUpdate.png", array("class" => "icon", "alt" => "manage users", 'url' => array('controller' => 'users'))); ?> <p>Manage Accounts</p></div></li>
             <li><div class="navHome"> <?php echo $this->Html->image("Adressbook.png", array("class" => "icon", "alt" => "addressbook", 'url' => array('controller' => 'contacts'))); ?><p>Address Book</p></div> </li>
-            <li><div class="navHome"> <?php echo $this->Html->image("profileUpdate.png", array("class" => "icon", "alt" => "manage users", 'url' => array('controller' => 'users'))); ?> <p>Profile Update</p></div></li>
-            <li><div class="navHome"> <?php echo $this->Html->image("videos.png", array("class" => "icon", "alt" => "health tips and videos", 'url' => array('controller' => 'videos'))); ?><p>Videos</p> </div></li>
             <li><div class="navHome"> <?php echo $this->Html->image("event.png", array("class" => "icon", "alt" => "events", 'url' => array('controller' => 'appointments'))); ?> <p>Event</p></div></li>
+            <li><div class="navHome"> <?php echo $this->Html->image("videos.png", array("class" => "icon", "alt" => "health tips and videos", 'url' => array('controller' => 'videos'))); ?><p>Videos</p> </div></li>
             <li><div class="navHome"> <?php echo $this->Html->image("reports.png", array("class" => "icon", "alt" => "genrate reports", 'url' => array('controller' => 'reports'))); ?> <p>Reports</p></div></li>
 
             <?php
