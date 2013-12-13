@@ -2,7 +2,7 @@
     <h3><?php echo __('Actions'); ?></h3>
     <ul>
         <li><?php echo $this->Html->link(__('New Bowel'), array('action' => 'add')); ?></li>
-        <li><?php echo $this->Html->link(__('Generate Bowel Report'), array('controller' => 'PDF', 'action' => 'bowelReport')); ?> </li>
+        <li><?php echo $this->Html->link(__('Generate Bowel Report'), array('controller' => 'PDF', 'action' => 'bowelReport/I')); ?> </li>
     </ul>
 </div>
 

@@ -18,13 +18,14 @@
 <div class="contacts form">
     <?php echo $this->Form->create('Contact', array('novalidate' => true)); ?>
     <fieldset>
-        <legend><?php echo __('Add Contact'); ?></legend>
+        <legend><?php echo __('Add Official Treatment Centre'); ?></legend>
         <table width="200" border="0">
             <tr>
                 <td><?php
                     echo $this->Form->input('centerName');
                     echo $this->Form->input('doctor');
-                    echo $this->Form->input('address', array('label' => ' Number / Street Name'));
+                    echo $this->Form->input('department');
+                    echo $this->Form->input('address');
                     echo $this->Form->input('suburb');
                     echo $this->Form->input('postal', array('label' => 'Postcode'));
                     ?></td>
@@ -33,6 +34,7 @@
                     echo $this->Form->input('state');
                     echo $this->Form->input('country');
                     echo $this->Form->input('phone');
+                    echo $this->Form->input('fax');
                     echo $this->Form->input('email');
 
                     echo $this->Form->input('isOfficial', array('type' => 'checkbox', 'checked' => true));

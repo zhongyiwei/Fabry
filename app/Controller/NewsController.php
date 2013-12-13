@@ -179,8 +179,10 @@ class NewsController extends AppController {
             $mail->Body = $newsDesc;
 
 //            debug($path);
-            $timeLimits = 60*60;
-            set_time_limit($timeLimits);
+                $timeLimits = 60 * 60;
+                set_time_limit($timeLimits);
+                ini_set('memory_limit','1024M');
+                
             if (!$mail->send()) {
                 echo 'Message could not be sent.';
                 echo 'Mailer Error: ' . $mail->ErrorInfo;

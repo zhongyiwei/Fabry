@@ -73,7 +73,7 @@
 
     <div class="actions">
         <ul>
-            <li><?php echo $this->Html->link(__('New Contact'), array('action' => 'add')); ?></li>
+            <li><?php echo $this->Html->link(__('New Contact'), array('action' => 'add?redirect=add')); ?></li>
         </ul>
     </div>
 
@@ -121,7 +121,7 @@
                             <?php if (($current_user['role'] == 'admin' ) && ($contact['Contact']['isOfficial'] == 1)): ?>
 
                                 <?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $contact['Contact']['id'])); ?>
-                                <?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $contact['Contact']['id']), null, __('Are you sure you want to delete  ' . $contact['Contact']['centerName'] . ' ?', $contact['Contact']['id'])); ?>
+                                <?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $contact['Contact']['id']), null, __('Are you sure you want to delete  ' . $contact['Contact']['doctor'] . ' ?', $contact['Contact']['id'])); ?>
 
                             <?php elseif ($current_user['role'] == 'member'): ?>
                                 <?php echo $this->Html->link(__('View'), array('action' => 'view', $contact['Contact']['id'])); ?>
@@ -139,12 +139,12 @@
                             <?php if ($current_user['role'] == 'admin'): ?>   <?php // only admin could edit and delete contacts, member could only view ?>
                                 <?php echo $this->Html->link(__('View'), array('action' => 'view', $contact['Contact']['id'])); ?>
                                 <?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $contact['Contact']['id'])); ?>
-                                <?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $contact['Contact']['id']), null, __('Are you sure you want to delete  ' . $contact['Contact']['centerName'] . ' ?', $contact['Contact']['id'])); ?>
+                                <?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $contact['Contact']['id']), null, __('Are you sure you want to delete ' . $contact['Contact']['doctor'] . ' ?', $contact['Contact']['id'])); ?>
 
                             <?php elseif ($current_user['role'] == 'member'): ?>
                                 <?php echo $this->Html->link(__('View'), array('action' => 'view', $contact['Contact']['id'])); ?>
                                 <?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $contact['Contact']['id'])); ?>
-                                <?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $contact['Contact']['id']), null, __('Are you sure you want to delete  ' . $contact['Contact']['centerName'] . ' ?', $contact['Contact']['id'])); ?>
+                                <?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $contact['Contact']['id']), null, __('Are you sure you want to delete ' . $contact['Contact']['doctor'] . ' ?', $contact['Contact']['id'])); ?>
                             <?php endif; ?>
                         </td>
                     </tr>

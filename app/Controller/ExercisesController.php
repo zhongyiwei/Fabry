@@ -54,16 +54,26 @@ class ExercisesController extends AppController {
             $id = $this->current_user['id'];
             $this->request->data['Exercise']['users_id'] = $id;
 
-            $this->Exercise->create();
-            if ($this->Exercise->save($this->request->data)) {
-                $this->Session->setFlash(__('The exercise has been saved.'), 'default', array(), 'good');
-                return $this->redirect(array('action' => 'index'));
+            $date = $this->request->data['Exercise']['date'];
+            $date = date('Y-m-d', strtotime($date));
+
+            $exe = $this->Exercise->find('all', array('conditions' => array('users_id' => $id, 'date' => $date)));
+
+            if (empty($exe)) {
+                $this->request->data['Exercise']['date'] = date('Y-m-d', strtotime($date));
+                $this->Exercise->create();
+                if ($this->Exercise->save($this->request->data)) {
+                    $this->Session->setFlash(__('The exercise has been saved.'), 'default', array(), 'good');
+                    return $this->redirect(array('action' => 'index'));
+                } else {
+                    $this->Session->setFlash(__('The exercise could not be saved. Please, try again.'), 'default', array(), 'bad');
+                }
             } else {
-                $this->Session->setFlash(__('The exercise could not be saved. Please, try again.'), 'default', array(), 'bad');
+                $this->Session->setFlash(__('There can be only one event occurred in one day.'), 'default', array(), 'bad');
             }
+            //$users = $this->Exercise->User->find('list');
+            //$this->set(compact('users'));
         }
-        //$users = $this->Exercise->User->find('list');
-        //$this->set(compact('users'));
     }
 
     /**

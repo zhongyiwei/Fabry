@@ -1,9 +1,18 @@
+<?php
+echo $this->Html->css('jquery-ui.css');
+echo $this->Html->css('jquery-ui-timepicker-addon.css');
+echo $this->Html->script('jquery-1.10.2.min.js');
+echo $this->Html->script('jquery-ui.min.js');
+echo $this->Html->script('jquery.ui.slider.js');
+echo $this->Html->script('jquery.ui.datepicker.js');
+echo $this->Html->script('jquery-ui-timepicker-addon.js');
+?>
 <div class="exercises form">
     <?php echo $this->Form2->create('Exercise'); ?>
     <fieldset>
         <legend><?php echo __('Add Exercise'); ?></legend>
         <?php
-        echo $this->Form2->input('date');
+        echo $this->Form2->input('Exercise.date', array('id' => 'dateTimePickerStart', 'type' => 'text'));
         echo $this->Form2->input('durationMinute');
         echo $this->Form2->input('exercise_type');
         echo $this->Form2->input('comment');
@@ -20,3 +29,6 @@
         <li><?php echo $this->Html->link(__('New Users'), array('controller' => 'users', 'action' => 'add')); ?> </li>
     </ul>
 </div>
+<script type="text/javascript">
+    $('#dateTimePickerStart').datepicker({dateFormat: 'dd-mm-yy'}).val()
+</script>
