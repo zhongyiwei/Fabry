@@ -3,13 +3,13 @@
     <ul>
 
         <li><?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $this->Form->value('Pain.id')), null, __('Are you sure you want to delete # %s?', $this->Form->value('Pain.id'))); ?></li>
-        <li><?php echo $this->Html->link(__('List Pains'), array('action' => 'index')); ?></li>
+        <li><?php echo $this->Html->link(__('Back'), array('action' => 'index')); ?></li>
     </ul>
 </div>
 <div class="pains form">
-    <?php echo $this->Form->create('Pain'); ?>
+    <?php echo $this->Form->create('Pain', array('novalidate' => true)); ?>
     <fieldset>
-        <legend><?php echo __('Edit Pain'); ?></legend>
+        <legend><?php echo __('Edit Pain Record'); ?></legend>
         <?php
         echo $this->Form->input('id');
         echo $this->Form->input('date', array('dateFormat' => 'DMY'));

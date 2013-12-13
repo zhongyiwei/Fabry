@@ -1,13 +1,13 @@
 <div class="actions">
     <h3><?php echo __('Actions'); ?></h3>
     <ul>
-        <li><?php echo $this->Html->link(__('New Bowel'), array('action' => 'add')); ?></li>
+        <li><?php echo $this->Html->link(__('New Movement Record'), array('action' => 'add')); ?></li>
         <li><?php echo $this->Html->link(__('Generate Bowel Report'), array('controller' => 'PDF', 'action' => 'bowelReport/I')); ?> </li>
     </ul>
 </div>
 
 <div class="bowels index">
-    <h2><?php echo __('Bowels'); ?></h2>
+    <h2><?php echo __('Bowel Movement Records'); ?></h2>
     <table cellpadding="0" cellspacing="0"  id="js-datatable">
         <thead>
             <tr>

@@ -69,17 +69,17 @@ echo $this->Html->css('jquery.dataTables.css');
                         <td class="actions">
                             <?php echo $this->Html->link(__('View'), array('action' => 'view', $user['User']['id'])); ?>
                             <?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $user['User']['id'])); ?>
-                            <?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $user['User']['id'], null, __('Are you sure you want to delete # %s?', $user['User']['id']))); ?>
+                            <?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $user['User']['id']), null, __('Are you sure you want to delete ' . $user['User']['username'] . '?', $user['User']['id'])); ?>
                         </td>
                     </tr>
                     <?php
                 }
 //                     else { 
                 ?>
-    <!--                        <td><?php // echo h($user['User']['username']);   ?>&nbsp;</td>
-    <td><?php // echo h($user['User']['role']);    ?>&nbsp;</td>
-    <td><?php // echo h($user['User']['email']);    ?>&nbsp;</td>
-    <td><?php // echo h($user['User']['phone']);    ?>&nbsp;</td>
+    <!--                        <td><?php // echo h($user['User']['username']);    ?>&nbsp;</td>
+    <td><?php // echo h($user['User']['role']);     ?>&nbsp;</td>
+    <td><?php // echo h($user['User']['email']);     ?>&nbsp;</td>
+    <td><?php // echo h($user['User']['phone']);     ?>&nbsp;</td>
     <td class="actions">-->
                 <?php // if ($user['User']['role'] == $current_user['role']) {  ?>
                 <?php // echo $this->Html->link(__('View'), array('action' => 'view', $user['User']['id']));  ?>

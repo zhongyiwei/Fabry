@@ -16,8 +16,8 @@
                     </td>
                     <td><?php echo h($invitation['Invitation']['response_status']); ?>&nbsp;</td>
                     <td class="actions">
-                        <?php echo $this->Html->link(__('Edit'), array('action' => 'editResponse', $invitation['Invitation']['id'])); ?>
-                        <?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $invitation['Invitation']['id']), null, __('Are you sure you want to delete # %s?', $invitation['Invitation']['id'])); ?>
+                        <?php echo $this->Html->link(__('Change Response'), array('action' => 'editResponse', $invitation['Invitation']['id'])); ?>
+                        
                     </td>
                 </tr>
             <?php endforeach; ?>

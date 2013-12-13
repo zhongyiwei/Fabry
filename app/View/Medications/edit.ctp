@@ -12,12 +12,12 @@ echo $this->Html->script('jquery-ui-timepicker-addon.js');
     <ul>
 
         <li><?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $this->Form->value('Medication.id')), null, __('Are you sure you want to delete '.$this->Form->value('Medication.medicationName').' from your list of medications ?', $this->Form->value('Medication.id'))); ?></li>
-        <li><?php echo $this->Html->link(__('List Medications'), array('action' => 'index')); ?></li>
+        <li><?php echo $this->Html->link(__('Back'), array('action' => 'index')); ?></li>
 
     </ul>
 </div>
 <div class="medications form">
-    <?php echo $this->Form2->create('Medication'); ?>
+    <?php echo $this->Form2->create('Medication', array('novalidate' => true)); ?>
     <fieldset>
         <legend><?php echo __('Edit Medication'); ?></legend>
         <?php

@@ -247,6 +247,21 @@ class UsersController extends AppController {
         }
         return $this->redirect(array('action' => 'index'));
     }
+    
+    public function deleteR($id = null) {
+        $this->User->id = $id;
+        if (!$this->User->exists()) {
+            throw new NotFoundException(__('Invalid user'));
+        }
+        $this->request->onlyAllow('post', 'delete');
+        if ($this->User->delete()) {
+            $this->Session->setFlash(__('The profile has been deleted.'), 'default', array(), 'good');
+        } else {
+            $this->Session->setFlash(__('The profile could not be deleted. Please, try again.'), 'default', array(), 'bad');
+        }
+        return $this->redirect(array('action' => 'loginReport'));
+    }
+    
 
     //this function to redirect the user to the right page 
     public function display() {

@@ -37,7 +37,7 @@ class BowelsController extends AppController {
      */
     public function view($id = null) {
         if (!$this->Bowel->exists($id)) {
-            throw new NotFoundException(__('Invalid bowel'));
+            throw new NotFoundException(__('Invalid record'));
         }
         $options = array('conditions' => array('Bowel.' . $this->Bowel->primaryKey => $id));
         $this->set('bowel', $this->Bowel->find('first', $options));
@@ -63,10 +63,10 @@ class BowelsController extends AppController {
 
                 $this->Bowel->create();
                 if ($this->Bowel->save($this->request->data)) {
-                    $this->Session->setFlash(__('The bowel has been saved.'), 'default', array(), 'good');
+                    $this->Session->setFlash(__('The record has been saved.'), 'default', array(), 'good');
                     return $this->redirect(array('action' => 'index'));
                 } else {
-                    $this->Session->setFlash(__('The bowel could not be saved. Please, try again.'), 'default', array(), 'bad');
+                    $this->Session->setFlash(__('The record could not be saved. Please, try again.'), 'default', array(), 'bad');
                 }
             } else {
                 $this->Session->setFlash(__('There can be only one event occurred in one day.'), 'default', array(), 'bad');
@@ -85,14 +85,14 @@ class BowelsController extends AppController {
      */
     public function edit($id = null) {
         if (!$this->Bowel->exists($id)) {
-            throw new NotFoundException(__('Invalid bowel'));
+            throw new NotFoundException(__('Invalid record'));
         }
         if ($this->request->is(array('post', 'put'))) {
             if ($this->Bowel->save($this->request->data)) {
-                $this->Session->setFlash(__('The bowel has been saved.'), 'default', array(), 'good');
+                $this->Session->setFlash(__('The record has been saved.'), 'default', array(), 'good');
                 return $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash(__('The bowel could not be saved. Please, try again.'), 'default', array(), 'bad');
+                $this->Session->setFlash(__('The record could not be saved. Please, try again.'), 'default', array(), 'bad');
             }
         } else {
             $options = array('conditions' => array('Bowel.' . $this->Bowel->primaryKey => $id));
@@ -116,9 +116,9 @@ class BowelsController extends AppController {
         }
         $this->request->onlyAllow('post', 'delete');
         if ($this->Bowel->delete()) {
-            $this->Session->setFlash(__('The bowel has been deleted.'), 'default', array(), 'good');
+            $this->Session->setFlash(__('The record has been deleted.'), 'default', array(), 'good');
         } else {
-            $this->Session->setFlash(__('The bowel could not be deleted. Please, try again.'), 'default', array(), 'bad');
+            $this->Session->setFlash(__('The record could not be deleted. Please, try again.'), 'default', array(), 'bad');
         }
         return $this->redirect(array('action' => 'index'));
     }

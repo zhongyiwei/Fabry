@@ -58,6 +58,7 @@ class PainsController extends AppController {
             $this->request->data['Pain']['users_id'] = $id;
 
             $date = $this->request->data['Pain']['date'];
+            $this->request->data['Pain']['date'] = date('Y-m-d', strtotime($date));
 //            $date = date('Y-m-d 00:00:00', strtotime($date));
 //            debug($date);
             $paind = $this->Pain->find('all', array('conditions' => array('users_id' => $id, 'date' => $date)));

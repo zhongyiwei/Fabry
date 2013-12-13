@@ -1,4 +1,4 @@
-<div class="actions">
+<div class="actions" style="margin-top:-35px;">
     <ul>
 
         <?php if ($current_user['role'] == 'admin') { ?>
@@ -80,7 +80,7 @@
                 echo date('d-m-Y', $timestamp);
                 ?>			&nbsp;
             </dd>
-            <dt><?php echo __('Street name / number'); ?></dt>
+            <dt><?php echo __('Address'); ?></dt>
             <dd>
     <?php echo h($user['User']['address']); ?>
                 &nbsp;

@@ -8,7 +8,7 @@
 </div>
 
 <div class="exercises form">
-    <?php echo $this->Form2->create('Exercise'); ?>
+    <?php echo $this->Form2->create('Exercise', array('novalidate' => true)); ?>
     <fieldset>
         <legend><?php echo __('Edit Exercise'); ?></legend>
         <?php
