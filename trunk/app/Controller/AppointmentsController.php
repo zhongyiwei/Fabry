@@ -157,7 +157,7 @@ class AppointmentsController extends AppController {
             if ($this->Appointment->save($this->request->data)) {
                 // good message color changing
                 $this->Session->setFlash(__('The event has been saved.'), 'default', array(), 'good');
-                return $this->redirect(array('action' => 'index'));
+                return $this->redirect(array('action' => 'calendarEvent','controller'=>'calendarevents'));
             } else {
 
                 //bad message color changing
@@ -172,7 +172,11 @@ class AppointmentsController extends AppController {
             $options = array('fields' => array('id', 'doctor'));
             $contacts = $this->Contact->find('list', $options);
             $this->set('contacts', $contacts);
+            
         }
+        
+                                        
+                
     }
 
     /**
@@ -193,7 +197,7 @@ class AppointmentsController extends AppController {
         } else {
             $this->Session->setFlash(__('The event could not be deleted. Please, try again.'));
         }
-        return $this->redirect(array('action' => 'index'));
+        return $this->redirect(array('action' => 'calendarEvent','controller'=>'calendarevents'));
     }
 
 }

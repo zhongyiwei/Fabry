@@ -28,7 +28,7 @@ echo $this->Html->script('jquery-ui-timepicker-addon.js');
 //        echo $this->Form->checkbox('users', array($userName));
         ?>
     </fieldset>
-    <?php echo $this->Form->end(__('Save and send email')); ?>
+    <?php echo $this->Form->end(__('Save')); ?>
 </div>
 <div class="actions">
     <h3><?php echo __('Actions'); ?></h3>

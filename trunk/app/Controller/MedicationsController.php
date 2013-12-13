@@ -65,11 +65,9 @@ class MedicationsController extends AppController {
                 return $this->redirect(array('action' => 'index'));
             } else {
                 $this->Session->setFlash(__('The medication could not be saved. Please, try again.'), 'default', array(), 'bad');
-            }
-        } else {
-            $this->Session->setFlash(__('There can be only one event occurred in one day.'), 'default', array(), 'bad');
-//            }
-        }
+            } 
+        
+        } 
         //$users = $this->Medication->User->find('list');
         //$this->set(compact('users'));
     }

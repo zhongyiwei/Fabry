@@ -129,7 +129,7 @@ $this->Html->image('cake.logo.png');
                             <li><?php echo $this->Html->link('Medical Records', ''); ?></a>
                                 <ul>
                                     <li><?php echo $this->Html->link('Exercise Chart', '/exercises'); ?></a></li>
-                                    <li><?php echo $this->Html->link('Bowel Chart', '/bowels'); ?></a></li>
+                                    <li><?php echo $this->Html->link('Bowel Movement Chart', '/bowels'); ?></a></li>
                                     <li><?php echo $this->Html->link('Pain Chart', '/pains'); ?></a></li>
                                     <li><?php echo $this->Html->link('Medication Chart', '/medications'); ?></a></li>
                                     <li><?php echo $this->Html->link('External Medical Records', '/uploads'); ?></a></li>

@@ -1,5 +1,5 @@
 <div class="events form">
-<?php echo $this->Form->create('Appointment'); ?>
+<?php echo $this->Form->create('Appointment', array('novalidate' => true)); ?>
 	<fieldset>
 		<legend><?php echo __('Edit Appointment'); ?></legend>
 	<?php

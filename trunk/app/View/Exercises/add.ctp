@@ -6,9 +6,15 @@ echo $this->Html->script('jquery-ui.min.js');
 echo $this->Html->script('jquery.ui.slider.js');
 echo $this->Html->script('jquery.ui.datepicker.js');
 echo $this->Html->script('jquery-ui-timepicker-addon.js');
-?>
+?><div class="actions">
+    <h3><?php echo __('Actions'); ?></h3>
+    <ul>
+
+        <li><?php echo $this->Html->link(__('Back'), array('action' => 'index')); ?></li>
+    </ul>
+</div>
 <div class="exercises form">
-    <?php echo $this->Form2->create('Exercise'); ?>
+    <?php echo $this->Form2->create('Exercise', array('novalidate' => true)); ?>
     <fieldset>
         <legend><?php echo __('Add Exercise'); ?></legend>
         <?php
@@ -20,15 +26,7 @@ echo $this->Html->script('jquery-ui-timepicker-addon.js');
     </fieldset>
     <?php echo $this->Form2->end(__('Submit')); ?>
 </div>
-<div class="actions">
-    <h3><?php echo __('Actions'); ?></h3>
-    <ul>
 
-        <li><?php echo $this->Html->link(__('List Exercises'), array('action' => 'index')); ?></li>
-        <li><?php echo $this->Html->link(__('List Users'), array('controller' => 'users', 'action' => 'index')); ?> </li>
-        <li><?php echo $this->Html->link(__('New Users'), array('controller' => 'users', 'action' => 'add')); ?> </li>
-    </ul>
-</div>
 <script type="text/javascript">
     $('#dateTimePickerStart').datepicker({dateFormat: 'dd-mm-yy'}).val()
 </script>

@@ -8,10 +8,18 @@ echo $this->Html->script('jquery.ui.datepicker.js');
 echo $this->Html->script('jquery-ui-timepicker-addon.js');
 ?>
 <?php echo $this->Session->flash(); ?>
+<div class="actions">
+    <h3><?php echo __('Actions'); ?></h3>
+    <ul>
+
+        <li><?php echo $this->Html->link(__('Back'), array('action' => 'index')); ?></li>
+        
+    </ul>
+</div>
 <div class="calendarEvents form">
     <?php echo $this->Form->create('CalendarEvent'); ?>
     <fieldset>
-        <legend><?php echo __('Add Calendar Event'); ?></legend>
+        <legend><?php echo __('Add Personal Event'); ?></legend>
         <?php
         if (!empty($this->params['url']['date'])) {
             $date = $this->params['url']['date'];
@@ -29,15 +37,7 @@ echo $this->Html->script('jquery-ui-timepicker-addon.js');
     </fieldset>
     <?php echo $this->Form->end(__('Submit')); ?>
 </div>
-<div class="actions">
-    <h3><?php echo __('Actions'); ?></h3>
-    <ul>
 
-        <li><?php echo $this->Html->link(__('List Calendar Events'), array('action' => 'index')); ?></li>
-        <li><?php echo $this->Html->link(__('List Users'), array('controller' => 'users', 'action' => 'index')); ?> </li>
-        <li><?php echo $this->Html->link(__('New Users'), array('controller' => 'users', 'action' => 'add')); ?> </li>
-    </ul>
-</div>
 <script type="text/javascript">
     $('#dateTimePickerStart').datetimepicker();
     $('#dateTimePickerEnd').datetimepicker();

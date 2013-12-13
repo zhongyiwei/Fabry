@@ -11,13 +11,13 @@ echo $this->Html->script('jquery-ui-timepicker-addon.js');
     <h3><?php echo __('Actions'); ?></h3>
     <ul>
 
-        <li><?php echo $this->Html->link(__('List Pains'), array('action' => 'index')); ?></li>
+        <li><?php echo $this->Html->link(__('Back'), array('action' => 'index')); ?></li>
     </ul>
 </div>
 <div class="pains form">
-    <?php echo $this->Form->create('Pain'); ?>
+    <?php echo $this->Form->create('Pain', array('novalidate' => true)); ?>
     <fieldset>
-        <legend><?php echo __('Add Pain'); ?></legend>
+        <legend><?php echo __('Add Pain Record'); ?></legend>
         <?php
         echo $this->Form2->input('Pain.date', array('id' => 'dateTimePickerStart', 'type' => 'text'));
         echo $this->Form->input('painLevel', array('min' => 0, 'max' => 10));

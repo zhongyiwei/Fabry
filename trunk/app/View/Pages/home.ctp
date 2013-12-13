@@ -18,8 +18,8 @@
 
             <li><div class="navHome"> <?php echo $this->Html->image("profileUpdate.png", array("class" => "icon", "alt" => "manage users", 'url' => array('controller' => 'users'))); ?> <p>Manage Accounts</p></div></li>
             <li><div class="navHome"> <?php echo $this->Html->image("Adressbook.png", array("class" => "icon", "alt" => "addressbook", 'url' => array('controller' => 'contacts'))); ?><p>Address Book</p></div> </li>
-            <li><div class="navHome"> <?php echo $this->Html->image("event.png", array("class" => "icon", "alt" => "events", 'url' => array('controller' => 'appointments'))); ?> <p>Event</p></div></li>
-            <li><div class="navHome"> <?php echo $this->Html->image("videos.png", array("class" => "icon", "alt" => "health tips and videos", 'url' => array('controller' => 'videos'))); ?><p>Videos</p> </div></li>
+            <li><div class="navHome"> <?php echo $this->Html->image("event.png", array("class" => "icon", "alt" => "events", 'url' => array('controller' => 'events'))); ?> <p>Event</p></div></li>
+<!--            <li><div class="navHome"> <?php // echo $this->Html->image("videos.png", array("class" => "icon", "alt" => "health tips and videos", 'url' => array('controller' => 'videos'))); ?><p>Videos</p> </div></li>-->
             <li><div class="navHome"> <?php echo $this->Html->image("reports.png", array("class" => "icon", "alt" => "view deactivate accounts", 'url' => array('controller' => 'users','action' => 'loginReport'))); ?> <p>Non-Active Reports</p></div></li>
 
             <?php
@@ -34,7 +34,7 @@
             <li><div class="navHome"> <?php echo $this->Html->image("calendar.png", array("class" => "icon", "alt" => "Calendar", 'url' => array('controller' => 'calendarEvents', 'action' => "calendarEvent"))); ?> <p>Calendar</p></div></li>
             <li><div class="navHome"> <?php echo $this->Html->image("event.png", array("class" => "icon", "alt" => "remainders", 'url' => array('controller' => 'appointments'))); ?> <p>Event</p></div></li>
             <li><div class="navHome"> <?php echo $this->Html->image("profileUpdate.png", array("class" => "icon", "alt" => "FSGA", 'url' => array('controller' => 'users', 'action' => "view/$userId"))); ?> <p>Profile Update</p></div></li>
-            <li><div class="navHome"> <?php echo $this->Html->image("videos.png", array("class" => "icon", "alt" => "access health tips and vidoes", 'url' => array('controller' => 'videos'))); ?> <p>Videos</p> </div></li>
+<!--            <li><div class="navHome"> <?php // echo $this->Html->image("videos.png", array("class" => "icon", "alt" => "access health tips and vidoes", 'url' => array('controller' => 'videos'))); ?> <p>Videos</p> </div></li>-->
             <li><div class="navHome"> <?php echo $this->Html->image("emailUs.png", array("class" => "icon", "alt" => "Contact Fabry Support Group Australia", 'url' => 'http://fabry.com.au/contact-us/')); ?> <p>Contact Us</p></div></li>
             
 <?php } ?>

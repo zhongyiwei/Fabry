@@ -18,7 +18,7 @@ class Medication extends AppModel {
         'medicationName' => array(
             'notempty' => array(
                 'rule' => array('notempty'),
-            //'message' => 'Your custom message here',
+            'message' => 'Please enter name of medication',
             //'allowEmpty' => false,
             //'required' => false,
             //'last' => false, // Stop validation after this rule
@@ -28,7 +28,7 @@ class Medication extends AppModel {
         'strengthEachPill' => array(
             'notempty' => array(
                 'rule' => array('notempty'),
-            //'message' => 'Your custom message here',
+            'message' => 'Please enter strength of each medication',
             //'allowEmpty' => false,
             //'required' => false,
             //'last' => false, // Stop validation after this rule
@@ -38,7 +38,7 @@ class Medication extends AppModel {
         'doseEachTime' => array(
             'notempty' => array(
                 'rule' => array('notempty'),
-            //'message' => 'Your custom message here',
+            'message' => 'Please enter dosage to take each time',
             //'allowEmpty' => false,
             //'required' => false,
             //'last' => false, // Stop validation after this rule
@@ -68,7 +68,7 @@ class Medication extends AppModel {
         'repeatTimes' => array(
             'notempty' => array(
                 'rule' => array('notempty'),
-            //'message' => 'Your custom message here',
+            'message' => 'Please select a number',
             //'allowEmpty' => false,
             //'required' => false,
             //'last' => false, // Stop validation after this rule
@@ -78,7 +78,7 @@ class Medication extends AppModel {
         'start' => array(
             'notempty' => array(
                 'rule' => array('notempty'),
-            //'message' => 'Your custom message here',
+            'message' => 'Please select a date',
             //'allowEmpty' => false,
             //'required' => false,
             //'last' => false, // Stop validation after this rule

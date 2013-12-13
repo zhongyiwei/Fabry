@@ -7,11 +7,11 @@ echo $this->Html->script('fullcalendar.js');
 //debug($invitationData);
 ?>
 <?php echo $this->Session->flash(); ?>
-<?php echo $this->Html->link(__('New Calendar Event'), array('action' => 'add')); ?>
+<?php echo $this->Html->link(__('New Calendar Event'), array('action' => 'add'),array('class'=>'cl')); ?>
 <?php
 echo nl2br(" \n ");
 ?>
-<?php echo $this->Html->link(__('New Appoinment Event'), array('controller' => 'appointments', 'action' => 'add?redirect=calendar')); ?>
+<?php echo $this->Html->link(__('New Appoinment Event'), array('controller' => 'appointments', 'action' => 'add?redirect=calendar'),array('class'=>'cl')); ?>
 <?php
 echo $this->Html->image("legend.png", array("alt" => "Calendar Legend", 'name' => "Calendar Legend", 'height' => "110", 'style' => "float:right;margin-top: -25px;margin-bottom: 15px;"));
 ?>

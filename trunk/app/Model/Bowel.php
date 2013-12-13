@@ -28,7 +28,7 @@ class Bowel extends AppModel {
         'count' => array(
             'numeric' => array(
                 'rule' => array('numeric'),
-            //'message' => 'Your custom message here',
+            'message' => 'Please select a number',
             //'allowEmpty' => false,
             //'required' => false,
             //'last' => false, // Stop validation after this rule

@@ -37,7 +37,7 @@ echo $this->Html->script('jquery-ui-timepicker-addon.js');
 //        echo $this->Form->checkbox('users', array($userName));
         ?>
     </fieldset>
-    <?php echo $this->Form->end(__('Update and Resend email')); ?>
+    <?php echo $this->Form->end(__('Update')); ?>
 </div>
 
 <script type="text/javascript">
