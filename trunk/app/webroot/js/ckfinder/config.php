@@ -80,7 +80,7 @@ Examples:
 ATTENTION: The trailing slash is required.
 */
 //$baseDir = resolveUrl($baseUrl);
-$baseDir = 'E:/xampp/htdocs/build2/app/webroot/info/';
+$baseDir = '/Applications/MAMP/htdocs/build4_v13.0/app/webroot/info/';
 /*$baseDir = 'E:/Note2/FIT3047 Industrial Experience Project/IEProject/app/webroot/uploads';*/
 
 /*

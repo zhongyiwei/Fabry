@@ -77,15 +77,21 @@ $this->Html->image('cake.logo.png');
                             <li><?php echo $this->Html->link('Manage Accounts', array('controller' => 'users', 'action' => 'index')); ?></a></li>
                         </ul>
                     </nav>
-                    
-                    
-                    
+
+
+
                 <?php elseif ($current_user['role'] == 'admin'): ?>
 
                     <nav>
                         <ul>
                             <li><?php echo $this->Html->link('Home', '/pages/home'); ?></a></li>
-                            <li><?php echo $this->Html->link('Members Management', array('controller' => 'users', 'action' => 'index')); ?></a></li>
+                            <li><?php echo $this->Html->link('Members Management', array('controller' => 'users', 'action' => 'index')); ?></a>
+                                <ul>
+                                    <li><?php echo $this->Html->link('View Accounts', array('controller' => 'users', 'action' => 'index')); ?></a>
+                                    <li><?php echo $this->Html->link('Non-Active Accounts Report', '/users/loginReport'); ?></a></li>
+                                </ul>
+                            </li>
+
                             <li><?php echo $this->Html->link('Doctors and Centres Management', '/contacts'); ?></a></li>
                             <li><?php echo $this->Html->link('Events', '/events'); ?></a>
                                 <ul>
@@ -98,15 +104,16 @@ $this->Html->image('cake.logo.png');
                             </li>
                             <li><?php echo $this->Html->link('Newsletters', '/news'); ?></a></li>
                             <li><?php echo $this->Html->link('Health Tips And Videos', '/addressbooks'); ?></a></li>
-                            <li><?php echo $this->Html->link('Reports', '/addressbooks'); ?></a></li>      
+                                  
                         </ul>
                     </nav>
-                    
-                    
-                    
-                    <?php elseif ($current_user['role'] == 'member'):
-                        $users_id = $current_user['id'];
-                        ?>
+
+
+
+                <?php
+                elseif ($current_user['role'] == 'member'):
+                    $users_id = $current_user['id'];
+                    ?>
 
                     <nav>
                         <ul>
@@ -114,7 +121,7 @@ $this->Html->image('cake.logo.png');
                             <li><?php echo $this->Html->link('Address Book', "/contacts/memindex"); ?></a>
                                 <ul>
                                     <li><?php echo $this->Html->link('List Personal Contacts', array('controller' => 'contacts', 'action' => 'memindex')); ?></a></li>
-                                    <li><?php echo $this->Html->link('New Contact', array('controller' => 'contacts', 'action' => "add", $users_id)); ?></a></li>
+                                    <li><?php echo $this->Html->link('New Contact', array('controller' => 'contacts', 'action' => "add?redirect=add")); ?></a></li>
                                     <li><?php echo $this->Html->link('Official Treatment Centres', array('controller' => 'contacts', 'action' => 'index')); ?></a></li>
                                     <!--<li><?php echo $this->Html->link('Learn More', '/contacts'); ?></a></li>-->
                                 </ul>
@@ -132,7 +139,7 @@ $this->Html->image('cake.logo.png');
                             <li><?php echo $this->Html->link('Calendar', '/calendarEvents/calendarEvent'); ?></a>
                                 <ul>
                                     <li><?php echo $this->Html->link('View Calendar', '/calendarEvents/calendarEvent'); ?></a>
-                                    <li><?php echo $this->Html->link('My Events', '/calendarEvents/calendarEvent'); ?></a>
+                                    <li><?php echo $this->Html->link('My Events', '/calendarEvents/index'); ?></a>
                                     <li><?php echo $this->Html->link('My Appointments', '/appointments'); ?></a>
                                         <ul>
                                             <li><?php echo $this->Html->link('List All Appointments', '/appointments'); ?></a></li>
@@ -143,22 +150,22 @@ $this->Html->image('cake.logo.png');
                                 </ul>
                             </li>
                             <li><?php echo $this->Html->link('Event', '/invitations/eventParticipation'); ?></a>
-<!--                                <ul>
-                                    <li><?php echo $this->Html->link('RSVP', '/addressbooks'); ?></a></li>
-                                    <li><?php echo $this->Html->link('Remainder to make booking', '/addressbooks'); ?></a></li>
-                                    <li><?php echo $this->Html->link('Remainder to attend appointment/ take medication', '/addressbooks'); ?></a></li>
-
-                                </ul>-->
+                                <!--                                <ul>
+                                                                    <li><?php echo $this->Html->link('RSVP', '/addressbooks'); ?></a></li>
+                                                                    <li><?php echo $this->Html->link('Remainder to make booking', '/addressbooks'); ?></a></li>
+                                                                    <li><?php echo $this->Html->link('Remainder to attend appointment/ take medication', '/addressbooks'); ?></a></li>
+                                
+                                                                </ul>-->
                             </li>
                             <li><?php echo $this->Html->link('Profile Update', array('controller' => 'users', 'action' => "view/$users_id")); ?></a></li>
-                            
-                            
-                            
-                            
+
+
+
+
                         </ul>
                     </nav>
 
-                <?php endif; ?>
+<?php endif; ?>
             </div>
 
 
@@ -168,10 +175,10 @@ $this->Html->image('cake.logo.png');
                 <!-- for good /bad flash message colors --> 
                 <?php echo $this->Session->flash('good'); ?>
                 <?php echo $this->Session->flash('bad'); ?>
-                <?php echo $this->fetch('content'); ?>
+<?php echo $this->fetch('content'); ?>
             </div>
             <div id="footer">
-                <?php /* Designed by Team 71 Infinity :) Tefo */ ?>
+<?php /* Designed by Team 71 Infinity :) Tefo */ ?>
                 <h1>Copyright &copy; Fabry Support Group Australia, All Rights Reserved.</h1>
 
                 </h2>

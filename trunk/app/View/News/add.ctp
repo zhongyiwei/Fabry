@@ -10,7 +10,7 @@ echo $this->Html->script('ckfinder/ckfinder');
         echo $this->Form->input('news_description', array('id' => 'news_description'));
 //        echo $this->Form->input('publish_status', array('options' => $publishStatus, 'default' => 'Private'));
         //echo $this->Form->input('User');
-        echo $this->Form->input('pdf_name', array('id' => 'xFilePath', 'class' => 'ckeditor', 'style' => 'width:500px'));
+        echo $this->Form->input('pdf_name', array('id' => 'xFilePath', 'class' => 'ckeditor', 'style' => 'width:500px', 'label' => 'Browse for PDF file (double click to select)'));
         echo $this->Form->button('Browse PDF file', array('onclick' => 'BrowseServer()', 'type' => 'button', 'style' => 'padding:15px 5px;margin-top:-70px; margin-left:555px;float:left'));
         ?>
     </fieldset>

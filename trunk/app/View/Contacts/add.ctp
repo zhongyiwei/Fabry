@@ -16,7 +16,7 @@
 <div class="contacts form">
     <?php echo $this->Form->create('Contact', array('novalidate' => true)); ?>
     <fieldset>
-        <legend><?php echo __('Add Contact'); ?></legend>
+        <legend><?php echo __('Add Personal Contact'); ?></legend>
 
         <table width="200" border="0" class="userTable">
             <tr>

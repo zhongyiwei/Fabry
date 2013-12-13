@@ -51,6 +51,13 @@ class MedicationsController extends AppController {
     public function add() {
         if ($this->request->is('post')) {
             $id = $this->current_user['id'];
+
+//            $date = $this->request->data['Bowel']['date'];
+//            debug($date);
+//            $medi = $this->Medication->find('all', array('conditions' => array('users_id' => $id, 'start' => $date)));
+//
+//            debug($medi);
+//            if (empty($medi)) {
             $this->request->data['Medication']['users_id'] = $id;
             $this->Medication->create();
             if ($this->Medication->save($this->request->data)) {
@@ -59,6 +66,9 @@ class MedicationsController extends AppController {
             } else {
                 $this->Session->setFlash(__('The medication could not be saved. Please, try again.'), 'default', array(), 'bad');
             }
+        } else {
+            $this->Session->setFlash(__('There can be only one event occurred in one day.'), 'default', array(), 'bad');
+//            }
         }
         //$users = $this->Medication->User->find('list');
         //$this->set(compact('users'));

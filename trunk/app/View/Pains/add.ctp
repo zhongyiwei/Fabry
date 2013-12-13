@@ -1,3 +1,12 @@
+<?php
+echo $this->Html->css('jquery-ui.css');
+echo $this->Html->css('jquery-ui-timepicker-addon.css');
+echo $this->Html->script('jquery-1.10.2.min.js');
+echo $this->Html->script('jquery-ui.min.js');
+echo $this->Html->script('jquery.ui.slider.js');
+echo $this->Html->script('jquery.ui.datepicker.js');
+echo $this->Html->script('jquery-ui-timepicker-addon.js');
+?>
 <div class="actions">
     <h3><?php echo __('Actions'); ?></h3>
     <ul>
@@ -10,7 +19,7 @@
     <fieldset>
         <legend><?php echo __('Add Pain'); ?></legend>
         <?php
-        echo $this->Form->input('date', array('dateFormat' => 'DMY'));
+        echo $this->Form2->input('Pain.date', array('id' => 'dateTimePickerStart', 'type' => 'text'));
         echo $this->Form->input('painLevel', array('min' => 0, 'max' => 10));
         echo $this->Form->input('medication');
         echo $this->Form->input('illness');
@@ -23,3 +32,6 @@
     <?php echo $this->Form->end(__('Submit')); ?>
 </div>
 
+<script type="text/javascript">
+    $('#dateTimePickerStart').datepicker({ dateFormat: 'dd-mm-yy' }).val()
+</script>

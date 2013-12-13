@@ -77,7 +77,7 @@
 
 <div class="contacts index">
 
-    <h2><?php echo __('Official Contacts'); ?></h2>
+    <h2><?php echo __('Official Treatment Centres'); ?></h2>
 
     <div class="actions">
 
@@ -85,7 +85,7 @@
 
         <?php if ($current_user['role'] == 'admin' || $current_user['role'] == 'super'): ?>
             <ul>
-                <li><?php echo $this->Html->link(__('New Contact'), array('controller' => 'contacts', 'action' => 'admadd')); ?></li>
+                <li><?php echo $this->Html->link(__('New Contact'), array('controller' => 'contacts', 'action' => 'admadd?redirect=add')); ?></li>
             </ul>
         <?php endif ?>
     </div>
@@ -98,7 +98,7 @@
                 <tr>
                     <th>Centre Name</th>
                     <th>Doctor</th>
-                    <th>Department</th>
+<!--                    <th>Department</th>-->
                     <th>State</th>
                     <th>Country</th>
                     <th>Phone</th>
@@ -108,7 +108,7 @@
                 <tr>
                     <th>Centre Name</th>
                     <th>Doctor</th>
-                    <th>Department</th>
+                    <!--<th>Department</th>-->
                     <th>State</th>
                     <th>Country</th>
                     <th>Phone</th>
@@ -128,7 +128,7 @@
                     <tr>
                         <td><?php echo h($contact['Contact']['centerName']); ?>&nbsp;</td>
                         <td><?php echo h($contact['Contact']['doctor']); ?>&nbsp;</td>
-                        <td><?php echo h($contact['Contact']['department']); ?>&nbsp;</td>
+<!--                        <td><?php // echo h($contact['Contact']['department']); ?>&nbsp;</td>-->
                         <td><?php echo h($contact['Contact']['state']); ?>&nbsp;</td>
                         <td><?php echo h($contact['Contact']['country']); ?>&nbsp;</td>
                         <td><?php echo h($contact['Contact']['phone']); ?>&nbsp;</td>
@@ -140,7 +140,7 @@
                             <?php if (($current_user['role'] == 'admin' || $current_user['role'] == 'super' ) && ($contact['Contact']['isOfficial'] == 1)): ?>
 
                                 <?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $contact['Contact']['id'])); ?>
-                                <?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $contact['Contact']['id']), null, __('Are you sure you want to delete  ' . $contact['Contact']['centerName'] . ' ?', $contact['Contact']['id'])); ?>
+                                <?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $contact['Contact']['id']), null, __('Are you sure you want to delete  ' . $contact['Contact']['doctor'] . ' ?', $contact['Contact']['id'])); ?>
 
                             <?php elseif ($current_user['role'] == 'member'): ?>
                                 <?php echo $this->Html->link(__('View'), array('action' => 'view', $contact['Contact']['id'])); ?>
@@ -151,7 +151,7 @@
                     <tr>
                         <td><?php echo h($contact['Contact']['centerName']); ?>&nbsp;</td>
                         <td><?php echo h($contact['Contact']['doctor']); ?>&nbsp;</td>
-                        <td><?php echo h($contact['Contact']['department']); ?>&nbsp;</td>
+<!--                        <td><?php // echo h($contact['Contact']['department']); ?>&nbsp;</td>-->
                         <td><?php echo h($contact['Contact']['state']); ?>&nbsp;</td>
                         <td><?php echo h($contact['Contact']['country']); ?>&nbsp;</td>
                         <td><?php echo h($contact['Contact']['phone']); ?>&nbsp;</td>

@@ -3,8 +3,8 @@
 
         <?php if ($current_user['role'] == 'admin') { ?>
 
-    <?php if ($user['User']['role'] == 'admin'): ?>
-        <?php if ($user['User']['username'] == $current_user['username']) { ?>
+            <?php if ($user['User']['role'] == 'admin'): ?>
+                <?php if ($user['User']['username'] == $current_user['username']) { ?>
                     <li><?php echo $this->Html->link(__('Update Entry'), array('action' => 'edit', $user['User']['id'])); ?> </li>
                     <li><?php echo $this->Html->link(__('Change Password'), array('action' => 'password', $user['User']['id'])); ?> </li>
                     <li><?php echo $this->Html->link('Go Back', '/pages/home'); ?></a></li>
@@ -17,21 +17,21 @@
             <?php if ($user['User']['role'] == 'member'): ?>
                 <li><?php echo $this->Html->link(__('Update Entry'), array('action' => 'edit', $user['User']['id'])); ?> </li>
                 <li><?php echo $this->Html->link(__('Change Password'), array('action' => 'password', $user['User']['id'])); ?> </li>
-                <?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $user['User']['id'], null, __('Are you sure you want to delete # %s?', $user['User']['id']))); ?>
+                <li><?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $user['User']['id'], null, __('Are you sure you want to delete # %s?', $user['User']['id']))); ?></li>
                 <li><?php echo $this->Html->link('Go Back', '/pages/home'); ?></a></li>
             <?php endif ?>
 
 
         <?php }else if ($current_user['role'] == 'super') { ?>
 
-    <?php if ($user['User']['role'] == $current_user['role']) { ?>
+            <?php if ($user['User']['role'] == $current_user['role']) { ?>
 
                 <li><?php echo $this->Html->link(__('Change Password'), array('action' => 'password', $user['User']['id'])); ?> </li>		
                 <li><?php echo $this->Html->link('Go Back', '/pages/home'); ?></a></li>
             <?php } else { ?>
                 <li><?php echo $this->Html->link(__('Update Entry'), array('action' => 'edit', $user['User']['id'])); ?> </li>
                 <li><?php echo $this->Html->link(__('Change Password'), array('action' => 'password', $user['User']['id'])); ?> </li>
-                <?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $user['User']['id'], null, __('Are you sure you want to delete # %s?', $user['User']['id']))); ?>
+                <li><?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $user['User']['id'], null, __('Are you sure you want to delete # %s?', $user['User']['id']))); ?></li>
                 <li><?php echo $this->Html->link('Go Back', '/pages/home'); ?></a></li>
             <?php } ?>
         <?php } else { ?>
@@ -39,8 +39,8 @@
             <?php if ($user['User']['id'] == $current_user['id']) : ?>
                 <li><?php echo $this->Html->link(__('Update Entry'), array('action' => 'edit', $user['User']['id'])); ?> </li>
                 <li><?php echo $this->Html->link(__('Change Password'), array('action' => 'password', $user['User']['id'])); ?> </li>
-    <?php endif ?>
-<?php } ?>
+            <?php endif ?>
+        <?php } ?>
 
     </ul>
 </div>
@@ -75,7 +75,8 @@
             </dd>
             <dt><?php echo __('Date of Birth'); ?></dt>
             <dd>
-                <?php $timestamp = strtotime($user['User']['dob']);
+                <?php
+                $timestamp = strtotime($user['User']['dob']);
                 echo date('d-m-Y', $timestamp);
                 ?>			&nbsp;
             </dd>
@@ -120,7 +121,8 @@
                 </dd>
                 <dt><?php echo __('Date Of Diagnosis'); ?></dt>
                 <dd>
-                    <?php $timestamp = strtotime($user['User']['dateOfDiagnosis']);
+                    <?php
+                    $timestamp = strtotime($user['User']['dateOfDiagnosis']);
                     echo date('d-m-Y', $timestamp);
                     ?>
                     &nbsp;
