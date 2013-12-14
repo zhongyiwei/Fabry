@@ -68,6 +68,7 @@ class EventsController extends AppController {
         $users = $this->User->find('all', array('fields' => array('firstName', 'lastName', 'email', 'id')));
 //        debug($users);
 //        $userName = Set::combine($users, '{n}.User.id', array('{0} {1} ( {2} )', '{n}.User.firstName', '{n}.User.lastName', '{n}.User.email'));
+        $templates = $this->Template->find("all");
 
         if ($this->request->is('post')) {
             $uId = $this->current_user['id'];
@@ -124,7 +125,7 @@ class EventsController extends AppController {
             return $this->redirect(array('action' => 'index'));
         }
 
-        $this->set(compact("userName"));
+        $this->set(compact("userName","templates"));
     }
 
     /**
@@ -171,19 +172,19 @@ class EventsController extends AppController {
                     $userIdOne = $userEmail[$i]['User']['id'];
 
 //                    if ($this->Invitation->saveMany($data)) {
-                        $email = new CakeEmail();
-                        $email->config('default');
-                        $email->emailFormat('html');
-                        $email->from(array("$this->sender" => "$this->senderTag"));
+                    $email = new CakeEmail();
+                    $email->config('default');
+                    $email->emailFormat('html');
+                    $email->from(array("$this->sender" => "$this->senderTag"));
 
-                        $email->to("$userEmailOne");
-                        $title = $this->request->data['Event']['title'];
+                    $email->to("$userEmailOne");
+                    $title = $this->request->data['Event']['title'];
 
-                        $AttendLink = "<a href=" . Router::url("/invitations/attendStatus?eventId=$eventId&uId=$userIdOne&status=Attend", true) . ">YES! I will attend the event</a>";
-                        $NoAttendLink = "<a href=" . Router::url("/invitations/attendStatus?eventId=$eventId&uId=$userIdOne&status=No", true) . ">NO! I will not attend the event</a>";
-                        $InviteStatus = "<div> $AttendLink &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; or &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $NoAttendLink</div>";
-                        $description = "<div>" . $this->request->data['Event']['description'] . "</div>";
-                        $email->subject($title);
+                    $AttendLink = "<a href=" . Router::url("/invitations/attendStatus?eventId=$eventId&uId=$userIdOne&status=Attend", true) . ">YES! I will attend the event</a>";
+                    $NoAttendLink = "<a href=" . Router::url("/invitations/attendStatus?eventId=$eventId&uId=$userIdOne&status=No", true) . ">NO! I will not attend the event</a>";
+                    $InviteStatus = "<div> $AttendLink &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; or &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $NoAttendLink</div>";
+                    $description = "<div>" . $this->request->data['Event']['description'] . "</div>";
+                    $email->subject($title);
 //                        $email->send($InviteStatus . $description);
 //                    }
                 }
@@ -214,10 +215,34 @@ class EventsController extends AppController {
             throw new NotFoundException(__('Invalid event'));
         }
         $this->request->onlyAllow('post', 'delete');
+
+        $userEmail = $this->User->find('all');
+        $event = $this->Event->read(null, $id);
+
+        for ($i = 0; $i < count($userEmail); $i++) {
+            $userEmailOne = $userEmail[$i]['User']['email'];
+
+            $email = new CakeEmail();
+            $email->config('default');
+            $email->emailFormat('html');
+            $email->from(array("$this->sender" => "$this->senderTag"));
+
+
+            $email->to("$userEmailOne");
+            $title = "Cancellation of Event: " . $event['Event']['title'];
+
+            $timeLimits = 60 * 60;
+            set_time_limit($timeLimits);
+
+            $description = "Dear Members of Fabry: <br/> This is to inform you the event: " . $event['Event']['title'] . " has been cancelled. Thank you for your kind concern. <br/> Best Regards</br>Team Fabry ";
+            $email->subject($title);
+            $email->send($description);
+        }
+
         if ($this->Event->delete()) {
-            $this->Session->setFlash(__('The event has been deleted.'), 'default', array(), 'good');
+            $this->Session->setFlash(__('The event has been cancelled and cancallation email has been sent.'), 'default', array(), 'good');
         } else {
-            $this->Session->setFlash(__('The event could not be deleted. Please, try again.'), 'default', array(), 'bad');
+            $this->Session->setFlash(__('The event could not be cancalled. Please, try again.'), 'default', array(), 'bad');
         }
         return $this->redirect(array('action' => 'index'));
     }
@@ -249,6 +274,7 @@ class EventsController extends AppController {
             $description = "<div>" . $event['Event']['description'] . "</div>";
             $email->subject($title);
             $email->send($InviteStatus . $description);
+            $this->Session->setFlash(__('The event has been send'));
         }
         return $this->redirect(array('action' => 'index'));
     }

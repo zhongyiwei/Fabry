@@ -104,6 +104,9 @@ class AppointmentsController extends AppController {
         $this->set('contacts', $contacts);
         $redirect = $this->params['url']['redirect'];
         //saves the appointment and displays notification message
+
+//        $templates = $this->Template->find("all");
+
         if ($this->request->is('post')) {
 
             $this->request->data['Appointment']['users_id'] = $this->current_user['id'];
@@ -128,7 +131,7 @@ class AppointmentsController extends AppController {
 //                    $this->Session->setFlash(__('The calendar event could not be saved. Please, try again.'));
 //                }
                 if ($redirect == "calendar") {
-                                        return $this->redirect(array('action' => 'calendarEvent','controller'=>'calendarevents'));
+                    return $this->redirect(array('action' => 'calendarEvent', 'controller' => 'calendarevents'));
                 } else {
                     $this->redirect(array('action' => "index"));
                 }
@@ -157,7 +160,7 @@ class AppointmentsController extends AppController {
             if ($this->Appointment->save($this->request->data)) {
                 // good message color changing
                 $this->Session->setFlash(__('The event has been saved.'), 'default', array(), 'good');
-                return $this->redirect(array('action' => 'calendarEvent','controller'=>'calendarevents'));
+                return $this->redirect(array('action' => 'calendarEvent', 'controller' => 'calendarevents'));
             } else {
 
                 //bad message color changing
@@ -172,11 +175,8 @@ class AppointmentsController extends AppController {
             $options = array('fields' => array('id', 'doctor'));
             $contacts = $this->Contact->find('list', $options);
             $this->set('contacts', $contacts);
-            
+            $this->set(compact("id"));
         }
-        
-                                        
-                
     }
 
     /**
@@ -193,12 +193,11 @@ class AppointmentsController extends AppController {
         }
         $this->request->onlyAllow('post', 'delete');
         if ($this->Appointment->delete()) {
-            $this->Session->setFlash(__('The event has been deleted.'));
+            $this->Session->setFlash(__('The event has been deleted.'), 'default', array(), 'good');
         } else {
             $this->Session->setFlash(__('The event could not be deleted. Please, try again.'));
         }
-        return $this->redirect(array('action' => 'calendarEvent','controller'=>'calendarevents'));
+        return $this->redirect(array('action' => 'calendarEvent', 'controller' => 'calendarevents'));
     }
 
 }
-

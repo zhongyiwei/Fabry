@@ -33,7 +33,7 @@
                     <td class="actions">
                         <?php echo $this->Html->link(__('Detail and Response List'), array('action' => 'view', $event['Event']['id'])); ?>
                         <?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $event['Event']['id'])); ?>
-                        <?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $event['Event']['id']), null, __('Are you sure you want to delete the event that starts on the ' . $event['Event']['start'] . ' ?', $event['Event']['id'])); 
+                        <?php echo $this->Form->postLink(__('Cancel Event'), array('action' => 'delete', $event['Event']['id']), null, __('Are you sure you want to delete the event that starts on the ' . $event['Event']['start'] . ' ?', $event['Event']['id'])); 
                         if ($event['Event']['send_status'] == 'false') {
                             echo $this->Html->link(__('Send to members'), array('action' => 'emailsubscriber', $event['Event']['id']), null, __('Sending email will take some time due to large amount of subscribers, are you sure you want to proceed?'));
                             ;

@@ -48,17 +48,31 @@ class InvitationsController extends AppController {
      * @return void
      */
     public function add() {
+        $id = $this->current_user['id'];
+        $this->request->data['Invitation']['users_id'] = $id;
         if ($this->request->is('post')) {
+
             $this->Invitation->create();
             if ($this->Invitation->save($this->request->data)) {
                 $this->Session->setFlash(__('The invitation has been saved.'));
-                return $this->redirect(array('action' => 'index'));
+                return $this->redirect(array('action' => 'eventParticipation'));
             } else {
                 $this->Session->setFlash(__('The invitation could not be saved. Please, try again.'));
             }
         }
 //        $users = $this->Invitation->User->find('list');
-//        $events = $this->Invitation->Event->find('list');
+
+        $invitation = $this->Invitation->find('all', array('conditions' => array('users_id' => $id)));
+        $invitedIds = NULL;
+//        debug($invitation);
+        if (!empty($invitation)) {
+            for ($i = 0; $i < count($invitation); $i++) {
+                $invitedIds[$i] = $invitation[$i]['Invitation']['events_id'];
+            }
+        }
+//        debug($invitedIds);
+        $events = $this->Event->find('list', array('conditions' => array('id !=' => $invitedIds)));
+//        debug($events);
         $this->set(compact('users', 'events'));
     }
 
@@ -141,7 +155,18 @@ class InvitationsController extends AppController {
     public function eventParticipation() {
         $id = $this->current_user['id'];
         $invitationData = $this->Invitation->find('all', array('conditions' => array('users_id' => $id)));
-        $this->set(compact("invitationData"));
+        
+                $invitation = $this->Invitation->find('all', array('conditions' => array('users_id' => $id)));
+        $invitedIds = NULL;
+//        debug($invitation);
+        if (!empty($invitation)) {
+            for ($i = 0; $i < count($invitation); $i++) {
+                $invitedIds[$i] = $invitation[$i]['Invitation']['events_id'];
+            }
+        }
+//        debug($invitedIds);
+        $events = $this->Event->find('list', array('conditions' => array('id !=' => $invitedIds)));
+        $this->set(compact("invitationData",'events'));
     }
 
     public function editResponse($id = null) {
@@ -163,4 +188,5 @@ class InvitationsController extends AppController {
 //        $events = $this->Invitation->Event->find('list');
         $this->set(compact('users', 'events'));
     }
+
 }

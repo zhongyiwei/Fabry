@@ -1,21 +1,34 @@
 <?php
-echo $this->Html->css('fullcalendar.css');
+echo $this->Html->script('jquery-1.10.2.min.js');
+echo $this->Html->script('jquery-ui.js');
 echo $this->Html->script('fullcalendar.js');
+echo $this->Html->script('jquery.ui.dialog.js');
+
+echo $this->Html->css('jquery-ui.css');
+echo $this->Html->css('fullcalendar.css');
+echo $this->Html->css('jquery.ui.dialog.css');
+
 //debug($eventData);
 //debug($appointmentData);
 //debug($contactId);
 //debug($invitationData);
 ?>
 <?php echo $this->Session->flash(); ?>
-<?php echo $this->Html->link(__('New Personal Event'), array('action' => 'add'),array('class'=>'cl')); ?>
+<?php echo $this->Html->link(__('New Personal Event'), array('action' => 'add'), array('class' => 'cl')); ?>
 <?php
 echo nl2br(" \n ");
 ?>
-<?php echo $this->Html->link(__('New Appoinment Event'), array('controller' => 'appointments', 'action' => 'add?redirect=calendar'),array('class'=>'cl')); ?>
+<?php echo $this->Html->link(__('New Appoinment Event'), array('controller' => 'appointments', 'action' => 'add?redirect=calendar'), array('class' => 'cl')); ?>
 <?php
 echo $this->Html->image("legend.png", array("alt" => "Calendar Legend", 'name' => "Calendar Legend", 'height' => "110", 'style' => "float:right;margin-top: -25px;margin-bottom: 15px;"));
 ?>
 <div id='calendar' style='margin:3em 0;font-size:13px'></div> 
+
+<div id="dialog" style="display: none" title="Choose one: ">
+    <p>Please choose which one you want to add:</p>
+    <div  ><a class="cl" href="" id="toPersonal">Add Personal Calendar Event</a></div>
+    <div ><a  class="cl" href="" id="toAppointment">Add Appointment</a></div>
+</div>
 <script type="text/javascript">
     $(document).ready(function() {
         var source = new Array();
@@ -62,8 +75,11 @@ echo $medicationEvent;
                 var curr_year = date.getFullYear();
                 var finalDate = curr_year + "-" + curr_month + "-" + curr_date;
 
-                window.location = <?php echo "'" . $this->webroot . "calendarEvents/add?date='" ?> + finalDate;
-
+//                window.location = <?php // echo "'" . $this->webroot . "calendarEvents/add?date='" ?> + finalDate;
+                $("#dialog").dialog();
+//                finalDate = $.trim(finalDate)
+                $("#toPersonal").prop("href", "<?php echo $this->webroot . "calendarEvents/add?date="?>" + finalDate);
+                $("#toAppointment").prop("href", "<?php echo $this->webroot . "appointments/add?redirect=calendar&date="?>" + finalDate);
             },
             header: {
                 left: 'prev,next today',
@@ -122,8 +138,14 @@ echo $medicationEvent;
 //                    start: new Date(y, m, 28),
 //                    end: new Date(y, m, 29),
 //                    url: 'http://google.com/'}
-            ]
-
+            ],
+            timeFormat: 'h(:mm)tt'
         });
     });
+
+
+    function toCalendar()
+    {
+        window.location = <?php echo "'" . $this->webroot . "calendarEvents/add?date='" ?> + finalDate;
+    }
 </script>
