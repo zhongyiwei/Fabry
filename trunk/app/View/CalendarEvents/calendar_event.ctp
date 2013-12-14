@@ -7,7 +7,7 @@ echo $this->Html->script('fullcalendar.js');
 //debug($invitationData);
 ?>
 <?php echo $this->Session->flash(); ?>
-<?php echo $this->Html->link(__('New Calendar Event'), array('action' => 'add'),array('class'=>'cl')); ?>
+<?php echo $this->Html->link(__('New Personal Event'), array('action' => 'add'),array('class'=>'cl')); ?>
 <?php
 echo nl2br(" \n ");
 ?>
