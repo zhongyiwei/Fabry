@@ -1,3 +1,13 @@
+<div class="actions">
+	
+	<ul>
+
+		<li><?php echo $this->Form->postLink(__('Delete Appointment'), array('action' => 'delete', $this->Form->value('Event.id')), null, __('Are you sure you want to delete # %s?', $this->Form->value('Event.id'))); ?></li>
+		<li><?php echo $this->Html->link(__('Back to Calendar'), array('action' => 'calendarEvent','controller'=>'calendarevents')); ?></li>
+		<li><?php echo $this->Html->link(__('List Appointments'), array('action' => 'index')); ?></li>
+	</ul>
+</div>
+
 <div class="events form">
 <?php echo $this->Form->create('Appointment', array('novalidate' => true)); ?>
 	<fieldset>
@@ -23,11 +33,4 @@
 <?php echo $this->Form->end(__('Submit')); ?>
 </div>
 
-<div class="actions">
-	
-	<ul>
 
-		<li><?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $this->Form->value('Event.id')), null, __('Are you sure you want to delete # %s?', $this->Form->value('Event.id'))); ?></li>
-		<li><?php echo $this->Html->link(__('List Events'), array('action' => 'index')); ?></li>
-	</ul>
-</div>

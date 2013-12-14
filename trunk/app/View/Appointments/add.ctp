@@ -15,7 +15,8 @@ echo $this->Html->script('jquery-ui-timepicker-addon.js');
 		<!--
 		<li><?php //echo $this->Html->link(__('List Events'), array('action' => 'index')); ?></li>
 		-->
-		<li><?php echo $this->Html->link(__('List Events'), array('action' => 'index')); ?></li>
+		<li><?php echo $this->Html->link(__('Back to Calendar'), array('action' => 'calendarEvent','controller'=>'calendarevents')); ?></li>
+		<li><?php echo $this->Html->link(__('List Appointments'), array('action' => 'index')); ?></li>
 	</ul>
 </div>
 <div class="events form">
