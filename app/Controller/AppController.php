@@ -47,7 +47,7 @@ var $helpers = array('Form2');
             'authorize' => array('Controller')
         )
     );
-    var $uses = array('CalendarEvent', 'Appointment', 'Contact', 'User','Invitation','Pain','Bowel','Exercise','Medication','Invitation','PainMedi');
+    var $uses = array('CalendarEvent', 'Appointment', 'Contact', 'User','Invitation','Pain','Bowel','Exercise','Medication','Invitation','PainMedi','Event','Template');
 
     public function isAuthorized($user) {                                                      // to determine if a user who is login has permission to access the page they trying to access.
         return true;

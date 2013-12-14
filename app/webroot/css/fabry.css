@@ -1000,3 +1000,10 @@ div.soon a img {
 .home ul{
     list-style: none;
 }
+.templateTitle:hover{
+ text-decoration: underline;
+ cursor: pointer;
+}
+.tempContent{
+    display: none;
+}

@@ -173,21 +173,22 @@ class NewsController extends AppController {
             $mail->FromName = $this->senderTag;
             $mail->addAddress($subscribersName);
 
-            $path = $_SERVER['DOCUMENT_ROOT']."$this->webroot"."app/webroot/$pdfName";
+            $path = $_SERVER['DOCUMENT_ROOT'] . "$this->webroot" . "app/webroot/$pdfName";
             $mail->addAttachment($path);
             $mail->Subject = $newsTitle;
             $mail->Body = $newsDesc;
 
 //            debug($path);
-                $timeLimits = 60 * 60;
-                set_time_limit($timeLimits);
-                ini_set('memory_limit','1024M');
-                
+            $timeLimits = 60 * 60;
+            set_time_limit($timeLimits);
+            ini_set('memory_limit', '1024M');
+
             if (!$mail->send()) {
                 echo 'Message could not be sent.';
                 echo 'Mailer Error: ' . $mail->ErrorInfo;
                 exit;
             }
+            $this->Session->setFlash(__('The news has been send'));
         }
         $this->redirect(array('action' => 'index'));
     }

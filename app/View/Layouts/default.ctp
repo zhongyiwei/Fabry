@@ -104,13 +104,13 @@ $this->Html->image('cake.logo.png');
                             </li>
                             <li><?php echo $this->Html->link('Newsletters', '/news'); ?></a></li>
                             <li><?php echo $this->Html->link('Health Tips And Videos', '/addressbooks'); ?></a></li>
-                                  
+                            <li><?php echo $this->Html->link('Email Templates', '/templates'); ?></a></li>
                         </ul>
                     </nav>
 
 
 
-                <?php
+                    <?php
                 elseif ($current_user['role'] == 'member'):
                     $users_id = $current_user['id'];
                     ?>
@@ -165,7 +165,7 @@ $this->Html->image('cake.logo.png');
                         </ul>
                     </nav>
 
-<?php endif; ?>
+                <?php endif; ?>
             </div>
 
 
@@ -175,10 +175,10 @@ $this->Html->image('cake.logo.png');
                 <!-- for good /bad flash message colors --> 
                 <?php echo $this->Session->flash('good'); ?>
                 <?php echo $this->Session->flash('bad'); ?>
-<?php echo $this->fetch('content'); ?>
+                <?php echo $this->fetch('content'); ?>
             </div>
             <div id="footer">
-<?php /* Designed by Team 71 Infinity :) Tefo */ ?>
+                <?php /* Designed by Team 71 Infinity :) Tefo */ ?>
                 <h1>Copyright &copy; Fabry Support Group Australia, All Rights Reserved.</h1>
 
                 </h2>

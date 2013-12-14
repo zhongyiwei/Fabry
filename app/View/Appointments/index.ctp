@@ -1,3 +1,4 @@
+<?php echo $this->Session->flash(); ?>
 <div class="events index">
     <h2><?php echo __('Appointments'); ?></h2>
 
