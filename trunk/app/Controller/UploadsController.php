@@ -1,4 +1,5 @@
 <?php
+App::uses('CakeEmail', 'Network/Email');
 App::uses('AppController', 'Controller');
 /**
  * Uploads Controller
@@ -148,6 +149,9 @@ function uploadFile() {
 		}
 		if ($this->request->is(array('post', 'put'))) 
 		{
+
+			$this->Upload->id = $id;
+
 			if ($this->Upload->save($this->request->data)) {
 				$this->Session->setFlash(__('The upload has been saved.'), 'default',array(),'good');
 				return $this->redirect(array('action' => 'index'));
@@ -162,6 +166,45 @@ function uploadFile() {
 		$this->set(compact('users'));
 	}
 
+
+	public function email($filename = null) {
+
+
+		if (!$filename) {
+			$this->redirect(array('action' => 'index'));
+		}
+
+		if ($this->request->is('post')) {
+			$email = new CakeEmail();
+			$email->config(array(
+				'host' => 'ssl://smtp.gmail.com',
+				'port' => 465,
+				'username' => 'team61fabry',
+				'password' => 'ieteam61',
+				'transport' => 'Smtp',
+			));
+// email validation
+
+			if (!$this->Upload->validateEmail($this->request->data['Upload']['emailto'])) {
+
+				$this->Session->setFlash(__('The email address is not valid.'), 'default',array(),'bad');
+				
+			} else {
+			
+				$email->from(array('team61fabry@gmail.com' => 'Fabry Cake'));
+				$email->to($this->request->data['Upload']['emailto']);
+				$email->subject($this->request->data['Upload']['subject']);
+				$email->attachments('upload/'.$filename);
+
+				$result =	$email->send($this->request->data['Upload']['body']);
+				$this->Session->setFlash(__('Your Email has been sent.'), 'default',array(),'good');
+				return $this->redirect(array('action' => 'index'));
+
+			}
+		}
+
+
+	}
 	
 	
 	
