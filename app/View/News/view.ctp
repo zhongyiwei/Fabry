@@ -1,3 +1,11 @@
+<div class="actions">
+    <h3><?php echo __('Actions'); ?></h3>
+    <ul>
+
+        <li><?php echo $this->Html->link(__('Back To List of News'), array('action' => 'index')); ?></li>
+        
+    </ul>
+</div>
 <div class="news view">
     <dl>
 <!--		<dt><?php echo __('Id'); ?></dt>

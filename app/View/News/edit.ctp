@@ -1,8 +1,16 @@
 <?php
 echo $this->Html->script('ckfinder/ckfinder');
 ?>
+<div class="actions">
+    <h3><?php echo __('Actions'); ?></h3>
+    <ul>
+
+        <li><?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $this->Form->value('News.id')), null, __('Are you sure you want to delete # %s?', $this->Form->value('News.id'))); ?></li>
+        <li><?php echo $this->Html->link(__('Back to Newsletter Lists'), array('action' => 'index')); ?></li>
+    </ul>
+</div>
 <div class="news form">
-    <?php echo $this->Form->create('News'); ?>
+    <?php echo $this->Form->create('News', array('novalidate' => true)); ?>
     <fieldset>
             <!--<legend><?php echo __('Edit News'); ?></legend>-->
         <?php
@@ -30,16 +38,7 @@ echo $this->Html->script('ckfinder/ckfinder');
 
 </script>
 
-<div class="actions">
-    <h3><?php echo __('Actions'); ?></h3>
-    <ul>
 
-        <li><?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $this->Form->value('News.id')), null, __('Are you sure you want to delete # %s?', $this->Form->value('News.id'))); ?></li>
-        <li><?php echo $this->Html->link(__('List News'), array('action' => 'index')); ?></li>
-        <li><?php echo $this->Html->link(__('List Users'), array('controller' => 'users', 'action' => 'index')); ?> </li>
-        <li><?php echo $this->Html->link(__('New User'), array('controller' => 'users', 'action' => 'add')); ?> </li>
-    </ul>
-</div>
 <script type="text/javascript">
     function BrowseServer()
     {
