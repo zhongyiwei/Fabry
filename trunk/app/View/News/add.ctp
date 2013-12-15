@@ -1,9 +1,18 @@
 <?php
 echo $this->Html->script('ckfinder/ckfinder');
 ?>
+<div class="actions">
+    <h3><?php echo __('Actions'); ?></h3>
+    <ul>
+
+        <li><?php echo $this->Html->link(__('Back To List of News'), array('action' => 'index')); ?></li>
+        
+    </ul>
+</div>
 <div class="news form">
-    <?php echo $this->Form->create('News'); ?>
+    <?php echo $this->Form->create('News', array('novalidate' => true)); ?>
     <fieldset>
+    <legend><?php echo __('Create Newsletter Email'); ?></legend>
         <?php
 //        $publishStatus = array('Private' => 'Private', 'Published' => 'Published');
         echo $this->Form->input('news_title');
@@ -42,15 +51,7 @@ echo $this->Form->input('User');
 </div>
 
 -->
-<div class="actions">
-    <h3><?php echo __('Actions'); ?></h3>
-    <ul>
 
-        <li><?php echo $this->Html->link(__('List News'), array('action' => 'index')); ?></li>
-        <li><?php echo $this->Html->link(__('List Users'), array('controller' => 'users', 'action' => 'index')); ?> </li>
-        <li><?php echo $this->Html->link(__('New User'), array('controller' => 'users', 'action' => 'add')); ?> </li>
-    </ul>
-</div>
 <script type="text/javascript">
     function BrowseServer()
     {
