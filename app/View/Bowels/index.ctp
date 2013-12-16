@@ -1,8 +1,8 @@
 <div class="actions">
     <h3><?php echo __('Actions'); ?></h3>
     <ul>
-        <li><?php echo $this->Html->link(__('New Movement Record'), array('action' => 'add')); ?></li>
-        <li><?php echo $this->Html->link(__('Generate Bowel Report'), array('controller' => 'PDF', 'action' => 'bowelReport/I')); ?> </li>
+        <li><?php echo $this->Html->link(__('New Entry'), array('action' => 'add')); ?></li>
+        <li><?php echo $this->Html->link(__('Generate Bowel Movement Report'), array('controller' => 'PDF', 'action' => 'bowelReport/I')); ?> </li>
     </ul>
 </div>
 
@@ -30,7 +30,7 @@
                     <td class="actions">
                         <?php echo $this->Html->link(__('View'), array('action' => 'view', $bowel['Bowel']['id'])); ?>
                         <?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $bowel['Bowel']['id'])); ?>
-                        <?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $bowel['Bowel']['id']), null, __('Are you sure you want to delete # %s?', $bowel['Bowel']['id'])); ?>
+                        <?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $bowel['Bowel']['id']), null, __('Are you sure you want to delete the movement recored on '.$bowel['Bowel']['date'].' from the list')); ?>
                     </td>
                 </tr>
             <?php endforeach; ?>

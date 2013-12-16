@@ -2,7 +2,7 @@
 	<h3><?php echo __('Actions'); ?></h3>
 	<ul>
 
-		<li><?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $this->Form->value('Bowel.id')), null, __('Are you sure you want to delete '.$this->Form->value('Bowel.date').'?', $this->Form->value('Bowel.id'))); ?></li>
+		<li><?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $this->Form->value('Bowel.id')), null, __('Are you sure you want to delete the movement recored on '.date('d-m-Y', strtotime($this->Form->value('Bowel.date'))).' from the list ')); ?></li>
 		<li><?php echo $this->Html->link(__('Back'), array('action' => 'index')); ?></li>
 	</ul>
 </div>

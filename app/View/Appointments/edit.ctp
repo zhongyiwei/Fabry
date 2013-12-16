@@ -11,7 +11,7 @@ echo $this->Html->script('jquery-ui-timepicker-addon.js');
 <div class="actions">
 
     <ul>
-        <li><?php echo $this->Form->postLink(__('Delete Appointment'), array('action' => 'delete', $id), null, __('Are you sure you want to delete # %s?', $id)); ?></li>
+        <li><?php echo $this->Form->postLink(__('Delete Appointment'), array('action' => 'delete', $id), null, __('Are you sure you want to delete your appointment at '.date('d-m-Y G:i', strtotime($this->Form->value('Appointment.date'))).' ?')); ?></li>
         <li><?php echo $this->Html->link(__('Back to Calendar'), array('action' => 'calendarEvent', 'controller' => 'calendarevents')); ?></li>
         <li><?php echo $this->Html->link(__('List Appointments'), array('action' => 'index')); ?></li>
     </ul>
@@ -56,5 +56,5 @@ echo $this->Html->script('jquery-ui-timepicker-addon.js');
 </div>
 
 <script type="text/javascript">
-    $('#dateTimePickerStart').datetimepicker();
+    $('#dateTimePickerStart').datetimepicker({dateFormat: 'dd-mm-yy'});
 </script>

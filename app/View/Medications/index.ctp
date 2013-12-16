@@ -1,7 +1,7 @@
 <div class="actions">
     <h3><?php echo __('Actions'); ?></h3>
     <ul>
-        <li><?php echo $this->Html->link(__('New Medication'), array('action' => 'add')); ?></li>
+        <li><?php echo $this->Html->link(__('New Entry'), array('action' => 'add')); ?></li>
         <li><?php echo $this->Html->link(__('Generate Medication Report'), array('controller' => 'PDF', 'action' => 'medicationReport/I')); ?> </li>
     </ul>
 </div>
@@ -31,7 +31,7 @@
                     <td class="actions">
                         <?php echo $this->Html->link(__('View'), array('action' => 'view', $medication['Medication']['id'])); ?>
                         <?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $medication['Medication']['id'])); ?>
-                        <?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $medication['Medication']['id']), null, __('Are you sure you want to delete'.$this->Form->value('Medication.medicationName').' from your list of medications ?', $medication['Medication']['id'])); ?>
+                        <?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $medication['Medication']['id']), null, __('Are you sure you want to delete '.$medication['Medication']['medicationName'].' from your list of medications ?')); ?>
                         <?php // echo $this->Html->link(__('Medication Report'), array('controller' => 'PDF', 'action' => 'medicationReport', $medication['Medication']['id'])); ?>
                     </td>
                 </tr>

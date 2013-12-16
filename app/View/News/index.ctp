@@ -24,7 +24,7 @@
                     <td class="actions">
                         <?php echo $this->Html->link(__('View'), array('action' => 'view', $news['News']['id'])); ?>
                         <?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $news['News']['id'])); ?>
-                        <?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $news['News']['id']), null, __('Are you sure you want to delete # %s?', $news['News']['news_title'])); ?>
+                        <?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $news['News']['id']), null, __('Are you sure you want to delete the newsletter "'.$news['News']['news_title'].'"?')); ?>
                         <?php
                         if ($news['News']['send_status'] == 'false') {
                             echo $this->Html->link(__('Send to members'), array('action' => 'emailsubscriber', $news['News']['id']), null, __('Sending email will take some time due to large amount of subscribers, are you sure you want to proceed?'));
