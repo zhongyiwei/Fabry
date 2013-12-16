@@ -88,6 +88,9 @@ class ExercisesController extends AppController {
             throw new NotFoundException(__('Invalid exercise'), 'default', array(), 'bad');
         }
         if ($this->request->is(array('post', 'put'))) {
+            $date = $this->request->data['Exercise']['date'];
+            $date = date('Y-m-d', strtotime($date));
+
             if ($this->Exercise->save($this->request->data)) {
                 $this->Session->setFlash(__('The exercise has been saved.'), 'default', array(), 'good');
                 return $this->redirect(array('action' => 'index'));

@@ -42,6 +42,7 @@ class NewsController extends AppController {
      * @return void
      */
     public function add() {
+        $templates = $this->Template->find("all");
         if ($this->request->is('post')) {
             $this->News->create();
             $this->request->data['News']['send_status'] = 'false';
@@ -52,7 +53,7 @@ class NewsController extends AppController {
                 $this->Session->setFlash(__('The news could not be saved. Please, try again.'), 'failure-message');
             }
         }
-        $this->set(compact('users'));
+        $this->set(compact('users','templates'));
     }
 
     /**
