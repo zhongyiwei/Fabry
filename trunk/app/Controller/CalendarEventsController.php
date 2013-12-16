@@ -23,8 +23,11 @@ class CalendarEventsController extends AppController {
      * @return void
      */
     public function index() {
-        $this->CalendarEvent->recursive = 0;
-        $this->set('calendarEvents', $this->Paginator->paginate());
+        // $this->CalendarEvent->recursive = 0;
+        // $this->set('calendarEvents', $this->Paginator->paginate());
+        $id = $this->current_user['id'];
+        $calendarEvent = $this->CalendarEvent->find('all', array('conditions' => array('users_id' => $id)));
+        $this->set('calendarEvents', $calendarEvent);
     }
 
     /**
