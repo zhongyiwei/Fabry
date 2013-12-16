@@ -71,6 +71,9 @@ class UsersController extends AppController {
       } *///baked
     public function add() {
         if ($this->request->is('post')) {
+            $this->request->data['User']['dob'] = date('Y-m-d', strtotime($this->request->data['User']['dob']));
+            $this->request->data['User']['dateOfDiagnosis'] = date('Y-m-d', strtotime($this->request->data['User']['dateOfDiagnosis']));
+
             $this->User->create();
             if ($this->User->save($this->request->data)) {
                 $this->Session->setFlash(__('The profile has been saved.'), 'default', array(), 'good');
@@ -148,6 +151,9 @@ class UsersController extends AppController {
         }
 
         if ($this->request->is(array('post', 'put'))) {
+            $this->request->data['User']['dob'] = date('Y-m-d', strtotime($this->request->data['User']['dob']));
+            $this->request->data['User']['dateOfDiagnosis'] = date('Y-m-d', strtotime($this->request->data['User']['dateOfDiagnosis']));
+
             if ($this->User->save($this->request->data)) {
                 $this->Session->setFlash(__('The profile has been edited successfully.'), 'default', array(), 'good');
                 /* $userId = $current_user['id']; */
@@ -247,7 +253,7 @@ class UsersController extends AppController {
         }
         return $this->redirect(array('action' => 'index'));
     }
-    
+
     public function deleteR($id = null) {
         $this->User->id = $id;
         if (!$this->User->exists()) {
@@ -261,7 +267,6 @@ class UsersController extends AppController {
         }
         return $this->redirect(array('action' => 'loginReport'));
     }
-    
 
     //this function to redirect the user to the right page 
     public function display() {

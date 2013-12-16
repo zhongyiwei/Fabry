@@ -13,7 +13,7 @@ echo $this->Html->script('jquery-ui-timepicker-addon.js');
     <ul>
 
         <li><?php echo $this->Html->link(__('Back'), array('action' => 'index')); ?></li>
-        
+
     </ul>
 </div>
 <div class="calendarEvents form">
@@ -31,7 +31,7 @@ echo $this->Html->script('jquery-ui-timepicker-addon.js');
             echo $this->Form->input('start', array('id' => 'dateTimePickerStart', 'type' => 'text'));
         }
         echo $this->Form->input('end', array('id' => 'dateTimePickerEnd', 'type' => 'text'));
-        echo $this->Form->input('allDay');
+        echo $this->Form->input('allDay',array('id' => 'checkbox','onclick'=>'changeContent()'));
         echo $this->Form->input('repeat');
         ?>
     </fieldset>
@@ -39,6 +39,15 @@ echo $this->Html->script('jquery-ui-timepicker-addon.js');
 </div>
 
 <script type="text/javascript">
-    $('#dateTimePickerStart').datetimepicker({dateFormat: 'dd-mm-yy'}).val();
-    $('#dateTimePickerEnd').datetimepicker({dateFormat: 'dd-mm-yy'});
+    $('#dateTimePickerStart').datetimepicker({dateFormat: 'dd-mm-yy H'}).val();
+    $('#dateTimePickerEnd').datetimepicker({dateFormat: 'dd-mm-yy H'});
+
+    function changeContent() {
+        if ($('#checkbox').prop('checked')) {
+            $('#dateTimePickerEnd').hide();
+        }else{
+            $('#dateTimePickerEnd').show();
+        }
+    }
+
 </script>

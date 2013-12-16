@@ -12,9 +12,9 @@ echo $this->Html->script('jquery-ui-timepicker-addon.js');
     <h3><?php echo __('Actions'); ?></h3>
     <ul>
 
-        <li><?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $this->Form->value('CalendarEvent.id')), null, __('Are you sure you want to delete '.$this->Form->value('CalendarEvent.title').' from the event list?')); ?></li>
+        <li><?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $this->Form->value('CalendarEvent.id')), null, __('Are you sure you want to delete ' . $this->Form->value('CalendarEvent.title') . ' from the event list?')); ?></li>
         <li><?php echo $this->Html->link(__('Back'), array('action' => 'index')); ?></li>
-        
+
     </ul>
 </div>
 <div class="calendarEvents form">
@@ -24,9 +24,9 @@ echo $this->Html->script('jquery-ui-timepicker-addon.js');
         <?php
         echo $this->Form->input('id');
         echo $this->Form->input('title');
-        echo $this->Form->input('start', array('id' => 'dateTimePickerStart','type'=>'text'));
-        echo $this->Form->input('end', array('id' => 'dateTimePickerEnd','type'=>'text'));
-        echo $this->Form->input('allDay');
+        echo $this->Form->input('start', array('id' => 'dateTimePickerStart', 'type' => 'text'));
+        echo $this->Form->input('end', array('id' => 'dateTimePickerEnd', 'type' => 'text'));
+        echo $this->Form->input('allDay', array('id' => 'checkbox', 'onclick' => 'changeContent()'));
         echo $this->Form->input('repeat');
         ?>
     </fieldset>
@@ -34,9 +34,21 @@ echo $this->Html->script('jquery-ui-timepicker-addon.js');
 </div>
 
 <script type="text/javascript">
-    $.datepicker.formatDate( "yy-mm-dd");
+    $.datepicker.formatDate("yy-mm-dd");
     $('#dateTimePickerStart').datetimepicker({
     });
     $('#dateTimePickerEnd').datetimepicker({
+    });
+
+    function changeContent() {
+        if ($('#checkbox').prop('checked')) {
+            $('#dateTimePickerEnd').hide();
+        } else {
+            $('#dateTimePickerEnd').show();
+        }
+    };
+
+    $(document).ready(function() {
+        changeContent();
     });
 </script>

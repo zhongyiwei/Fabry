@@ -34,14 +34,14 @@ class CalendarEvent extends AppModel {
 			),
 		),
 		'end' => array(
-			'notempty' => array(
-				'rule' => array('notempty'),
-				'message' => 'please select the end time of the event',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
+//			'notempty' => array(
+//				'rule' => array('notempty'),
+//				'message' => 'please select the end time of the event',
+//				//'allowEmpty' => false,
+//				//'required' => false,
+//				//'last' => false, // Stop validation after this rule
+//				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+//			),
 		),
 		'allDay' => array(
 			'notempty' => array(

@@ -54,11 +54,21 @@ class CalendarEventsController extends AppController {
         if ($this->request->is('post')) {
             $id = $this->current_user['id'];
             $this->request->data['CalendarEvent']['users_id'] = $id;
+
+            $checkEmpty = $this->request->data['CalendarEvent']['end'];
+
+            $this->request->data['CalendarEvent']['start'] = date('Y-m-d H:i', strtotime($this->request->data['CalendarEvent']['start']));
+            $this->request->data['CalendarEvent']['end'] = date('Y-m-d H:i', strtotime($this->request->data['CalendarEvent']['end']));
+
             $startDate = strtotime($this->request->data['CalendarEvent']['start']);
             $endDate = strtotime($this->request->data['CalendarEvent']['end']);
-            if ($startDate < $endDate) {
-                $this->CalendarEvent->create();
 
+
+            if ($startDate < $endDate || empty($checkEmpty)) {
+                $this->CalendarEvent->create();
+                if (empty($checkEmpty)) {
+                    $this->request->data['CalendarEvent']['end'] = NULL;
+                }
                 if ($this->CalendarEvent->save($this->request->data)) {
                     $this->Session->setFlash(__('The calendar event has been saved.'), 'default', array(), 'good');
                     return $this->redirect(array('action' => 'calendarEvent'));
@@ -83,9 +93,18 @@ class CalendarEventsController extends AppController {
             throw new NotFoundException(__('Invalid calendar event'));
         }
         if ($this->request->is(array('post', 'put'))) {
+
+            $checkEmpty = $this->request->data['CalendarEvent']['end'];
+
+            $this->request->data['CalendarEvent']['start'] = date('Y-m-d H:i', strtotime($this->request->data['CalendarEvent']['start']));
+            $this->request->data['CalendarEvent']['end'] = date('Y-m-d H:i', strtotime($this->request->data['CalendarEvent']['end']));
+
             $startDate = strtotime($this->request->data['CalendarEvent']['start']);
             $endDate = strtotime($this->request->data['CalendarEvent']['end']);
-            if ($startDate < $endDate) {
+            if ($startDate < $endDate || empty($checkEmpty)) {
+                if (empty($checkEmpty)) {
+                    $this->request->data['CalendarEvent']['end'] = NULL;
+                }
                 if ($this->CalendarEvent->save($this->request->data)) {
                     $this->Session->setFlash(__('The calendar event has been saved.'), 'default', array(), 'good');
                     return $this->redirect(array('action' => 'calendarEvent'));
@@ -248,4 +267,3 @@ class CalendarEventsController extends AppController {
     }
 
 }
-

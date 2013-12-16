@@ -453,6 +453,8 @@ class PDFController extends AppController {
                 $start = date('d-m-Y', strtotime($start));
                 $end = date('d-m-Y', strtotime($end));
                 $pdf->Cell(180, 10, "Patient Name: " . $userData[0]['User']['firstName'] . " " . $userData[0]['User']['lastName'], 0, 1);
+                $pdf->Cell(180, 10, "Phone Number: " . $userData[0]['User']['phone'], 0, 1);
+                $pdf->Cell(180, 10, "Date of Birth: " . $userData[0]['User']['dob'], 0, 1);
                 $pdf->Cell(180, 10, "Date: Between " . $start . " and " . $end, 0, 1);
                 $pdf->Ln(1);
 //            $pdf->Cell(180, 10, "Number of Days Take medicine: " . $takeMedicineDays . " Days", 0, 1);
@@ -529,7 +531,7 @@ class PDFController extends AppController {
 //            $this->render('painReport');
                 $pdf->SetCreator('Fabry');
 
-                $fileName="Pain Report".date("d-m-Y").".pdf";
+                $fileName = "Pain Report" . date("d-m-Y") . ".pdf";
                 $pdf->Output($fileName, "$type");
             } else {
                 $pdf = new PDF("L");
@@ -539,8 +541,8 @@ class PDFController extends AppController {
                 $title = 'Sorry there is no data related from your request';
                 $pdf->Cell(70, 10, $title, 0, 1);
                 $pdf->Ln(2);
-                
-                $fileName="Pain Report".date("d-m-Y").".pdf";
+
+                $fileName = "Pain Report" . date("d-m-Y") . ".pdf";
                 $pdf->Output($fileName, "$type");
             }
         }
@@ -592,12 +594,14 @@ class PDFController extends AppController {
                 $start = date('d-m-Y', strtotime($start));
                 $end = date('d-m-Y', strtotime($end));
                 $pdf->Cell(180, 10, "Patient Name: " . $userData[0]['User']['firstName'] . " " . $userData[0]['User']['lastName'], 0, 1);
+                $pdf->Cell(180, 10, "Phone Number: " . $userData[0]['User']['phone'], 0, 1);
+                $pdf->Cell(180, 10, "Date of Birth: " . $userData[0]['User']['dob'], 0, 1);
                 $pdf->Cell(180, 10, "Date: Between " . $start . " and " . $end, 0, 1);
                 $pdf->Ln(1);
-            for ($j = 1; $j < 7; $j++) {
+                for ($j = 1; $j < 7; $j++) {
 //                $temp = $j+1;
-                $pdf->Cell(180, 10, "$j movements per day: " . $Move['Bowel'][$j] . " Days", 0, 1);
-            }
+                    $pdf->Cell(180, 10, "$j movements per day: " . $Move['Bowel'][$j] . " Days", 0, 1);
+                }
 //                $pdf->Cell(180, 10, "Number of Days having  n movement: ", 0, 1);
 //                $movementHeader = array('1 Move', '2 Move', '3 Move', '4 Move', '5 Move', '6 Move');
 //                $pdf->BasicTable($movementHeader, $Move, 20);
@@ -611,7 +615,7 @@ class PDFController extends AppController {
 //            $this->render('painReport');
                 $pdf->SetCreator('Fabry');
 
-                $fileName="Bowel Report ".date("d-m-Y").".pdf";
+                $fileName = "Bowel Report " . date("d-m-Y") . ".pdf";
                 $pdf->Output($fileName, "$type");
             } else {
                 $pdf = new PDF("L");
@@ -622,8 +626,8 @@ class PDFController extends AppController {
                 $pdf->Cell(70, 10, $title, 0, 1);
                 $pdf->Ln(2);
                 $pdf->SetCreator('Fabry');
-                
-                $fileName="Bowel Report ".date("d-m-Y").".pdf";
+
+                $fileName = "Bowel Report " . date("d-m-Y") . ".pdf";
                 $pdf->Output($fileName, "$type");
             }
         }
@@ -665,6 +669,15 @@ class PDFController extends AppController {
                     $PDFTableData[$i][3] = $exerciseData[$i]['Exercise']['comment'];
                 }
 
+                $startTimeStamp = strtotime($start);
+                $endTimeStamp = strtotime($end);
+
+                $timeDiff = abs($endTimeStamp - $startTimeStamp);
+
+                $numberDays = $timeDiff / 86400;  // 86400 seconds in one day
+// and you might want to convert to integer
+                $numberDays = intval($numberDays)+1;
+
                 $this->response->type('pdf');
 
 //            $this->set('fpdf', new FPDF('P', 'mm', 'A4'));
@@ -680,6 +693,8 @@ class PDFController extends AppController {
                 $start = date('d-m-Y', strtotime($start));
                 $end = date('d-m-Y', strtotime($end));
                 $pdf->Cell(180, 10, "Patient Name: " . $userData[0]['User']['firstName'] . " " . $userData[0]['User']['lastName'], 0, 1);
+                $pdf->Cell(180, 10, "Phone Number: " . $userData[0]['User']['phone'], 0, 1);
+                $pdf->Cell(180, 10, "Date of Birth: " . $userData[0]['User']['dob'], 0, 1);
                 $pdf->Cell(180, 10, "Date: Between " . $start . " and " . $end, 0, 1);
                 $pdf->Ln(1);
 
@@ -693,6 +708,9 @@ class PDFController extends AppController {
                         $missingDays++;
                     }
                 }
+
+                $missingDays = $numberDays - count($exerciseData) + $missingDays;
+
                 $pdf->Cell(180, 10, "Number of Days missed exercise: " . $missingDays . " Days", 0, 1);
 
                 $pdf->Ln(1);
@@ -708,8 +726,8 @@ class PDFController extends AppController {
 //            $this->render('painReport');
                 $pdf->SetCreator('Fabry');
 
-            
-                    $fileName="Exercise Report".date("d-m-Y").".pdf";
+
+                $fileName = "Exercise Report" . date("d-m-Y") . ".pdf";
                 $pdf->Output($fileName, "$type");
             } else {
                 $pdf = new PDF();
@@ -719,7 +737,7 @@ class PDFController extends AppController {
                 $title = 'Sorry there is no data related from your request';
                 $pdf->Cell(70, 10, $title, 0, 1);
                 $pdf->Ln(2);
-                    $fileName="Exercise Report".date("d-m-Y").".pdf";
+                $fileName = "Exercise Report" . date("d-m-Y") . ".pdf";
                 $pdf->Output($fileName, "$type");
             }
         }
@@ -761,6 +779,8 @@ class PDFController extends AppController {
                 $pdf->Ln(2);
                 $pdf->SetFont('Arial', '', 12);
                 $pdf->Cell(180, 10, "Patient Name: " . $userData[0]['User']['firstName'] . " " . $userData[0]['User']['lastName'], 0, 1);
+                $pdf->Cell(180, 10, "Phone Number: " . $userData[0]['User']['phone'], 0, 1);
+                $pdf->Cell(180, 10, "Date of Birth: " . $userData[0]['User']['dob'], 0, 1);
                 $PDFTableHeader = array('Medication Name', 'Strength', 'DOSE', 'Frequency', 'Medicine Commence Time');
 
                 $pdf->BasicTable($PDFTableHeader, $PDFTableData, 52);
@@ -769,7 +789,7 @@ class PDFController extends AppController {
 //            $this->render('painReport');
                 $pdf->SetCreator('Fabry');
 
-                $fileName="Medication Report".date("d-m-Y").".pdf";
+                $fileName = "Medication Report" . date("d-m-Y") . ".pdf";
                 $pdf->Output($fileName, "$type");
             } else {
                 $pdf = new PDF("L");
@@ -779,8 +799,8 @@ class PDFController extends AppController {
                 $title = 'Sorry there is no data related from your request';
                 $pdf->Cell(70, 10, $title, 0, 1);
                 $pdf->Ln(2);
- 
-                $fileName="Medication Report".date("d-m-Y").".pdf";
+
+                $fileName = "Medication Report" . date("d-m-Y") . ".pdf";
                 $pdf->Output($fileName, "$type");
             }
         }

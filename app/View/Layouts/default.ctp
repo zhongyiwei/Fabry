@@ -144,7 +144,7 @@ $this->Html->image('cake.logo.png');
                                     <li><?php echo $this->Html->link('My Appointments', '/appointments'); ?></a>
                                         <ul>
                                             <li><?php echo $this->Html->link('List All Appointments', '/appointments'); ?></a></li>
-                                            <li><?php echo $this->Html->link('New Appointment', '/appointments/add'); ?></a></li>
+                                            <li><?php echo $this->Html->link('New Appointment', '/appointments/add?redirect=normal'); ?></a></li>
                                             <li><?php echo $this->Html->link('Remainder to attend appointment/ take medication', '/addressbooks'); ?></a></li>
                                         </ul>
                                     </li>

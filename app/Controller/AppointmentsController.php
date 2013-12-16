@@ -104,10 +104,11 @@ class AppointmentsController extends AppController {
         $this->set('contacts', $contacts);
         $redirect = $this->params['url']['redirect'];
         //saves the appointment and displays notification message
-
 //        $templates = $this->Template->find("all");
 
         if ($this->request->is('post')) {
+            $date = $this->request->data['Appointment']['date'];
+            $this->request->data['Appointment']['date'] = date('Y-m-d H:i', strtotime($date));
 
             $this->request->data['Appointment']['users_id'] = $this->current_user['id'];
             if ($this->Appointment->save($this->request->data)) {
@@ -156,6 +157,9 @@ class AppointmentsController extends AppController {
             throw new NotFoundException(__('Invalid event'));
         }
         if ($this->request->is(array('post', 'put'))) {
+            $date = $this->request->data['Appointment']['date'];
+            $this->request->data['Appointment']['date'] = date('Y-m-d H:i', strtotime($date));
+
             $this->request->data['Appointment']['users_id'] = $this->current_user['id'];
             if ($this->Appointment->save($this->request->data)) {
                 // good message color changing

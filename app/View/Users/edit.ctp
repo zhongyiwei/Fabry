@@ -1,3 +1,12 @@
+<?php
+echo $this->Html->css('jquery-ui.css');
+echo $this->Html->css('jquery-ui-timepicker-addon.css');
+echo $this->Html->script('jquery-1.10.2.min.js');
+echo $this->Html->script('jquery-ui.min.js');
+echo $this->Html->script('jquery.ui.slider.js');
+echo $this->Html->script('jquery.ui.datepicker.js');
+echo $this->Html->script('jquery-ui-timepicker-addon.js');
+?>
 <div class="actions">
 
     <ul>
@@ -33,9 +42,9 @@
             $userId = $current_user['id'];
             ?>
 
-    <!--            <h3><?php echo __('Profile of '), h($current_user['username']); ?></h3>-->
+            <!--            <h3><?php echo __('Profile of '), h($current_user['username']); ?></h3>-->
             <!--<dd>
-                    <h3><?php // echo h($current_user['username']);  ?></h3>
+                    <h3><?php // echo h($current_user['username']);    ?></h3>
                     &nbsp;
             </dd>-->
         <?php endif; ?>
@@ -59,7 +68,8 @@
                     <?php
                     echo $this->Form->input('firstName');
                     echo $this->Form->input('lastName');
-                    echo $this->Form->input('dob', array('dateFormat' => 'DMY', 'minYear' => date('Y') - 120, 'maxYear' => date('Y') - 0));
+//                    echo $this->Form->input('dob', array('dateFormat' => 'DMY', 'minYear' => date('Y') - 120, 'maxYear' => date('Y') - 0));
+                    echo $this->Form->input('dob', array('id' => 'dob', 'type' => 'text'));
                     echo $this->Form->input('address');
                     echo $this->Form->input('suburb');
                     echo $this->Form->input('postal', array('label' => 'Post Code'));
@@ -77,8 +87,8 @@
                     if ($current_user['role'] == 'super'):
                         echo $this->Form->input('role', array('label' => 'Define the role', 'options' => array('member' => 'Member', 'admin' => 'Admin')));
                     endif;
-
-                    echo $this->Form->input('dateOfDiagnosis', array('dateFormat' => 'DMY', 'minYear' => date('Y') - 120, 'maxYear' => date('Y') - 0));
+                    echo $this->Form->input('dateOfDiagnosis', array('id' => 'dateOfDiagnosis', 'type' => 'text'));
+//                    echo $this->Form->input('dateOfDiagnosis', array('dateFormat' => 'DMY', 'minYear' => date('Y') - 120, 'maxYear' => date('Y') - 0));
                     //echo $this->Form->year('dateOfDiagnosis', date('Y') - 100, date('Y') - 13, array('empty' => "YEAR"));
                     //echo $this->Form->month('dateOfDiagnosis', array('empty' => "MONTH"));
                     //echo $this->Form->day('dateOfDiagnosis', array('empty' => 'DAY'));
@@ -120,3 +130,7 @@
 
 </div>
 
+<script type="text/javascript">
+    $('#dob').datepicker({dateFormat: 'dd-mm-yy', maxDate: '+0d'});
+    $('#dateOfDiagnosis').datepicker({dateFormat: 'dd-mm-yy', maxDate: '+0d'});
+</script>
