@@ -49,7 +49,7 @@ class AppointmentsController extends AppController {
 //        $this->set('appointments', $data);
 //        Debugger::log($data);
         $id = $this->current_user['id'];
-        $appointments = $this->Appointment->find('all', array('conditions' => array('Contact.users_id' => $id)));
+        $appointments = $this->Appointment->find('all', array('conditions' => array('appointment.users_id' => $id)));
         $this->set(compact("appointments"));
         /*
           $allAppointments = $this->Paginator->paginate();
