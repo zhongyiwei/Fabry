@@ -598,13 +598,13 @@ class PDFController extends AppController {
                 $pdf->Cell(180, 10, "Date of Birth: " . $userData[0]['User']['dob'], 0, 1);
                 $pdf->Cell(180, 10, "Date: Between " . $start . " and " . $end, 0, 1);
                 $pdf->Ln(1);
-                for ($j = 1; $j < 7; $j++) {
-//                $temp = $j+1;
-                    $pdf->Cell(180, 10, "$j movements per day: " . $Move['Bowel'][$j] . " Days", 0, 1);
-                }
-//                $pdf->Cell(180, 10, "Number of Days having  n movement: ", 0, 1);
-//                $movementHeader = array('1 Move', '2 Move', '3 Move', '4 Move', '5 Move', '6 Move');
-//                $pdf->BasicTable($movementHeader, $Move, 20);
+//                for ($j = 1; $j < 7; $j++) {
+////                $temp = $j+1;
+//                    $pdf->Cell(180, 10, "$j movements per day: " . $Move['Bowel'][$j] . " Days", 0, 1);
+//                }
+                $pdf->Cell(180, 10, "Number of Days having  n movement: ", 0, 1);
+                $movementHeader = array('1 Move', '2 Move', '3 Move', '4 Move', '5 Move', '6 Move');
+                $pdf->BasicTable($movementHeader, $Move, 20);
 
                 $pdf->Ln(10);
                 $PDFTableHeader = array('Date', 'Bowel Movement (0 - 6)', 'Comments');
