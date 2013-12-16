@@ -103,8 +103,8 @@ $this->Html->image('cake.logo.png');
                                        </ul>    -->
                             </li>
                             <li><?php echo $this->Html->link('Newsletters', '/news'); ?></a></li>
-                            <li><?php echo $this->Html->link('Health Tips And Videos', '/addressbooks'); ?></a></li>
-                            <li><?php echo $this->Html->link('Templates', '/templates'); ?></a></li>
+                            <!-- <li><?php echo $this->Html->link('Health Tips And Videos', '/addressbooks'); ?></a></li> -->
+                            <li><?php echo $this->Html->link('Email Templates', '/templates'); ?></a></li>
                         </ul>
                     </nav>
 
