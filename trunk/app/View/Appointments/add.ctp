@@ -60,5 +60,5 @@ echo $this->Html->script('jquery-ui-timepicker-addon.js');
 </div>
 
 <script type="text/javascript">
-    $('#dateTimePickerStart').datetimepicker();
+    $('#dateTimePickerStart').datetimepicker({dateFormat: 'dd-mm-yy'});
 </script>

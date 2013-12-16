@@ -20,7 +20,7 @@
                 ?>
 
                 <li><?php echo $this->Html->link(__('Edit Contact'), array('action' => 'edit', $contact['Contact']['id'])); ?> </li>
-                <li><?php echo $this->Form->postLink(__('Delete Contact'), array('action' => 'delete', $contact['Contact']['id']), null, __('Are you sure you want to delete ' . $contact['Contact']['doctor'] . 'from the official list ?')); ?> </li>
+                <li><?php echo $this->Form->postLink(__('Delete Contact'), array('action' => 'delete', $contact['Contact']['id']), null, __('Are you sure you want to delete ' . $contact['Contact']['doctor'] . 'from the list ?')); ?> </li>
                 <li><?php echo $this->Html->link(__('New Contact'), array('action' => 'add')); ?> </li>
 
             <?php }

@@ -84,7 +84,7 @@ class PainsController extends AppController {
                     $this->Session->setFlash(__('The pain data could not be saved. Please, try again.'), 'default', array(), 'bad');
                 }
             } else {
-                $this->Session->setFlash(__('Please ensure you have chosen at least one medicine and you does not have the same day record.'), 'default', array(), 'bad');
+                $this->Session->setFlash(__('Please ensure you have chosen at least one medicine from the midication chart and you do not have a record at same day .'), 'default', array(), 'bad');
             }
         }
         $this->set(compact("medicationName"));

@@ -19,7 +19,7 @@ echo $this->Html->script('jquery-ui-timepicker-addon.js');
 <table>
     <tr><td>
             <div class="events form">
-                <?php echo $this->Form->create('Event'); ?>
+                <?php echo $this->Form->create('Event', array('novalidate' => true)); ?>
                 <fieldset>
                     <legend><?php echo __('Add Event'); ?></legend>
                     <?php

@@ -17,7 +17,7 @@ echo $this->Html->script('jquery-ui-timepicker-addon.js');
     </ul>
 </div>
 <div class="calendarEvents form">
-    <?php echo $this->Form->create('CalendarEvent'); ?>
+    <?php echo $this->Form->create('CalendarEvent', array('novalidate' => true)); ?>
     <fieldset>
         <legend><?php echo __('Add Personal Event'); ?></legend>
         <?php
@@ -39,6 +39,6 @@ echo $this->Html->script('jquery-ui-timepicker-addon.js');
 </div>
 
 <script type="text/javascript">
-    $('#dateTimePickerStart').datetimepicker();
-    $('#dateTimePickerEnd').datetimepicker();
+    $('#dateTimePickerStart').datetimepicker({dateFormat: 'dd-mm-yy'}).val();
+    $('#dateTimePickerEnd').datetimepicker({dateFormat: 'dd-mm-yy'});
 </script>

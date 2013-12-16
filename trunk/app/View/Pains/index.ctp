@@ -1,7 +1,7 @@
 <div class="actions">
     <h3><?php echo __('Actions'); ?></h3>
     <ul>
-        <li><?php echo $this->Html->link(__('New Pain'), array('action' => 'add')); ?></li>
+        <li><?php echo $this->Html->link(__('New Entry'), array('action' => 'add')); ?></li>
         <li><?php echo $this->Html->link(__('Generate Pain Report'), array('controller' => 'PDF', 'action' => 'painReport/I')); ?> </li>
     </ul>
 </div>
@@ -36,7 +36,7 @@
                     <td class="actions">
                         <?php echo $this->Html->link(__('View'), array('action' => 'view', $pain['Pain']['id'])); ?>
     <?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $pain['Pain']['id'])); ?>
-                <?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $pain['Pain']['id']), null, __('Are you sure you want to delete # %s?', $pain['Pain']['id'])); ?>
+                <?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $pain['Pain']['id']), null, __('Are you sure you want to delete the pain record on '.date('d-m-Y', strtotime($pain['Pain']['date'])).' from the list?')); ?>
                     </td>
                 </tr>
 <?php endforeach; ?>
