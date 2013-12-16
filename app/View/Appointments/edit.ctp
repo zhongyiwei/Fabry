@@ -20,7 +20,7 @@ echo $this->Html->script('jquery-ui-timepicker-addon.js');
 
     <?php echo $this->Form->create('Appointment', array('novalidate' => true)); ?>
     <fieldset>
-        <legend><?php echo __('New Appointment'); ?></legend>
+        <legend><?php echo __('Edit Appointment'); ?></legend>
         <?php
         echo $this->Form->hidden('id');
         if (!empty($this->params['url']['date'])) {
