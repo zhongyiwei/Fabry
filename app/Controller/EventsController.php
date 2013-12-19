@@ -126,12 +126,12 @@ class EventsController extends AppController {
 //                        $email->subject($title);
 //                        $email->send($InviteStatus . $description);
 
-                        $this->Session->setFlash(__('The event has been saved.'), 'default', array(), 'good');
+                        $this->Session->setFlash(__('The event invitation has been saved.'), 'default', array(), 'good');
                         return $this->redirect(array('action' => 'index'));
 //                    }
                     }
                 } else {
-                    $this->Session->setFlash(__('The event could not be saved. Please, try again.'), 'default', array(), 'bad');
+                    $this->Session->setFlash(__('The event invitation could not be saved. Please, try again.'), 'default', array(), 'bad');
                 }
             } else {
                 $this->Session->setFlash(__('The start date should be earlier than end date, please choose again.'));
@@ -254,8 +254,11 @@ class EventsController extends AppController {
 
             $timeLimits = 60 * 60;
             set_time_limit($timeLimits);
-
-            $description = "Dear Members of Fabry: <br/> This is to inform you the event: " . $event['Event']['title'] . " has been cancelled. Thank you for your kind concern. <br/> Best Regards</br>Team Fabry ";
+            $date = $event['Event']['start'];
+            $date = date('d-m-Y', strtotime($date));
+            $time = $event['Event']['start'];
+            $time = date('H:i', strtotime($time));
+            $description = "Dear Members of Fabry: <br/> This is to inform you the event: " . $event['Event']['title'] . " on the" . $date ." at ". $time . " has been cancelled. Thank you for your kind concern. <br/> Best Regards</br>Team Fabry ";
             $email->subject($title);
             $email->send($description);
         }
@@ -296,7 +299,7 @@ class EventsController extends AppController {
             $email->subject($title);
             $email->send($InviteStatus . $description);
         }
-        $this->Session->setFlash(__('The event has been send'), 'default', array(), 'good');
+        $this->Session->setFlash(__('The event invitation email has been send'), 'default', array(), 'good');
         return $this->redirect(array('action' => 'index'));
     }
 
