@@ -1,3 +1,4 @@
+<?php echo $this->Session->flash(); ?>
 <?php
 echo $this->Html->css('jquery-ui.css');
 echo $this->Html->css('jquery-ui-timepicker-addon.css');

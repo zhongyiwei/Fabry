@@ -1,4 +1,4 @@
-
+<?php echo $this->Session->flash(); ?>
 <?php /*
   <div class="contacts index">
   <h2><?php echo __('Contacts'); ?></h2>

@@ -1,3 +1,4 @@
+<?php echo $this->Session->flash(); ?>
 <div class="uploads index">
 	<h2><?php echo __('External Medical Records Uploaded'); ?></h2>
 	

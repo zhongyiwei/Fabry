@@ -1,3 +1,4 @@
+<?php echo $this->Session->flash(); ?>
 <div class="painmedis form">
 <?php echo $this->Form->create('Painmedi'); ?>
 	<fieldset>

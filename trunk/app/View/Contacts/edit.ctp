@@ -1,3 +1,4 @@
+<?php echo $this->Session->flash(); ?>
 <div class="actions">
     <ul>
         <?php if ($current_user['role'] == 'admin' || $current_user['role'] == 'super') : ?> 

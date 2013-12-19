@@ -2,6 +2,7 @@
 echo $this->Html->script('jquery.dataTables.min.js');
 echo $this->Html->css('jquery.dataTables.css');
 ?>
+<?php echo $this->Session->flash(); ?>
 <div class="users index">
     <h2><?php echo __('Accounts have not login for more than 2 years'); ?></h2>
 

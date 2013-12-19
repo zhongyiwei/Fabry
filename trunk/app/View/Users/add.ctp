@@ -7,6 +7,7 @@ echo $this->Html->script('jquery.ui.slider.js');
 echo $this->Html->script('jquery.ui.datepicker.js');
 echo $this->Html->script('jquery-ui-timepicker-addon.js');
 ?>
+<?php echo $this->Session->flash(); ?>
 <?php if ($current_user ['role'] == 'admin' || $current_user['role'] == 'member'): ?>		
     <?php // this if statement used to control the content will be displayed to user (Only the members and admin can see the "List Users" button).     ?>
     <div class="actions">

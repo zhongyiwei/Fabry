@@ -7,6 +7,7 @@ echo $this->Html->script('jquery.ui.slider.js');
 echo $this->Html->script('jquery.ui.datepicker.js');
 echo $this->Html->script('jquery-ui-timepicker-addon.js');
 ?>
+<?php echo $this->Session->flash(); ?>
 <div class="actions">
     <h3><?php echo __('Actions'); ?></h3>
     <ul>

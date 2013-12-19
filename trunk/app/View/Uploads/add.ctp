@@ -1,3 +1,4 @@
+<?php echo $this->Session->flash(); ?>
 <div class="uploads form">
 
 <?php echo $this->Form->create('Upload', array('novalidate' => true, 'type' => 'file'));?>

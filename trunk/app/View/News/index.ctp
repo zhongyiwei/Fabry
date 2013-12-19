@@ -1,4 +1,5 @@
-    <div class="actions">
+<?php echo $this->Session->flash(); ?>
+<div class="actions">
         <h3><?php echo __('Actions'); ?></h3>
         <ul>
             <li><?php echo $this->Html->link(__('New Newsletter Email'), array('action' => 'add')); ?></li>
