@@ -66,8 +66,8 @@ class DATABASE_CONFIG {
 		'persistent' => false,
 		'host' => 'localhost',
 		'login' => 'root',
-		'password' => '',
-		'database' => 'fabrydb',
+		'password' => 'root',
+		'database' => 'fabry_v14',
 		'prefix' => '',
 		//'encoding' => 'utf8',
 	);

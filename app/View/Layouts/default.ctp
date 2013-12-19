@@ -137,7 +137,7 @@ $this->Html->image('cake.logo.png');
                                     <li><?php echo $this->Html->link('Email GP', '/PDF/emailPdfs'); ?></a></li>
                                 </ul>
                             </li>
-                            <li><?php echo $this->Html->link('Calendar', '/calendarEvents/calendarEvent'); ?></a>
+                            <li><?php echo $this->Html->link('Events/Appointments', '/calendarEvents/calendarEvent'); ?></a>
                                 <ul>
                                     <li><?php echo $this->Html->link('View Calendar', '/calendarEvents/calendarEvent'); ?></a>
                                     <li><?php echo $this->Html->link('My Events', '/calendarEvents/index'); ?></a>
@@ -150,7 +150,7 @@ $this->Html->image('cake.logo.png');
                                     </li>
                                 </ul>
                             </li>
-                            <li><?php echo $this->Html->link('Event', '/invitations/eventParticipation'); ?></a>
+                            <li><?php echo $this->Html->link('FSGA Events', '/invitations/eventParticipation'); ?></a>
                                 <!--                                <ul>
                                                                     <li><?php echo $this->Html->link('RSVP', '/addressbooks'); ?></a></li>
                                                                     <li><?php echo $this->Html->link('Remainder to make booking', '/addressbooks'); ?></a></li>
