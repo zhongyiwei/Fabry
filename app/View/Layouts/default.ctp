@@ -142,6 +142,14 @@ $this->Html->image('cake.logo.png');
                                     <li><?php echo $this->Html->link('View Calendar', '/calendarEvents/calendarEvent'); ?></a>
                                     <li><?php echo $this->Html->link('My Events', '/calendarEvents/index'); ?></a>
                                     <li><?php echo $this->Html->link('My Appointments', '/appointments'); ?></a>
+                                    <li><?php echo $this->Html->link('FSGA Events', '/invitations/eventParticipation'); ?></a>
+                                <!--                                <ul>
+                                                                    <li><?php echo $this->Html->link('RSVP', '/addressbooks'); ?></a></li>
+                                                                    <li><?php echo $this->Html->link('Remainder to make booking', '/addressbooks'); ?></a></li>
+                                                                    <li><?php echo $this->Html->link('Remainder to attend appointment/ take medication', '/addressbooks'); ?></a></li>
+                                
+                                                                </ul>-->
+                            </li>
                                         <ul>
                                             <li><?php echo $this->Html->link('List All Appointments', '/appointments'); ?></a></li>
                                             <li><?php echo $this->Html->link('New Appointment', '/appointments/add?redirect=normal'); ?></a></li>
@@ -150,14 +158,7 @@ $this->Html->image('cake.logo.png');
                                     </li>
                                 </ul>
                             </li>
-                            <li><?php echo $this->Html->link('FSGA Events', '/invitations/eventParticipation'); ?></a>
-                                <!--                                <ul>
-                                                                    <li><?php echo $this->Html->link('RSVP', '/addressbooks'); ?></a></li>
-                                                                    <li><?php echo $this->Html->link('Remainder to make booking', '/addressbooks'); ?></a></li>
-                                                                    <li><?php echo $this->Html->link('Remainder to attend appointment/ take medication', '/addressbooks'); ?></a></li>
-                                
-                                                                </ul>-->
-                            </li>
+                            
                             <li><?php echo $this->Html->link('Profile Update', array('controller' => 'users', 'action' => "view/$users_id")); ?></a></li>
 
 
