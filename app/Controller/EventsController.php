@@ -97,23 +97,23 @@ class EventsController extends AppController {
 
                 if ($this->Invitation->saveMany($data)) {
                     for ($i = 0; $i < count($userEmail); $i++) {
-                        $userEmailOne = $userEmail[$i]['User']['email'];
-                        $userIdOne = $userEmail[$i]['User']['id'];
-
-                        $email = new CakeEmail();
-                        $email->config('default');
-                        $email->emailFormat('html');
-                        $email->from(array("$this->sender" => "$this->senderTag"));
-
-
-                        $email->to("$userEmailOne");
-                        $title = $this->request->data['Event']['title'];
-
-                        $AttendLink = "<a href=" . Router::url("/invitations/attendStatus?eventId=$eventId&uId=$userIdOne&status=Attend", true) . ">YES! I will attend the event</a>";
-                        $NoAttendLink = "<a href=" . Router::url("/invitations/attendStatus?eventId=$eventId&uId=$userIdOne&status=No", true) . ">NO! I will not attend the event</a>";
-                        $InviteStatus = "<div> $AttendLink &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; or &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $NoAttendLink</div>";
-                        $description = "<div>" . $this->request->data['Event']['description'] . "</div>";
-                        $email->subject($title);
+//                        $userEmailOne = $userEmail[$i]['User']['email'];
+//                        $userIdOne = $userEmail[$i]['User']['id'];
+//
+//                        $email = new CakeEmail();
+//                        $email->config('default');
+//                        $email->emailFormat('html');
+//                        $email->from(array("$this->sender" => "$this->senderTag"));
+//
+//
+//                        $email->to("$userEmailOne");
+//                        $title = $this->request->data['Event']['title'];
+//
+//                        $AttendLink = "<a href=" . Router::url("/invitations/attendStatus?eventId=$eventId&uId=$userIdOne&status=Attend", true) . ">YES! I will attend the event</a>";
+//                        $NoAttendLink = "<a href=" . Router::url("/invitations/attendStatus?eventId=$eventId&uId=$userIdOne&status=No", true) . ">NO! I will not attend the event</a>";
+//                        $InviteStatus = "<div> $AttendLink &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; or &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $NoAttendLink</div>";
+//                        $description = "<div>" . $this->request->data['Event']['description'] . "</div>";
+//                        $email->subject($title);
 //                        $email->send($InviteStatus . $description);
 
                         $this->Session->setFlash(__('The event has been saved.'), 'default', array(), 'good');
@@ -168,23 +168,23 @@ class EventsController extends AppController {
 //                    $this->request->data['Invitation']['response_status'] = "No Respond";
 //                    $userEmail = $this->User->find('all', array('conditions' => array('id' => $selectedUsers[$i])));
 //                    debug($userEmail);
-                    $userEmailOne = $userEmail[$i]['User']['email'];
-                    $userIdOne = $userEmail[$i]['User']['id'];
-
-//                    if ($this->Invitation->saveMany($data)) {
-                    $email = new CakeEmail();
-                    $email->config('default');
-                    $email->emailFormat('html');
-                    $email->from(array("$this->sender" => "$this->senderTag"));
-
-                    $email->to("$userEmailOne");
-                    $title = $this->request->data['Event']['title'];
-
-                    $AttendLink = "<a href=" . Router::url("/invitations/attendStatus?eventId=$eventId&uId=$userIdOne&status=Attend", true) . ">YES! I will attend the event</a>";
-                    $NoAttendLink = "<a href=" . Router::url("/invitations/attendStatus?eventId=$eventId&uId=$userIdOne&status=No", true) . ">NO! I will not attend the event</a>";
-                    $InviteStatus = "<div> $AttendLink &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; or &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $NoAttendLink</div>";
-                    $description = "<div>" . $this->request->data['Event']['description'] . "</div>";
-                    $email->subject($title);
+//                    $userEmailOne = $userEmail[$i]['User']['email'];
+//                    $userIdOne = $userEmail[$i]['User']['id'];
+//
+////                    if ($this->Invitation->saveMany($data)) {
+//                    $email = new CakeEmail();
+//                    $email->config('default');
+//                    $email->emailFormat('html');
+//                    $email->from(array("$this->sender" => "$this->senderTag"));
+//
+//                    $email->to("$userEmailOne");
+//                    $title = $this->request->data['Event']['title'];
+//
+//                    $AttendLink = "<a href=" . Router::url("/invitations/attendStatus?eventId=$eventId&uId=$userIdOne&status=Attend", true) . ">YES! I will attend the event</a>";
+//                    $NoAttendLink = "<a href=" . Router::url("/invitations/attendStatus?eventId=$eventId&uId=$userIdOne&status=No", true) . ">NO! I will not attend the event</a>";
+//                    $InviteStatus = "<div> $AttendLink &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; or &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $NoAttendLink</div>";
+//                    $description = "<div>" . $this->request->data['Event']['description'] . "</div>";
+//                    $email->subject($title);
 //                        $email->send($InviteStatus . $description);
 //                    }
                 }
