@@ -11,7 +11,7 @@ echo $this->Html->script('jquery-ui-timepicker-addon.js');
     <h3><?php echo __('Actions'); ?></h3>
     <ul>
 
-        <li><?php echo $this->Html->link(__('Back'), array('action' => 'index')); ?></li>
+        <li><?php echo $this->Html->link(__('Back to List'), array('action' => 'index')); ?></li>
     </ul>
 </div>
 <div class="medications form">
@@ -31,5 +31,5 @@ echo $this->Html->script('jquery-ui-timepicker-addon.js');
 </div>
 
 <script type="text/javascript">
-    $('#dateTimePickerStart').datetimepicker();
+    $('#dateTimePickerStart').datetimepicker({dateFormat: 'dd-mm-yy'}).val();
 </script>

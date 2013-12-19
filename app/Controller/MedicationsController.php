@@ -58,6 +58,9 @@ class MedicationsController extends AppController {
 //
 //            debug($medi);
 //            if (empty($medi)) {
+            $date = $this->request->data['Medication']['start'];
+            $this->request->data['Medication']['start'] = date('Y-m-d H:i', strtotime($date));
+            
             $this->request->data['Medication']['users_id'] = $id;
             $this->Medication->create();
             if ($this->Medication->save($this->request->data)) {
@@ -89,7 +92,9 @@ class MedicationsController extends AppController {
             throw new NotFoundException(__('Invalid medication'));
         }
         if ($this->request->is(array('post', 'put'))) {
-
+            $date = $this->request->data['Medication']['start'];
+            $this->request->data['Medication']['start'] = date('Y-m-d H:i', strtotime($date));
+            
             $uid = $this->current_user['id'];
             $this->request->data['Medication']['users_id'] = $uid;
             $this->request->data['Medication']['id'] = $id;

@@ -3,8 +3,8 @@
 	<ul>
 		<li><?php echo $this->Html->link(__('Edit Medication'), array('action' => 'edit', $medication['Medication']['id'])); ?> </li>
 		<li><?php echo $this->Form->postLink(__('Delete Medication'), array('action' => 'delete', $medication['Medication']['id']), null, __('Are you sure you want to delete '.$medication['Medication']['medicationName'].' from your list of medications ?', $medication['Medication']['id'])); ?> </li>
-		<li><?php echo $this->Html->link(__('List Medications'), array('action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Medication'), array('action' => 'add')); ?> </li>
+		<li><?php echo $this->Html->link(__('Back to List'), array('action' => 'index')); ?> </li>
+		<!--<li><?php // echo $this->Html->link(__('New Medication'), array('action' => 'add')); ?> </li>-->
 	</ul>
 </div>
 
