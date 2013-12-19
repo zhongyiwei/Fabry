@@ -76,18 +76,24 @@ class EventsController extends AppController {
 //            $selectedUsers = $this->request->data['Event']['users'];
             $this->request->data['Event']['send_status'] = 'false';
 
-            $userEmail = $this->User->find('all');
+//            $userEmail = $this->User->find('all');
 
-            if ($this->Event->save($this->request->data)) {
+            $this->request->data['Event']['start'] = date('Y-m-d H:i', strtotime($this->request->data['Event']['start']));
+            $this->request->data['Event']['end'] = date('Y-m-d H:i', strtotime($this->request->data['Event']['end']));
+            $startDate = strtotime($this->request->data['Event']['start']);
+            $endDate = strtotime($this->request->data['Event']['end']);
 
-                $eventData = $this->Event->find('all', array('order' => 'id DESC', 'limit' => 1));
+            if ($startDate < $endDate) {
+                if ($this->Event->save($this->request->data)) {
+
+                    $eventData = $this->Event->find('all', array('order' => 'id DESC', 'limit' => 1));
 //                $eventId = $this->Event->getLastInsertID();
-                $eventId = $eventData[0]['Event']['id'];
+                    $eventId = $eventData[0]['Event']['id'];
 //                for ($i = 0; $i < count($selectedUsers); $i++) {
 //                    $this->request->data['Invitation']['users_id'] = $selectedUsers[$i];
-                for ($j = 0; $j < count($userEmail); $j++) {
-                    $data[$j] = array('id' => '', 'users_id' => $userEmail[$j]['User']['id'], 'events_id' => $eventId, 'response_status' => 'No Respond');
-                }
+                    for ($j = 0; $j < count($userEmail); $j++) {
+                        $data[$j] = array('id' => '', 'users_id' => $userEmail[$j]['User']['id'], 'events_id' => $eventId, 'response_status' => 'No Respond');
+                    }
 //                    $this->request->data['Invitation']['users_id'] = $userEmail[$i]['User']['id'];
 //                    $this->request->data['Invitation']['events_id'] = $eventId;
 //                    $this->request->data['Invitation']['response_status'] = "No Respond";
@@ -95,8 +101,8 @@ class EventsController extends AppController {
 //                    debug($userEmail);
 
 
-                if ($this->Invitation->saveMany($data)) {
-                    for ($i = 0; $i < count($userEmail); $i++) {
+                    if ($this->Invitation->saveMany($data)) {
+//                    for ($i = 0; $i < count($userEmail); $i++) {
 //                        $userEmailOne = $userEmail[$i]['User']['email'];
 //                        $userIdOne = $userEmail[$i]['User']['id'];
 //
@@ -118,10 +124,13 @@ class EventsController extends AppController {
 
                         $this->Session->setFlash(__('The event has been saved.'), 'default', array(), 'good');
                         return $this->redirect(array('action' => 'index'));
+//                    }
                     }
+                } else {
+                    $this->Session->setFlash(__('The event could not be saved. Please, try again.'), 'default', array(), 'bad');
                 }
             } else {
-                $this->Session->setFlash(__('The event could not be saved. Please, try again.'), 'default', array(), 'bad');
+                $this->Session->setFlash(__('The start date should be earlier than end date, please choose again.'));
             }
         }
 
@@ -146,24 +155,29 @@ class EventsController extends AppController {
 //            $uId = $this->current_user['id'];
 //            $this->request->data['Event']['user_id'] = $uId;
 //            $selectedUsers = $this->request->data['Event']['users'];
+            $this->request->data['Event']['start'] = date('Y-m-d H:i', strtotime($this->request->data['Event']['start']));
+            $this->request->data['Event']['end'] = date('Y-m-d H:i', strtotime($this->request->data['Event']['end']));
+            $startDate = strtotime($this->request->data['Event']['start']);
+            $endDate = strtotime($this->request->data['Event']['end']);
 
-            if ($this->Event->saveMany($this->request->data)) {
-                $userEmail = $this->User->find('all');
+            if ($startDate < $endDate) {
+                if ($this->Event->saveMany($this->request->data)) {
+                    $userEmail = $this->User->find('all');
 
 //                for ($j = 0; $j < count($userEmail); $j++) {
 //                    $data[$j] = array('id' => '', 'users_id' => $userEmail[$j]['User']['id'], 'events_id' => $id, 'response_status' => 'No Respond');
 //                }
 
-                for ($i = 0; $i < count($userEmail); $i++) {
+                    for ($i = 0; $i < count($userEmail); $i++) {
 //                $eventId = $this->Event->getLastInsertID();
 //                for ($i = 0; $i < count($selectedUsers); $i++) {
 //                    $this->request->data['Invitation']['users_id'] = $selectedUsers[$i];
 //                    $this->request->data['Invitation']['events_id'] = $eventId;
-                    $invitationId = $this->Invitation->find('all', array('conditions' => array('users_id' => $userEmail[$i]['User']['id'], 'events_id' => $id)));
-                    if (!empty($invitationId)) {
+                        $invitationId = $this->Invitation->find('all', array('conditions' => array('users_id' => $userEmail[$i]['User']['id'], 'events_id' => $id)));
+                        if (!empty($invitationId)) {
 //                        $this->request->data['Invitation']['id'] = $invitationId[0]['Invitation']['id'];
-                        $data[$i] = array('id' => $invitationId[0]['Invitation']['id'], 'users_id' => $userEmail[$i]['User']['id'], 'events_id' => $id);
-                    }
+                            $data[$i] = array('id' => $invitationId[0]['Invitation']['id'], 'users_id' => $userEmail[$i]['User']['id'], 'events_id' => $id);
+                        }
 
 //                    $this->request->data['Invitation']['response_status'] = "No Respond";
 //                    $userEmail = $this->User->find('all', array('conditions' => array('id' => $selectedUsers[$i])));
@@ -187,13 +201,16 @@ class EventsController extends AppController {
 //                    $email->subject($title);
 //                        $email->send($InviteStatus . $description);
 //                    }
-                }
+                    }
 
 //            if ($this->Event->save($this->request->data)) {
 //                $this->Session->setFlash(__('The event has been saved.'), 'default', array(), 'good');
-                return $this->redirect(array('action' => 'index'));
+                    return $this->redirect(array('action' => 'index'));
+                } else {
+                    $this->Session->setFlash(__('The event could not be saved. Please, try again.'), 'default', array(), 'bad');
+                }
             } else {
-                $this->Session->setFlash(__('The event could not be saved. Please, try again.'), 'default', array(), 'bad');
+                $this->Session->setFlash(__('The start date should be earlier than end date, please choose again.'));
             }
         } else {
             $options = array('conditions' => array('Event.' . $this->Event->primaryKey => $id));
