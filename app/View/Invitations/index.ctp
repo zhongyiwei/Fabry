@@ -1,3 +1,4 @@
+<?php echo $this->Session->flash(); ?>
 <div class="invitations index">
     <h2><?php echo __('Invitations'); ?></h2>
     <table cellpadding="0" cellspacing="0">

@@ -2,6 +2,7 @@
 echo $this->Html->script('jquery.dataTables.min.js');
 echo $this->Html->css('jquery.dataTables.css');
 ?>
+<?php echo $this->Session->flash(); ?>
 <div class="users index">
     <h2><?php echo __('Accounts'); ?></h2>
     <div class="actions"> 

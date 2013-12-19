@@ -1,3 +1,4 @@
+<?php echo $this->Session->flash(); ?>
 <div class="invitations form">
 <?php echo $this->Form->create('Invitation'); ?>
 	<fieldset>

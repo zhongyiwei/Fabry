@@ -1,6 +1,7 @@
 <?php
 echo $this->Html->script('ckfinder/ckfinder');
 ?>
+<?php echo $this->Session->flash(); ?>
 <div class="actions">
     <h3><?php echo __('Actions'); ?></h3>
     <ul>

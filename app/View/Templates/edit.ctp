@@ -1,3 +1,4 @@
+<?php echo $this->Session->flash(); ?>
 <div class="templates form">
 <?php echo $this->Form->create('Template'); ?>
 	<fieldset>

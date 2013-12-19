@@ -94,7 +94,7 @@ class EventsController extends AppController {
                     for ($j = 0; $j < count($userEmail); $j++) {
                         if ($userEmail[$j]['User']['role'] != 'admin') {
                             $data[$j] = array('id' => '', 'users_id' => $userEmail[$j]['User']['id'], 'events_id' => $eventId, 'response_status' => 'No Respond');
-                        }else{
+                        } else {
                             $data[$j] = array('id' => '', 'users_id' => $userEmail[$j]['User']['id'], 'events_id' => $eventId, 'response_status' => 'Attend');
                         }
                     }
@@ -295,8 +295,8 @@ class EventsController extends AppController {
             $description = "<div>" . $event['Event']['description'] . "</div>";
             $email->subject($title);
             $email->send($InviteStatus . $description);
-            $this->Session->setFlash(__('The event has been send'));
         }
+        $this->Session->setFlash(__('The event has been send'), 'default', array(), 'good');
         return $this->redirect(array('action' => 'index'));
     }
 
