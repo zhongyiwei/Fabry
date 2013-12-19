@@ -11,7 +11,7 @@ echo $this->Html->script('jquery-ui-timepicker-addon.js');
     <h3><?php echo __('Actions'); ?></h3>
     <ul>
 
-        <li><?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $this->Form->value('Bowel.id')), null, __('Are you sure you want to delete the movement recored on ' . date('d-m-Y', strtotime($this->Form->value('Bowel.date'))) . ' from the list ')); ?></li>
+        <li><?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $this->Form->value('Bowel.id')), null, __('Are you sure you want to delete your bowel movement entry on ' . date('d-m-Y', strtotime($this->Form->value('Bowel.date'))) . '?')); ?></li>
         <li><?php echo $this->Html->link(__('Back to List'), array('action' => 'index')); ?></li>
     </ul>
 </div>
