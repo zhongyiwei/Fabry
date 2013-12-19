@@ -16,7 +16,7 @@ echo $this->Html->script('ckfinder/ckfinder');
         <?php
 //        $publishStatus = array('Private' => 'Private', 'Published' => 'Published');
         echo $this->Form->input('id');
-        echo $this->Form->input('news_title');
+        echo $this->Form->input('news_title', array('label'=>'Subject'));
         echo $this->Form->input('news_description', array('id' => 'news_description', 'news' => 'ckeditor'));
 //        echo $this->Form->input('publish_status', array('options' => $publishStatus, 'default' => 'Private'));
         //echo $this->Form->input('User');
