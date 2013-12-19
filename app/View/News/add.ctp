@@ -19,7 +19,7 @@ echo $this->Html->script('ckfinder/ckfinder');
                     <legend><?php echo __('Create Newsletter Email'); ?></legend>
                     <?php
 //        $publishStatus = array('Private' => 'Private', 'Published' => 'Published');
-                    echo $this->Form->input('news_title');
+                    echo $this->Form->input('news_title', array('label'=>'Subject'));
                     echo $this->Form->input('news_description', array('id' => 'news_description'));
 //        echo $this->Form->input('publish_status', array('options' => $publishStatus, 'default' => 'Private'));
                     //echo $this->Form->input('User');
