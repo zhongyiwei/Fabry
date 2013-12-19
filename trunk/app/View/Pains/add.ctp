@@ -24,6 +24,7 @@ echo $this->Html->script('jquery-ui-timepicker-addon.js');
         echo $this->Form->input('medication');
         echo $this->Form->input('illness',array('label'=>'Symptons'));
         echo "<h3>Medication Taken</h3>";
+        echo $this->Html->image("addMedi.png", array("alt" => "add", 'name' => "add", 'height' => "40", 'style' => "background: #FFF; margin:-7px 0px 7px 5px;", 'url' => array('controller' => 'medications', 'action' => 'add?redirect=event')));
         echo $this->Form->select('medications', $medicationName, array(
             'multiple' => 'checkbox'
         ));
