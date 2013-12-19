@@ -44,7 +44,7 @@ $this->Html->image('cake.logo.png');
         <div id="container">
             <div id="header">
                 <h1><?php echo $this->Html->link($cakeDescription, 'http://cakephp.org'); ?></h1>
-                <div id="signIn">
+                <div id="signIn" >
 
                     <?php
                     /* <!-- IF YOU LOGIN, A WELCOME MESSAGE WILL DISPLAY AND GO TO THE HOMEPAGE VIEW, AND A LOGOUT BUTTON WILL ALSO DISPLAY ON TOP RIGHT --> */
