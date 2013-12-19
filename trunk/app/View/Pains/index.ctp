@@ -36,7 +36,7 @@
                     <td class="actions">
                         <?php echo $this->Html->link(__('View'), array('action' => 'view', $pain['Pain']['id'])); ?>
     <?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $pain['Pain']['id'])); ?>
-                <?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $pain['Pain']['id']), null, __('Are you sure you want to delete the pain record on '.date('d-m-Y', strtotime($pain['Pain']['date'])).' from the list?')); ?>
+                <?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $pain['Pain']['id']), null, __('Are you sure you want to delete your pain entry on '.date('d-m-Y', strtotime($pain['Pain']['date'])).'?')); ?>
                     </td>
                 </tr>
 <?php endforeach; ?>

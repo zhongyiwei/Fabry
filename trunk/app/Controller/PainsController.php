@@ -107,6 +107,8 @@ class PainsController extends AppController {
         $medicationName = $this->Medication->find("list", array('fields' => array('id', 'medicationName')));
 
         if ($this->request->is(array('post', 'put'))) {
+            $date = $this->request->data['Pain']['date'];
+            $this->request->data['Pain']['date'] = date('Y-m-d', strtotime($date));
             if ($this->Pain->save($this->request->data)) {
 
 

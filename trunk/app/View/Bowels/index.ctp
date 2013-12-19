@@ -21,19 +21,24 @@
             <?php foreach ($bowels as $bowel): ?>
                 <tr>
                     <td><?php $timestamp = strtotime($bowel['Bowel']['date']);
-							 echo date('d-m-Y', $timestamp) ?>&nbsp;</td>
+            echo date('d-m-Y', $timestamp)
+                ?>&nbsp;</td>
                     <td><?php echo h($bowel['Bowel']['count']); ?>&nbsp;</td>
                     <td><?php echo h($bowel['Bowel']['comment']); ?>&nbsp;</td>
-<!--                    <td>
-                        <?php // echo $this->Html->link($bowel['Users']['id'], array('controller' => 'users', 'action' => 'view', $bowel['Users']['id'])); ?>
+    <!--                    <td>
+    <?php // echo $this->Html->link($bowel['Users']['id'], array('controller' => 'users', 'action' => 'view', $bowel['Users']['id']));  ?>
                     </td>-->
                     <td class="actions">
                         <?php echo $this->Html->link(__('View'), array('action' => 'view', $bowel['Bowel']['id'])); ?>
                         <?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $bowel['Bowel']['id'])); ?>
-                        <?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $bowel['Bowel']['id']), null, __('Are you sure you want to delete the movement recored on '.$bowel['Bowel']['date'].' from the list')); ?>
-                    </td>
+                        <?php
+                        $date = $bowel['Bowel']['date'];
+                        $date = date('d-m-Y', strtotime($date));
+                        echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $bowel['Bowel']['id']), null, __('Are you sure you want to delete your bowel movement entry on ' . $date . '?', $bowel['Bowel']['id']));
+                        ?>
+                    </td>                                                                                                            
                 </tr>
-            <?php endforeach; ?>
+<?php endforeach; ?>
         </tbody>
     </table>
 </div>

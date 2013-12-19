@@ -88,6 +88,8 @@ class BowelsController extends AppController {
             throw new NotFoundException(__('Invalid record'));
         }
         if ($this->request->is(array('post', 'put'))) {
+            $date = $this->request->data['Bowel']['date'];
+            $this->request->data['Bowel']['date'] = date('Y-m-d', strtotime($date));
             if ($this->Bowel->save($this->request->data)) {
                 $this->Session->setFlash(__('The record has been saved.'), 'default', array(), 'good');
                 return $this->redirect(array('action' => 'index'));
