@@ -112,7 +112,7 @@ class AppointmentsController extends AppController {
 
             $this->request->data['Appointment']['users_id'] = $this->current_user['id'];
             if ($this->Appointment->save($this->request->data)) {
-                $this->Session->setFlash(__('The event has been saved.'), 'default', array(), 'good');
+                $this->Session->setFlash(__('The appointment has been saved.'), 'default', array(), 'good');
                 /*
                  * Elisha
                  * just redirect after saving! :)
@@ -163,7 +163,7 @@ class AppointmentsController extends AppController {
             $this->request->data['Appointment']['users_id'] = $this->current_user['id'];
             if ($this->Appointment->save($this->request->data)) {
                 // good message color changing
-                $this->Session->setFlash(__('The event has been saved.'), 'default', array(), 'good');
+                $this->Session->setFlash(__('The appointment has been saved.'), 'default', array(), 'good');
                 return $this->redirect(array('action' => 'calendarEvent', 'controller' => 'calendarevents'));
             } else {
 
@@ -197,9 +197,9 @@ class AppointmentsController extends AppController {
         }
         $this->request->onlyAllow('post', 'delete');
         if ($this->Appointment->delete()) {
-            $this->Session->setFlash(__('The event has been deleted.'), 'default', array(), 'good');
+            $this->Session->setFlash(__('The appointment has been deleted.'), 'default', array(), 'good');
         } else {
-            $this->Session->setFlash(__('The event could not be deleted. Please, try again.'));
+            $this->Session->setFlash(__('The appointment could not be deleted. Please, try again.'));
         }
         return $this->redirect(array('action' => 'calendarEvent', 'controller' => 'calendarevents'));
     }
