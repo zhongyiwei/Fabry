@@ -39,8 +39,8 @@ echo $this->Html->script('jquery-ui-timepicker-addon.js');
 </div>
 
 <script type="text/javascript">
-    $('#dateTimePickerStart').datetimepicker({dateFormat: 'dd-mm-yy H'}).val();
-    $('#dateTimePickerEnd').datetimepicker({dateFormat: 'dd-mm-yy H'});
+    $('#dateTimePickerStart').datetimepicker({dateFormat: 'dd-mm-yy'}).val();
+    $('#dateTimePickerEnd').datetimepicker({dateFormat: 'dd-mm-yy'});
 
     function changeContent() {
         if ($('#checkbox').prop('checked')) {
