@@ -62,12 +62,17 @@ class MedicationsController extends AppController {
             $this->Medication->create();
             if ($this->Medication->save($this->request->data)) {
                 $this->Session->setFlash(__('The medication has been saved.'), 'default', array(), 'good');
-                return $this->redirect(array('action' => 'index'));
+//                return $this->redirect(array('action' => 'index'));
+                $redirect = $this->params['url']['redirect'];
+                if ($redirect == "pain") {
+                    return $this->redirect(array('action' => 'add', 'controller' => 'pains'));
+                } else {
+                    return $this->redirect(array('action' => 'index', 'controller' => 'medications'));
+                }
             } else {
                 $this->Session->setFlash(__('The medication could not be saved. Please, try again.'), 'default', array(), 'bad');
-            } 
-        
-        } 
+            }
+        }
         //$users = $this->Medication->User->find('list');
         //$this->set(compact('users'));
     }

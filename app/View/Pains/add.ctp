@@ -22,9 +22,9 @@ echo $this->Html->script('jquery-ui-timepicker-addon.js');
         echo $this->Form2->input('Pain.date', array('id' => 'datePickerStart', 'type' => 'text'));
         echo $this->Form->input('painLevel', array('min' => 0, 'max' => 10));
         echo $this->Form->input('medication');
-        echo $this->Form->input('illness',array('label'=>'Symptons'));
-        echo "<h3>Medication Taken</h3>";
-        echo $this->Html->image("addMedi.png", array("alt" => "add", 'name' => "add", 'height' => "40", 'style' => "background: #FFF; margin:-7px 0px 7px 5px;", 'url' => array('controller' => 'medications', 'action' => 'add?redirect=event')));
+        echo $this->Form->input('illness', array('label' => 'Symptons'));
+        echo $this->Html->image("addMedi.png", array("alt" => "add", 'name' => "add", 'height' => "40", 'style' => "background: #FFF; margin:-7px 0px 7px 195px;", 'url' => array('controller' => 'medications', 'action' => 'add?redirect=pain')));
+        echo "<h3 style='margin: -45px 0 0 0;'>Medication Taken</h3>";
         echo $this->Form->select('medications', $medicationName, array(
             'multiple' => 'checkbox'
         ));

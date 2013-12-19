@@ -17,25 +17,26 @@ echo $this->Html->script('jquery-ui-timepicker-addon.js');
     </ul>
 </div>
 <div class="calendarEvents form">
-    <?php echo $this->Form->create('CalendarEvent', array('novalidate' => true)); ?>
+    <?php echo $this->Form2->create('CalendarEvent', array('novalidate' => true)); ?>
     <fieldset>
         <legend><?php echo __('Add Personal Event'); ?></legend>
         <?php
         if (!empty($this->params['url']['date'])) {
             $date = $this->params['url']['date'];
         }
-        echo $this->Form->input('title');
+        echo $this->Form2->input('title');
         if (!empty($this->params['url']['date'])) {
-            echo $this->Form->input('start', array('id' => 'dateTimePickerStart', 'type' => 'text', 'value' => $date));
+            echo $this->Form2->input('start', array('id' => 'dateTimePickerStart', 'type' => 'text', 'value' => $date));
         } else {
-            echo $this->Form->input('start', array('id' => 'dateTimePickerStart', 'type' => 'text'));
+            echo $this->Form2->input('start', array('id' => 'dateTimePickerStart', 'type' => 'text'));
         }
-        echo $this->Form->input('end', array('id' => 'dateTimePickerEnd', 'type' => 'text'));
+        echo $this->Form2->input('end', array('id' => 'dateTimePickerEnd', 'type' => 'text'));
         // echo $this->Form->input('allDay',array('id' => 'checkbox','onclick'=>'changeContent()'));
-        echo $this->Form->input('repeat');
+        echo $this->Form2->input('repeatTimes', array('label' => 'Repeat for how many times?', 'min' => 1));
+        echo $this->Form2->input('frequency');
         ?>
     </fieldset>
-    <?php echo $this->Form->end(__('Submit')); ?>
+    <?php echo $this->Form2->end(__('Submit')); ?>
 </div>
 
 <script type="text/javascript">
@@ -45,7 +46,7 @@ echo $this->Html->script('jquery-ui-timepicker-addon.js');
     function changeContent() {
         if ($('#checkbox').prop('checked')) {
             $('#dateTimePickerEnd').hide();
-        }else{
+        } else {
             $('#dateTimePickerEnd').show();
         }
     }

@@ -18,19 +18,20 @@ echo $this->Html->script('jquery-ui-timepicker-addon.js');
     </ul>
 </div>
 <div class="calendarEvents form">
-    <?php echo $this->Form->create('CalendarEvent', array('novalidate' => true)); ?>
+    <?php echo $this->Form2->create('CalendarEvent', array('novalidate' => true)); ?>
     <fieldset>
         <legend><?php echo __('Edit Personal Event'); ?></legend>
         <?php
-        echo $this->Form->input('id');
-        echo $this->Form->input('title');
-        echo $this->Form->input('start', array('id' => 'dateTimePickerStart', 'type' => 'text'));
-        echo $this->Form->input('end', array('id' => 'dateTimePickerEnd', 'type' => 'text'));
-        echo $this->Form->input('allDay', array('id' => 'checkbox', 'onclick' => 'changeContent()'));
-        echo $this->Form->input('repeat');
+        echo $this->Form2->input('id');
+        echo $this->Form2->input('title');
+        echo $this->Form2->input('start', array('id' => 'dateTimePickerStart', 'type' => 'text'));
+        echo $this->Form2->input('end', array('id' => 'dateTimePickerEnd', 'type' => 'text'));
+//        echo $this->Form2->input('allDay', array('id' => 'checkbox', 'onclick' => 'changeContent()'));
+        echo $this->Form2->input('repeatTimes', array('label' => 'Repeat for how many times?'));
+        echo $this->Form2->input('frequency');
         ?>
     </fieldset>
-    <?php echo $this->Form->end(__('Submit')); ?>
+    <?php echo $this->Form2->end(__('Submit')); ?>
 </div>
 
 <script type="text/javascript">
