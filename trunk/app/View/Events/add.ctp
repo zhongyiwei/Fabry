@@ -23,9 +23,16 @@ echo $this->Html->script('jquery-ui-timepicker-addon.js');
                 <fieldset>
                     <legend><?php echo __('Add Event'); ?></legend>
                     <?php
+                    if (!empty($this->params['url']['date'])) {
+                        $date = $this->params['url']['date'];
+                    }
                     echo $this->Form->input('title',array('label'=>'Subject'));
                     echo $this->Form->input('description', array('id' => 'description'));
-                    echo $this->Form->input('start', array('id' => 'dateTimePickerStart', 'type' => 'text'));
+                    if (!empty($this->params['url']['date'])) {
+                        echo $this->Form2->input('Event.start', array('id' => 'dateTimePickerStart', 'type' => 'text', 'value' => $date));
+                    } else {
+                        echo $this->Form2->input('Event.start', array('id' => 'dateTimePickerStart', 'type' => 'text'));
+                    }
                     echo $this->Form->input('end', array('id' => 'dateTimePickerEnd', 'type' => 'text'));
 //                    echo $this->Form2->input('frequency');
 //                    echo $this->Form->input('allDay');
@@ -66,4 +73,27 @@ echo $this->Html->script('jquery-ui-timepicker-addon.js');
 //    $(document).ready(function() {
 //
 //    });
+    $(document).ready(function() {
+        var formattedDate = new Date($('#dateTimePickerStart').val());
+        var d = formattedDate.getDate();
+        var m = formattedDate.getMonth();
+        m += 1;  // JavaScript months are 0-11
+
+        var hour = formattedDate.getHours();
+        var minute = formattedDate.getMinutes();
+
+        var y = formattedDate.getFullYear();
+
+        if (d.toString().length < 2) {
+            d = "0" + d;
+        }
+
+        if (m.toString().length < 2) {
+            m = "0" + m;
+        }
+        var check = $('#dateTimePickerStart').val();
+        if ( check !== "") {
+            $("#dateTimePickerStart").val(d + "-" + m + "-" + y);
+        }
+    });
 </script>

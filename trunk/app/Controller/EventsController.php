@@ -76,7 +76,7 @@ class EventsController extends AppController {
 //            $selectedUsers = $this->request->data['Event']['users'];
             $this->request->data['Event']['send_status'] = 'false';
 
-//            $userEmail = $this->User->find('all');
+            $userEmail = $this->User->find('all');
 
             $this->request->data['Event']['start'] = date('Y-m-d H:i', strtotime($this->request->data['Event']['start']));
             $this->request->data['Event']['end'] = date('Y-m-d H:i', strtotime($this->request->data['Event']['end']));
@@ -91,9 +91,13 @@ class EventsController extends AppController {
                     $eventId = $eventData[0]['Event']['id'];
 //                for ($i = 0; $i < count($selectedUsers); $i++) {
 //                    $this->request->data['Invitation']['users_id'] = $selectedUsers[$i];
-//                    for ($j = 0; $j < count($userEmail); $j++) {
-//                        $data[$j] = array('id' => '', 'users_id' => $userEmail[$j]['User']['id'], 'events_id' => $eventId, 'response_status' => 'No Respond');
-//                    }
+                    for ($j = 0; $j < count($userEmail); $j++) {
+                        if ($userEmail[$j]['User']['role'] != 'admin') {
+                            $data[$j] = array('id' => '', 'users_id' => $userEmail[$j]['User']['id'], 'events_id' => $eventId, 'response_status' => 'No Respond');
+                        }else{
+                            $data[$j] = array('id' => '', 'users_id' => $userEmail[$j]['User']['id'], 'events_id' => $eventId, 'response_status' => 'Attend');
+                        }
+                    }
 //                    $this->request->data['Invitation']['users_id'] = $userEmail[$i]['User']['id'];
 //                    $this->request->data['Invitation']['events_id'] = $eventId;
 //                    $this->request->data['Invitation']['response_status'] = "No Respond";
