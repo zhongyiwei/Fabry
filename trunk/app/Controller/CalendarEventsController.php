@@ -156,36 +156,52 @@ class CalendarEventsController extends AppController {
         $calendarEvent = "";
         for ($i = 0; $i < count($eventData); $i++) {
             $status = ($eventData[$i]['CalendarEvent']['allDay'] == 1 ? "true" : "false");
-            if ($eventData[$i]['CalendarEvent']['repeat'] == 0) {
+//            if ($eventData[$i]['CalendarEvent']['repeat'] == 0) {
+//                $calendarEvent .= "\n{\n";
+//                $calendarEvent .= "title:'" . $eventData[$i]['CalendarEvent']['title'] . "',\n";
+//                $calendarEvent .= "start:'" . $eventData[$i]['CalendarEvent']['start'] . "',\n";
+//                $calendarEvent .= "end:'" . $eventData[$i]['CalendarEvent']['end'] . "',\n";
+//                $calendarEvent .= "allDay:" . $status . ",\n";
+//                $calendarEvent .= "url:'" . $this->webroot . "calendarEvents/edit/" . $eventData[$i]['CalendarEvent']['id'] . "'";
+//                if ($i != (count($eventData) - 1)) {
+//                    $calendarEvent .= "\n},\n";
+//                } else {
+//                    $calendarEvent .= "\n}\n";
+//                }
+//            } else {
+            $repeatingTimes2 = $eventData[$i]['CalendarEvent']['repeatTimes'];
+            $repeatingHours2 = $eventData[$i]['CalendarEvent']['frequency'];
+
+
+            if ($repeatingHours2 == "Weekly") {
+                $repeatingHours2 = 168;
+            } else if ($repeatingHours2 == "Fortnightly") {
+                $repeatingHours2 = 336;
+            } else if ($repeatingHours2 == "Monthly") {
+                $repeatingHours2 = 730;
+            } else if ($repeatingHours2 == "Yearly") {
+                $repeatingHours2 = 8760;
+            }
+//            debug($repeatingHours2);
+//            debug($repeatingTimes2);
+
+            for ($r = 0; $r < $repeatingTimes2; $r++) {
+                $newStartDate = date('Y-m-d h:i:s', strtotime($eventData[$i]['CalendarEvent']['start']) + $repeatingHours2 * 3600 * $r);
+                $newEndDate = date('Y-m-d h:i:s', strtotime($eventData[$i]['CalendarEvent']['end']) + $repeatingHours2 * 3600 * $r);
                 $calendarEvent .= "\n{\n";
                 $calendarEvent .= "title:'" . $eventData[$i]['CalendarEvent']['title'] . "',\n";
-                $calendarEvent .= "start:'" . $eventData[$i]['CalendarEvent']['start'] . "',\n";
-                $calendarEvent .= "end:'" . $eventData[$i]['CalendarEvent']['end'] . "',\n";
+                $calendarEvent .= "start:'" . $newStartDate . "',\n";
+                $calendarEvent .= "end:'" . $newEndDate . "',\n";
                 $calendarEvent .= "allDay:" . $status . ",\n";
                 $calendarEvent .= "url:'" . $this->webroot . "calendarEvents/edit/" . $eventData[$i]['CalendarEvent']['id'] . "'";
-                if ($i != (count($eventData) - 1)) {
-                    $calendarEvent .= "\n},\n";
-                } else {
-                    $calendarEvent .= "\n}\n";
-                }
-            } else {
-                $repeatingWeeks = 54;
-                for ($j = 0; $j < $repeatingWeeks; $j++) {
-                    $newStartDate = date('Y-m-d h:i:s', strtotime($eventData[$i]['CalendarEvent']['start']) + 7 * 24 * 3600 * $j);
-                    $newEndDate = date('Y-m-d h:i:s', strtotime($eventData[$i]['CalendarEvent']['end']) + 7 * 24 * 3600 * $j);
-                    $calendarEvent .= "\n{\n";
-                    $calendarEvent .= "title:'" . $eventData[$i]['CalendarEvent']['title'] . "',\n";
-                    $calendarEvent .= "start:'" . $newStartDate . "',\n";
-                    $calendarEvent .= "end:'" . $newEndDate . "',\n";
-                    $calendarEvent .= "allDay:" . $status . ",\n";
-                    $calendarEvent .= "url:'" . $this->webroot . "calendarEvents/edit/" . $eventData[$i]['CalendarEvent']['id'] . "'";
 //            if ($i != ($repeatingWeeks - 1)) {
-                    $calendarEvent .= "\n},\n";
+                $calendarEvent .= "\n},\n";
 //            } else {
 //                 $calendarEvent .= "\n}\n";
 //            }
-                }
+//                }
             }
+//            debug($calendarEvent);
         }
 
         $appointmentEvent = "";

@@ -454,7 +454,8 @@ class PDFController extends AppController {
                 $end = date('d-m-Y', strtotime($end));
                 $pdf->Cell(180, 10, "Patient Name: " . $userData[0]['User']['firstName'] . " " . $userData[0]['User']['lastName'], 0, 1);
                 $pdf->Cell(180, 10, "Phone Number: " . $userData[0]['User']['phone'], 0, 1);
-                $pdf->Cell(180, 10, "Date of Birth: " . $userData[0]['User']['dob'], 0, 1);
+                $dob = date('d-m-Y', strtotime($userData[0]['User']['dob']));
+                $pdf->Cell(180, 10, "Date of Birth: " . $dob, 0, 1);
                 $pdf->Cell(180, 10, "Date: Between " . $start . " and " . $end, 0, 1);
                 $pdf->Ln(1);
 //            $pdf->Cell(180, 10, "Number of Days Take medicine: " . $takeMedicineDays . " Days", 0, 1);
@@ -595,7 +596,8 @@ class PDFController extends AppController {
                 $end = date('d-m-Y', strtotime($end));
                 $pdf->Cell(180, 10, "Patient Name: " . $userData[0]['User']['firstName'] . " " . $userData[0]['User']['lastName'], 0, 1);
                 $pdf->Cell(180, 10, "Phone Number: " . $userData[0]['User']['phone'], 0, 1);
-                $pdf->Cell(180, 10, "Date of Birth: " . $userData[0]['User']['dob'], 0, 1);
+                $dob = date('d-m-Y', strtotime($userData[0]['User']['dob']));
+                $pdf->Cell(180, 10, "Date of Birth: " . $dob, 0, 1);
                 $pdf->Cell(180, 10, "Date: Between " . $start . " and " . $end, 0, 1);
                 $pdf->Ln(1);
 //                for ($j = 1; $j < 7; $j++) {
@@ -696,7 +698,8 @@ class PDFController extends AppController {
                 $pdf->Cell(180, 10, "Phone Number: " . $userData[0]['User']['phone'], 0, 1);
                 $dob = $this->request->data['User']['dob'];
                 $this->request->data['User']['dob'] = date('d-m-Y', strtotime($date));
-                $pdf->Cell(180, 10, "Date of Birth: " . $userData[0]['User']['dob'], 0, 1);
+                $dob = date('d-m-Y', strtotime($userData[0]['User']['dob']));
+                $pdf->Cell(180, 10, "Date of Birth: " . $dob, 0, 1);
                 $pdf->Cell(180, 10, "Date: Between " . $start . " and " . $end, 0, 1);
                 $pdf->Ln(1);
 
@@ -782,7 +785,8 @@ class PDFController extends AppController {
                 $pdf->SetFont('Arial', '', 12);
                 $pdf->Cell(180, 10, "Patient Name: " . $userData[0]['User']['firstName'] . " " . $userData[0]['User']['lastName'], 0, 1);
                 $pdf->Cell(180, 10, "Phone Number: " . $userData[0]['User']['phone'], 0, 1);
-                $pdf->Cell(180, 10, "Date of Birth: " . $userData[0]['User']['dob'], 0, 1);
+                $dob = date('d-m-Y', strtotime($userData[0]['User']['dob']));
+                $pdf->Cell(180, 10, "Date of Birth: " . $dob, 0, 1);
                 $PDFTableHeader = array('Medication Name', 'Strength', 'DOSE', 'Frequency', 'Medicine Commence Time');
 
                 $pdf->BasicTable($PDFTableHeader, $PDFTableData, 52);

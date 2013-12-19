@@ -27,7 +27,8 @@ echo $this->Html->script('jquery-ui-timepicker-addon.js');
                     echo $this->Form->input('description', array('id' => 'description'));
                     echo $this->Form->input('start', array('id' => 'dateTimePickerStart', 'type' => 'text'));
                     echo $this->Form->input('end', array('id' => 'dateTimePickerEnd', 'type' => 'text'));
-                    echo $this->Form->input('allDay');
+//                    echo $this->Form2->input('frequency');
+//                    echo $this->Form->input('allDay');
                     ?>
                     <!--        <h3>Invitation send to: </h3>-->
                     <?php

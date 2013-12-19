@@ -23,8 +23,8 @@ echo $this->Html->script('jquery-ui-timepicker-addon.js');
         echo $this->Form2->input('strengthEachPill');
         echo $this->Form2->input('doseEachTime');
         echo $this->Form2->input('frequency');
+        echo $this->Form2->input('repeatTimes', array('label' => 'Repeat for how many times?', 'min' => 1));
         echo $this->Form2->input('start', array('id' => 'dateTimePickerStart', 'type' => 'text'));
-        echo $this->Form2->input('repeatTimes');
         ?>
     </fieldset>
     <?php echo $this->Form2->end(__('Submit')); ?>
