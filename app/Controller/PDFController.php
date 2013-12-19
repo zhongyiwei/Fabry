@@ -676,7 +676,7 @@ class PDFController extends AppController {
 
                 $numberDays = $timeDiff / 86400;  // 86400 seconds in one day
 // and you might want to convert to integer
-                $numberDays = intval($numberDays)+1;
+                $numberDays = intval($numberDays) + 1;
 
                 $this->response->type('pdf');
 
@@ -694,6 +694,8 @@ class PDFController extends AppController {
                 $end = date('d-m-Y', strtotime($end));
                 $pdf->Cell(180, 10, "Patient Name: " . $userData[0]['User']['firstName'] . " " . $userData[0]['User']['lastName'], 0, 1);
                 $pdf->Cell(180, 10, "Phone Number: " . $userData[0]['User']['phone'], 0, 1);
+                $dob = $this->request->data['User']['dob'];
+                $this->request->data['User']['dob'] = date('d-m-Y', strtotime($date));
                 $pdf->Cell(180, 10, "Date of Birth: " . $userData[0]['User']['dob'], 0, 1);
                 $pdf->Cell(180, 10, "Date: Between " . $start . " and " . $end, 0, 1);
                 $pdf->Ln(1);

@@ -11,18 +11,18 @@ echo $this->Html->script('jquery-ui-timepicker-addon.js');
     <h3><?php echo __('Actions'); ?></h3>
     <ul>
 
-        <li><?php echo $this->Html->link(__('Back'), array('action' => 'index')); ?></li>
+        <li><?php echo $this->Html->link(__('Back to List'), array('action' => 'index')); ?></li>
     </ul>
 </div>
 <div class="pains form">
     <?php echo $this->Form->create('Pain', array('novalidate' => true)); ?>
     <fieldset>
-        <legend><?php echo __('Add Pain Record'); ?></legend>
+        <legend><?php echo __('Add Pain Entry'); ?></legend>
         <?php
-        echo $this->Form2->input('Pain.date', array('id' => 'dateTimePickerStart', 'type' => 'text'));
+        echo $this->Form2->input('Pain.date', array('id' => 'datePickerStart', 'type' => 'text'));
         echo $this->Form->input('painLevel', array('min' => 0, 'max' => 10));
         echo $this->Form->input('medication');
-        echo $this->Form->input('illness');
+        echo $this->Form->input('illness',array('label'=>'Symptons'));
         echo "<h3>Medication Taken</h3>";
         echo $this->Form->select('medications', $medicationName, array(
             'multiple' => 'checkbox'
@@ -33,5 +33,5 @@ echo $this->Html->script('jquery-ui-timepicker-addon.js');
 </div>
 
 <script type="text/javascript">
-    $('#dateTimePickerStart').datepicker({ dateFormat: 'dd-mm-yy' }).val()
+    $('#datePickerStart').datepicker({dateFormat: 'dd-mm-yy'}).val()
 </script>
