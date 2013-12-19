@@ -1,7 +1,7 @@
 <div class="actions">
     <h3><?php echo __('Actions'); ?></h3>
     <ul>
-        <li><?php echo $this->Html->link(__('New Entry'), array('action' => 'add')); ?></li>
+        <li><?php echo $this->Html->link(__('New Entry'), array('action' => 'add?redirect=index')); ?></li>
         <li><?php echo $this->Html->link(__('Generate Medication Report'), array('controller' => 'PDF', 'action' => 'medicationReport/I')); ?> </li>
     </ul>
 </div>
