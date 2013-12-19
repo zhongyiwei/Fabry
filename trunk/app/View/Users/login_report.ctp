@@ -10,10 +10,12 @@ echo $this->Html->css('jquery.dataTables.css');
     <table cellpadding="0" cellspacing="0" id="js-datatable">
         <thead>
             <tr>
+                <th>Last Login</th>
                 <th>User Name</th>
+                <th>Full Name</th>
                 <th>Role</th>
                 <th>Email</th>
-                <th>Phone</th>
+                
                 
                 <th>Actions</th>
             </tr>
@@ -21,10 +23,12 @@ echo $this->Html->css('jquery.dataTables.css');
         <tbody>
             <?php foreach ($users as $user): ?>
                 <tr>
+                    <td><?php echo h($user['User']['lastLogin']); ?>&nbsp;</td> 
                     <td><?php echo h($user['User']['username']); ?>&nbsp;</td>
+                    <td><?php echo h($user['User']['firstName'].$user['User']['lastName']); ?>&nbsp;</td>
                     <td><?php echo h($user['User']['role']); ?>&nbsp;</td>
                     <td><?php echo h($user['User']['email']); ?>&nbsp;</td>
-                    <td><?php echo h($user['User']['phone']); ?>&nbsp;</td> 
+                    
                     
                     <td  class="actions"><?php echo $this->Html->link(__('View'), array('action' => 'view', $user['User']['id'])); ?>
                         <?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $user['User']['id'])); ?>
