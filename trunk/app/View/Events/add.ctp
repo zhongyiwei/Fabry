@@ -23,7 +23,7 @@ echo $this->Html->script('jquery-ui-timepicker-addon.js');
                 <fieldset>
                     <legend><?php echo __('Add Event'); ?></legend>
                     <?php
-                    echo $this->Form->input('title');
+                    echo $this->Form->input('title',array('label'=>'Subject'));
                     echo $this->Form->input('description', array('id' => 'description'));
                     echo $this->Form->input('start', array('id' => 'dateTimePickerStart', 'type' => 'text'));
                     echo $this->Form->input('end', array('id' => 'dateTimePickerEnd', 'type' => 'text'));
@@ -44,7 +44,7 @@ echo $this->Html->script('jquery-ui-timepicker-addon.js');
         </td>
         <td>
             <div>
-                <h3>Click to Choose templates below: </h3>
+                <h3>Click to Choose From Templates: </h3>
                 <?php
                 for ($i = 0; $i < count($templates); $i++) {
                     echo "<div class='templateTitle' onclick='changeContent(" . $i . ")'>" . $templates[$i]['Template']['title'] . "</div>";

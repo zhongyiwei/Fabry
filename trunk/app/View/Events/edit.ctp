@@ -12,7 +12,7 @@ echo $this->Html->script('jquery-ui-timepicker-addon.js');
     <ul>
 
         <li><?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $this->Form->value('Event.id')), null, __('Are you sure you want to delete the event that starts on the ' . $this->Form->value('Event.start') . '?', $this->Form->value('Event.id'))); ?></li>
-        <li><?php echo $this->Html->link(__('List Events'), array('action' => 'index')); ?></li>
+        <li><?php echo $this->Html->link(__('Back to List'), array('action' => 'index')); ?></li>
     </ul>
 </div>
 <?php echo $this->Session->flash(); ?>
@@ -22,7 +22,7 @@ echo $this->Html->script('jquery-ui-timepicker-addon.js');
         <legend><?php echo __('Edit Event'); ?></legend>
         <?php
         echo $this->Form->input('id');
-        echo $this->Form->input('title');
+        echo $this->Form->input('title',array('label'=>'Subject'));
         echo $this->Form->input('description');
         echo $this->Form->input('start', array('id' => 'dateTimePickerStart', 'type' => 'text'));
         echo $this->Form->input('end', array('id' => 'dateTimePickerEnd', 'type' => 'text'));

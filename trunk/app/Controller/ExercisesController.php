@@ -120,9 +120,9 @@ class ExercisesController extends AppController {
         }
         $this->request->onlyAllow('post', 'delete');
         if ($this->Exercise->delete()) {
-            $this->Session->setFlash(__('The exercise has been deleted.'), 'default', array(), 'good');
+            $this->Session->setFlash(__('The exercise entry has been deleted.'), 'default', array(), 'good');
         } else {
-            $this->Session->setFlash(__('The exercise could not be deleted. Please, try again.'), 'default', array(), 'bad');
+            $this->Session->setFlash(__('The exercise entry could not be deleted. Please, try again.'), 'default', array(), 'bad');
         }
         return $this->redirect(array('action' => 'index'));
     }
