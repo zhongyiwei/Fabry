@@ -5,7 +5,7 @@
     <div class="actions">
 
         <ul>
-            <li><?php echo $this->Html->link(__('New Appointment'), array('action' => 'add')); ?></li>
+            <li><?php echo $this->Html->link(__('New Appointment'), array('action' => 'add?redirect=index')); ?></li>
         </ul>
     </div>
 
@@ -29,7 +29,7 @@
                      * Elisha
                      * date is already speparated to date and time int the controller, so just use it like below
                      */
-                    $start = date('Y-m-d G:i', strtotime($appointment['Appointment']['date']));
+                    $start = date('d-m-Y H:i', strtotime($appointment['Appointment']['date']));
                     ?>
 
                     <td>
