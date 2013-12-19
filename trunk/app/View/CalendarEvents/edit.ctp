@@ -65,6 +65,15 @@ echo $this->Html->script('jquery-ui-timepicker-addon.js');
             minute = "0" + minute;
         }
 
+        if (d.toString().length < 2) {
+            d = "0" + d;
+        }
+
+        if (m.toString().length < 2) {
+            m = "0" + m;
+        }
+
+
         $("#dateTimePickerStart").val(d + "-" + m + "-" + y + " " + hour + ":" + minute);
 
         var formattedDate = new Date($('#dateTimePickerEnd').val());
@@ -83,6 +92,14 @@ echo $this->Html->script('jquery-ui-timepicker-addon.js');
 
         if (minute.toString().length < 2) {
             minute = "0" + minute;
+        }
+
+        if (d.toString().length < 2) {
+            d = "0" + d;
+        }
+
+        if (m.toString().length < 2) {
+            m = "0" + m;
         }
 
         $("#dateTimePickerEnd").val(d + "-" + m + "-" + y + " " + hour + ":" + minute);
