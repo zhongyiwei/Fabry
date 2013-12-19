@@ -26,6 +26,28 @@ class PDF extends FPDF {
         }
     }
 
+    function BasicTableForBowel($header, $data, $h) {
+// Header
+
+        for ($i = 0; $i < count($header); $i++) {
+            if ($i == 0) {
+                $this->Cell(40, $h, "Movement Counts", 1, 0, 'L');
+            } else {
+                $this->Cell(20, $h, $header[$i], 1, 0, 'L');
+            }
+        }
+        $this->Ln();
+
+        for ($i = 0; $i < count($data['Bowel'])+1; $i++) {
+            if ($i == 0) {
+                $this->Cell(40, $h, "Days", 1, 0, 'L');
+            } else {
+                $this->Cell(20, $h, $data['Bowel'][($i)], 1, 0, 'L');
+            }
+        }
+        $this->Ln();
+    }
+
     function BasicTableForPain($header, $data) {
 // Header
 //        foreach ($header as $col)
@@ -68,8 +90,10 @@ class PDF extends FPDF {
                         $this->Cell(6, $h, "", 1, 0, 'L', true);
                     }
                 } else if ($j == 2) {
+                    $this->SetFillColor(255, 255, 255);
                     $this->Cell(60, $h, $data[$i][$j], 1, 0, 'L', true);
                 } else if ($j == 3) {
+                    $this->SetFillColor(255, 255, 255);
                     $this->MultiCell(80, $h, $data[$i][$j], 1, 'L', true);
                 }
             }
@@ -605,8 +629,8 @@ class PDFController extends AppController {
 //                    $pdf->Cell(180, 10, "$j movements per day: " . $Move['Bowel'][$j] . " Days", 0, 1);
 //                }
                 $pdf->Cell(180, 10, "Number of Days having  n movement: ", 0, 1);
-                $movementHeader = array('1 Move', '2 Move', '3 Move', '4 Move', '5 Move', '6 Move');
-                $pdf->BasicTable($movementHeader, $Move, 20);
+                $movementHeader = array('Movement Counts', '1', '2', '3', '4', '5', '6');
+                $pdf->BasicTableForBowel($movementHeader, $Move, 6);
 
                 $pdf->Ln(10);
                 $PDFTableHeader = array('Date', 'Bowel Movement (0 - 6)', 'Comments');
@@ -696,8 +720,6 @@ class PDFController extends AppController {
                 $end = date('d-m-Y', strtotime($end));
                 $pdf->Cell(180, 10, "Patient Name: " . $userData[0]['User']['firstName'] . " " . $userData[0]['User']['lastName'], 0, 1);
                 $pdf->Cell(180, 10, "Phone Number: " . $userData[0]['User']['phone'], 0, 1);
-                $dob = $this->request->data['User']['dob'];
-                $this->request->data['User']['dob'] = date('d-m-Y', strtotime($date));
                 $dob = date('d-m-Y', strtotime($userData[0]['User']['dob']));
                 $pdf->Cell(180, 10, "Date of Birth: " . $dob, 0, 1);
                 $pdf->Cell(180, 10, "Date: Between " . $start . " and " . $end, 0, 1);
@@ -769,7 +791,9 @@ class PDFController extends AppController {
                     $PDFTableData[$i][1] = $medicationData[$i]['Medication']['strengthEachPill'];
                     $PDFTableData[$i][2] = $medicationData[$i]['Medication']['doseEachTime'];
                     $PDFTableData[$i][3] = $medicationData[$i]['Medication']['frequency'];
-                    $PDFTableData[$i][4] = $medicationData[$i]['Medication']['start'];
+
+                    $start = date('d-m-Y H:i', strtotime($medicationData[$i]['Medication']['start']));
+                    $PDFTableData[$i][4] = $start;
                 }
 
                 $this->response->type('pdf');
