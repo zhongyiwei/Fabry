@@ -50,5 +50,24 @@ echo $this->Html->script('jquery-ui-timepicker-addon.js');
             $('#dateTimePickerEnd').show();
         }
     }
+    $(document).ready(function() {
+        var formattedDate = new Date($('#dateTimePickerStart').val());
+        var d = formattedDate.getDate();
+        var m = formattedDate.getMonth();
+        m += 1;  // JavaScript months are 0-11
 
+        var hour = formattedDate.getHours();
+        var minute = formattedDate.getMinutes();
+
+        var y = formattedDate.getFullYear();
+
+        if (d.toString().length < 2) {
+            d = "0" + d;
+        }
+
+        if (m.toString().length < 2) {
+            m = "0" + m;
+        }
+        $("#dateTimePickerStart").val(d + "-" + m + "-" + y);
+    });
 </script>
