@@ -62,6 +62,7 @@ echo $medicationEvent;
         //        var m = date.getMonth();
         //        var y = date.getFullYear();
         $('#calendar').fullCalendar({
+             disableDragging: true,
             //            eventClick: function(calEvent, jsEvent) {
             //                var title = prompt('Event Title:', calEvent.title, {
             //                    buttons: {
@@ -92,6 +93,7 @@ if ($current_user['role'] == "admin") {
 }
 ?>
             },
+                    
             header: {
                 left: 'prev,next today',
                 center: 'title',
