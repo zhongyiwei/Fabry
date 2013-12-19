@@ -24,7 +24,7 @@ echo $this->Html->script('jquery-ui-timepicker-addon.js');
                     <legend><?php echo __('Add Event'); ?></legend>
                     <?php
                     echo $this->Form->input('title');
-                    echo $this->Form->input('description', array('id'=>'description'));
+                    echo $this->Form->input('description', array('id' => 'description'));
                     echo $this->Form->input('start', array('id' => 'dateTimePickerStart', 'type' => 'text'));
                     echo $this->Form->input('end', array('id' => 'dateTimePickerEnd', 'type' => 'text'));
                     echo $this->Form->input('allDay');
@@ -45,9 +45,9 @@ echo $this->Html->script('jquery-ui-timepicker-addon.js');
             <div>
                 <h3>Click to Choose templates below: </h3>
                 <?php
-                for ($i = 0 ; $i<count($templates); $i++){
-                    echo "<div class='templateTitle' onclick='changeContent(".$i.")'>".$templates[$i]['Template']['title']."</div>";
-                    echo "<div class='tempContent' id='temp".$i."'>".$templates[$i]['Template']['content']."</div>";
+                for ($i = 0; $i < count($templates); $i++) {
+                    echo "<div class='templateTitle' onclick='changeContent(" . $i . ")'>" . $templates[$i]['Template']['title'] . "</div>";
+                    echo "<div class='tempContent' id='temp" . $i . "'>" . $templates[$i]['Template']['content'] . "</div>";
                 }
                 ?>
             </div>
@@ -55,11 +55,14 @@ echo $this->Html->script('jquery-ui-timepicker-addon.js');
     </tr>
 </table>
 <script type="text/javascript">
-    $('#dateTimePickerStart').datetimepicker();
-    $('#dateTimePickerEnd').datetimepicker();
-    
-    function changeContent(index){
-        var id = "#temp"+index;
-        $("#description").val( $(id).text());
+    $('#dateTimePickerStart').datetimepicker({dateFormat: 'dd-mm-yy'});
+    $('#dateTimePickerEnd').datetimepicker({dateFormat: 'dd-mm-yy'});
+
+    function changeContent(index) {
+        var id = "#temp" + index;
+        $("#description").val($(id).text());
     }
+//    $(document).ready(function() {
+//
+//    });
 </script>
