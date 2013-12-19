@@ -115,17 +115,17 @@ class EventsController extends AppController {
                         $description = "<div>" . $this->request->data['Event']['description'] . "</div>";
                         $email->subject($title);
 //                        $email->send($InviteStatus . $description);
+
+                        $this->Session->setFlash(__('The event has been saved.'), 'default', array(), 'good');
+                        return $this->redirect(array('action' => 'index'));
                     }
                 }
             } else {
                 $this->Session->setFlash(__('The event could not be saved. Please, try again.'), 'default', array(), 'bad');
             }
-
-            $this->Session->setFlash(__('The event has been saved.'), 'default', array(), 'good');
-            return $this->redirect(array('action' => 'index'));
         }
 
-        $this->set(compact("userName","templates"));
+        $this->set(compact("userName", "templates"));
     }
 
     /**
