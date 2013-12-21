@@ -140,7 +140,7 @@
                             <?php if (($current_user['role'] == 'admin' || $current_user['role'] == 'super' ) && ($contact['Contact']['isOfficial'] == 1)): ?>
 
                                 <?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $contact['Contact']['id'])); ?>
-                                <?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $contact['Contact']['id']), null, __('Are you sure you want to delete  ' . $contact['Contact']['doctor'] . ' ?', $contact['Contact']['id'])); ?>
+                                <?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $contact['Contact']['id']), null, __('Are you sure you want to delete  ' . $contact['Contact']['doctor'] . ' with all related appointment data?', $contact['Contact']['id'])); ?>
 
                             <?php elseif ($current_user['role'] == 'member'): ?>
                                 <?php echo $this->Html->link(__('View'), array('action' => 'view', $contact['Contact']['id'])); ?>
@@ -160,7 +160,7 @@
 
                                 <?php echo $this->Html->link(__('View'), array('action' => 'view', $contact['Contact']['id'])); ?>
                                 <?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $contact['Contact']['id'])); ?>
-                                <?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $contact['Contact']['id']), null, __('Are you sure you want to delete ' . $contact['Contact']['doctor'] . ' from the official list ?', $contact['Contact']['id'])); ?>
+                                <?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $contact['Contact']['id']), null, __('Are you sure you want to delete ' . $contact['Contact']['doctor'] . ' from the official list with all related appointment data (It will not delete customer appointment data)?', $contact['Contact']['id'])); ?>
 
                             <?php elseif ($current_user['role'] == 'member'): ?>
                                 <?php echo $this->Html->link(__('View'), array('action' => 'view', $contact['Contact']['id'])); ?>
