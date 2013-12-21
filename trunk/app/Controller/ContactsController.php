@@ -157,12 +157,22 @@ class ContactsController extends AppController {
     public function delete($id = null) {
         $this->Contact->id = $id;
         $role = $this->current_user['role'];
+        
+        $uId = $this->current_user['id'];
         if (!$this->Contact->exists()) {
             throw new NotFoundException(__('Invalid contact'));
         }
         $this->request->onlyAllow('post', 'delete');
-        if ($this->Contact->delete()) {
+        
+        $appointment = $this->Appointment->find("all", array("conditions"=>array("contacts_id"=>$id,'Appointment.users_id'=>$uId),"fields"=>array('id')));
 
+        foreach ($appointment as $app){
+            $appId[] = $app['Appointment']['id'];
+        }
+//        debug($appId);
+        
+        if ($this->Contact->delete()) {
+            $this->Appointment->deleteAll(array('Appointment.id'=>$appId));
             $this->Session->setFlash(__('The contact has been deleted.'), 'default', array(), 'good');
         } else {
             $this->Session->setFlash(__('The contact could not be deleted. Please, try again.'), 'default', array(), 'bad');
