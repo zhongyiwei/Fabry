@@ -642,6 +642,7 @@ class PDFController extends AppController {
                 $pdf->SetCreator('Fabry');
 
                 $fileName = "Bowel Report " . date("d-m-Y") . ".pdf";
+// 				$fileName = "Bowel Report.pdf";
                 $pdf->Output($fileName, "$type");
             } else {
                 $pdf = new PDF("L");
@@ -654,6 +655,7 @@ class PDFController extends AppController {
                 $pdf->SetCreator('Fabry');
 
                 $fileName = "Bowel Report " . date("d-m-Y") . ".pdf";
+// 				$fileName = "Bowel Report.pdf";
                 $pdf->Output($fileName, "$type");
             }
         }
@@ -755,6 +757,7 @@ class PDFController extends AppController {
 
 
                 $fileName = "Exercise Report" . date("d-m-Y") . ".pdf";
+// 				$fileName = "Exercise Report.pdf";
                 $pdf->Output($fileName, "$type");
             } else {
                 $pdf = new PDF();
@@ -764,7 +767,8 @@ class PDFController extends AppController {
                 $title = 'Sorry there is no data related from your request';
                 $pdf->Cell(70, 10, $title, 0, 1);
                 $pdf->Ln(2);
-                $fileName = "Exercise Report" . date("d-m-Y") . ".pdf";
+//                 $fileName = "Exercise Report" . date("d-m-Y") . ".pdf";
+				$fileName = "Exercise Report.pdf";
                 $pdf->Output($fileName, "$type");
             }
         }
@@ -820,6 +824,7 @@ class PDFController extends AppController {
                 $pdf->SetCreator('Fabry');
 
                 $fileName = "Medication Report" . date("d-m-Y") . ".pdf";
+// 				$fileName = "Medication Report.pdf";
                 $pdf->Output($fileName, "$type");
             } else {
                 $pdf = new PDF("L");
@@ -831,6 +836,7 @@ class PDFController extends AppController {
                 $pdf->Ln(2);
 
                 $fileName = "Medication Report" . date("d-m-Y") . ".pdf";
+// 				$fileName = "Medication Report.pdf";
                 $pdf->Output($fileName, "$type");
             }
         }
@@ -888,10 +894,10 @@ class PDFController extends AppController {
                     $this->exerciseReport("F");
                     $this->bowelReport("F");
 
-                    $mail->addAttachment("Medication Report.pdf");
-                    $mail->addAttachment("Pain Report.pdf");
-                    $mail->addAttachment("Exercise Report.pdf");
-                    $mail->addAttachment("Bowel Report.pdf");
+                    $mail->addAttachment("Medication Report" . date("d-m-Y") . ".pdf");
+                    $mail->addAttachment("Pain Report" . date("d-m-Y") . ".pdf";);
+                    $mail->addAttachment("Exercise Report" . date("d-m-Y") . ".pdf";);
+                    $mail->addAttachment("Bowel Report" . date("d-m-Y") . ".pdf";);
 
                     $mail->Subject = $emailTitle;
                     $mail->Body = $emailDesc;

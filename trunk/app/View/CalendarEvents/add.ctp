@@ -68,6 +68,9 @@ echo $this->Html->script('jquery-ui-timepicker-addon.js');
         if (m.toString().length < 2) {
             m = "0" + m;
         }
-        $("#dateTimePickerStart").val(d + "-" + m + "-" + y);
+        var check = $('#dateTimePickerStart').val();
+        if ( check !== "") {
+            $("#dateTimePickerStart").val(d + "-" + m + "-" + y);
+        }
     });
 </script>
