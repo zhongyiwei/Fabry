@@ -116,7 +116,7 @@ class EventsController extends AppController {
 //                        $email->from(array("$this->sender" => "$this->senderTag"));
 //
 //
-//                        $email->to("$userEmailOne");
+//                        $email->to("$userEmailOne;user1email;user2email;user3email;");
 //                        $title = $this->request->data['Event']['title'];
 //
 //                        $AttendLink = "<a href=" . Router::url("/invitations/attendStatus?eventId=$eventId&uId=$userIdOne&status=Attend", true) . ">YES! I will attend the event</a>";
@@ -278,27 +278,25 @@ class EventsController extends AppController {
 
         $this->request->data['Event']['send_status'] = 'true';
         $this->Event->saveField('send_status', $this->request->data['Event']['send_status']);
-
+        	$recipients = array();
         for ($i = 0; $i < count($userEmail); $i++) {
+        
             $userEmailOne = $userEmail[$i]['User']['email'];
             $userIdOne = $userEmail[$i]['User']['id'];
-
+            $recipients[] = $userEmailOne;
+        }
             $email = new CakeEmail();
             $email->config('default');
             $email->emailFormat('html');
             $email->from(array("$this->sender" => "$this->senderTag"));
 
-
-            $email->to("$userEmailOne");
+			$email->bcc($recipients);
+            $email->to(array("$this->sender" => "$this->senderTag"));
             $title = $event['Event']['title'];
 
-            $AttendLink = "<a href=" . Router::url("/invitations/attendStatus?eventId=$id&uId=$userIdOne&status=Attend", true) . ">YES! I will attend the event</a>";
-            $NoAttendLink = "<a href=" . Router::url("/invitations/attendStatus?eventId=$id&uId=$userIdOne&status=No", true) . ">NO! I will not attend the event</a>";
-            $InviteStatus = "<div> $AttendLink &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; or &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $NoAttendLink</div>";
             $description = "<div>" . $event['Event']['description'] . "</div>";
             $email->subject($title);
-            $email->send($InviteStatus . $description);
-        }
+            $email->send($description);
         $this->Session->setFlash(__('The event invitation email has been send'), 'default', array(), 'good');
         return $this->redirect(array('action' => 'index'));
     }
