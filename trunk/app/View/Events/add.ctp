@@ -26,7 +26,7 @@ echo $this->Html->script('jquery-ui-timepicker-addon.js');
                     if (!empty($this->params['url']['date'])) {
                         $date = $this->params['url']['date'];
                     }
-                    echo $this->Form->input('title',array('label'=>'Subject'));
+                    echo $this->Form->input('title', array('label' => 'Subject'));
                     echo $this->Form->input('description', array('id' => 'description'));
                     if (!empty($this->params['url']['date'])) {
                         echo $this->Form2->input('Event.start', array('id' => 'dateTimePickerStart', 'type' => 'text', 'value' => $date));
@@ -92,7 +92,7 @@ echo $this->Html->script('jquery-ui-timepicker-addon.js');
             m = "0" + m;
         }
         var check = $('#dateTimePickerStart').val();
-        if ( check !== "") {
+        if (check !== "") {
             $("#dateTimePickerStart").val(d + "-" + m + "-" + y);
         }
     });

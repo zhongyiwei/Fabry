@@ -21,9 +21,9 @@
 		</dd>
 		<dt><?php echo __('Description'); ?></dt>
 		<dd>
-			<?php echo h($upload['Upload']['description']); ?>
-			&nbsp;
+			<?php echo mb_strimwidth(h($upload['Upload']['description']), 0, 100, '...')?>&nbsp;</td>
 		</dd>
+		
 		<dt><?php echo __('Filename'); ?></dt>
 		<dd>
 			<?php echo h($upload['Upload']['filename']); ?>

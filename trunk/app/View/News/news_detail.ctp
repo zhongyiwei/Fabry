@@ -1,6 +1,7 @@
-<?php 
-$nt =  $news['News']['news_title'];
-$this->assign('title', "Foodie Trails - $nt"); ?>
+<?php
+$nt = $news['News']['news_title'];
+$this->assign('title', "Foodie Trails - $nt");
+?>
 
 <?php
 //print_r($event);
@@ -10,6 +11,6 @@ $this->assign('title', "Foodie Trails - $nt"); ?>
  */
 ?>
 <h1 class="tourHeader">
-<?php echo $news['News']['news_title']?>
+<?php echo $news['News']['news_title'] ?>
 </h1>
 <?php echo $news['News']['news_description']; ?>

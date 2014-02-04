@@ -23,7 +23,7 @@
 	<tr>
 	
 		<td><?php echo h($upload['Upload']['title']); ?>&nbsp;</td>
-		<td><?php echo h($upload['Upload']['description']); ?>&nbsp;</td>
+		<td><?php echo mb_strimwidth(h($upload['Upload']['description']), 0, 25, '...')?>&nbsp;</td>
 		<td><?php echo h($upload['Upload']['filename']); ?>&nbsp;</td>
 		<td><?php $timestamp = strtotime($upload['Upload']['created']);
 			echo date('d-m-Y', $timestamp);?>

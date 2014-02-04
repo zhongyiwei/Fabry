@@ -98,7 +98,7 @@
                 <tr>
                     <th>Centre Name</th>
                     <th>Doctor</th>
-<!--                    <th>Department</th>-->
+    <!--                    <th>Department</th>-->
                     <th>State</th>
                     <th>Country</th>
                     <th>Phone</th>
@@ -128,7 +128,7 @@
                     <tr>
                         <td><?php echo h($contact['Contact']['centerName']); ?>&nbsp;</td>
                         <td><?php echo h($contact['Contact']['doctor']); ?>&nbsp;</td>
-<!--                        <td><?php // echo h($contact['Contact']['department']); ?>&nbsp;</td>-->
+        <!--                        <td><?php // echo h($contact['Contact']['department']);  ?>&nbsp;</td>-->
                         <td><?php echo h($contact['Contact']['state']); ?>&nbsp;</td>
                         <td><?php echo h($contact['Contact']['country']); ?>&nbsp;</td>
                         <td><?php echo h($contact['Contact']['phone']); ?>&nbsp;</td>
@@ -151,7 +151,7 @@
                     <tr>
                         <td><?php echo h($contact['Contact']['centerName']); ?>&nbsp;</td>
                         <td><?php echo h($contact['Contact']['doctor']); ?>&nbsp;</td>
-<!--                        <td><?php // echo h($contact['Contact']['department']); ?>&nbsp;</td>-->
+        <!--                        <td><?php // echo h($contact['Contact']['department']);  ?>&nbsp;</td>-->
                         <td><?php echo h($contact['Contact']['state']); ?>&nbsp;</td>
                         <td><?php echo h($contact['Contact']['country']); ?>&nbsp;</td>
                         <td><?php echo h($contact['Contact']['phone']); ?>&nbsp;</td>

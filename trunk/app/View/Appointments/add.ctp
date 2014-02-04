@@ -13,9 +13,9 @@ echo $this->Html->script('jquery-ui-timepicker-addon.js');
     <ul>
 
         <!--
-        <li><?php //echo $this->Html->link(__('List Events'), array('action' => 'index'));      ?></li>
+        <li><?php //echo $this->Html->link(__('List Events'), array('action' => 'index'));       ?></li>
         -->
-        <li><?php echo $this->Html->link(__('Back to Calendar'), array('action' => 'calendarEvent', 'controller' => 'calendarevents')); ?></li>
+        <li><?php echo $this->Html->link(__('Back to Calendar'), array('action' => 'calendarEvent', 'controller' => 'calendarEvents')); ?></li>
         <li><?php echo $this->Html->link(__('Back to List'), array('action' => 'index')); ?></li>
     </ul>
 </div>
@@ -62,6 +62,8 @@ echo $this->Html->script('jquery-ui-timepicker-addon.js');
 <script type="text/javascript">
     $('#dateTimePickerStart').datetimepicker({dateFormat: 'dd-mm-yy'});
 
+
+
     $(document).ready(function() {
         var formattedDate = new Date($('#dateTimePickerStart').val());
         var d = formattedDate.getDate();
@@ -80,9 +82,17 @@ echo $this->Html->script('jquery-ui-timepicker-addon.js');
         if (m.toString().length < 2) {
             m = "0" + m;
         }
+
+        if (hour.toString().length < 2) {
+            hour = "0" + hour;
+        }
+
+        if (minute.toString().length < 2) {
+            minute = "0" + minute;
+        }
         var check = $('#dateTimePickerStart').val();
-        if ( check !== "") {
-            $("#dateTimePickerStart").val(d + "-" + m + "-" + y);
+        if (check !== "") {
+            $("#dateTimePickerStart").val(d + "-" + m + "-" + y + " " + hour + ":" + minute);
         }
     });
 </script>

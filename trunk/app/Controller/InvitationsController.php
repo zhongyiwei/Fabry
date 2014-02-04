@@ -54,10 +54,10 @@ class InvitationsController extends AppController {
 
             $this->Invitation->create();
             if ($this->Invitation->save($this->request->data)) {
-                $this->Session->setFlash(__('The invitation has been saved.'));
+                $this->Session->setFlash(__('Thanks, your response to invitation has been saved.'),'default', array(), 'good');
                 return $this->redirect(array('action' => 'eventParticipation'));
             } else {
-                $this->Session->setFlash(__('The invitation could not be saved. Please, try again.'));
+                $this->Session->setFlash(__('The invitation could not be saved. Please, try again.'),'default', array(), 'bad');
             }
         }
 //        $users = $this->Invitation->User->find('list');
@@ -89,14 +89,14 @@ class InvitationsController extends AppController {
         }
         if ($this->request->is(array('post', 'put'))) {
             if ($this->Invitation->save($this->request->data)) {
-                $this->Session->setFlash(__('The invitation has been saved.'));
+                $this->Session->setFlash(__('The invitation has been saved.'),'default', array(), 'good');
 //                if ($this->current_user['role'] == "admin") {
                 return $this->redirect(array('action' => 'index'));
 //                } else {
 //                    return $this->redirect(array('action' => 'eventParticipation'));
 //                }
             } else {
-                $this->Session->setFlash(__('The invitation could not be saved. Please, try again.'));
+                $this->Session->setFlash(__('The invitation could not be saved. Please, try again.'),'default', array(), 'bad');
             }
         } else {
             $options = array('conditions' => array('Invitation.' . $this->Invitation->primaryKey => $id));
@@ -121,9 +121,9 @@ class InvitationsController extends AppController {
         }
         $this->request->onlyAllow('post', 'delete');
         if ($this->Invitation->delete()) {
-            $this->Session->setFlash(__('The invitation has been deleted.'));
+            $this->Session->setFlash(__('The invitation has been deleted.'),'default', array(), 'good');
         } else {
-            $this->Session->setFlash(__('The invitation could not be deleted. Please, try again.'));
+            $this->Session->setFlash(__('The invitation could not be deleted. Please, try again.'),'default', array(), 'bad');
         }
         return $this->redirect(array('action' => 'index'));
     }
@@ -148,7 +148,7 @@ class InvitationsController extends AppController {
 //            return $this->redirect(array('action' => 'index'));
             return $this->redirect(array('controller' => 'calendarEvents', 'action' => "calendarEvent"));
         } else {
-            $this->Session->setFlash(__('The invitation could not be saved. Please, try again.'));
+            $this->Session->setFlash(__('The invitation could not be saved. Please, try again.'),'default', array(), 'bad');
         }
     }
 
@@ -175,10 +175,10 @@ class InvitationsController extends AppController {
         }
         if ($this->request->is(array('post', 'put'))) {
             if ($this->Invitation->save($this->request->data)) {
-                $this->Session->setFlash(__('The invitation has been saved.'));
+                $this->Session->setFlash(__('Thanks, your response to invitation has been updated.'),'default', array(), 'good');
                 return $this->redirect(array('action' => 'eventParticipation'));
             } else {
-                $this->Session->setFlash(__('The invitation could not be saved. Please, try again.'));
+                $this->Session->setFlash(__('The invitation could not be saved. Please, try again.'),'default', array(), 'bad');
             }
         } else {
             $options = array('conditions' => array('Invitation.' . $this->Invitation->primaryKey => $id));

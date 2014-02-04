@@ -19,8 +19,14 @@ echo $this->Html->script('ckfinder/ckfinder');
                     <legend><?php echo __('Create Newsletter Email'); ?></legend>
                     <?php
 //        $publishStatus = array('Private' => 'Private', 'Published' => 'Published');
-                    echo $this->Form->input('news_title', array('label'=>'Subject'));
-                    echo $this->Form->input('news_description', array('id' => 'news_description'));
+                    echo "<big><h4>Click to Choose email templates</h4></big>";
+
+                    for ($i = 0; $i < count($templates); $i++) {
+                        echo "<u><div class='templateTitle' onclick='changeContent(" . $i . ")'>" . $templates[$i]['Template']['title'] . "</div></u>";
+                        echo "<div class='tempContent' id='temp" . $i . "'>" . $templates[$i]['Template']['content'] . "</div>";
+                    }
+                    echo $this->Form->input('news_title', array('label' => 'Subject'));
+                    echo $this->Form->input('news_description', array('id' => 'news_description', 'label' => 'Content of Invitation Email'));
 //        echo $this->Form->input('publish_status', array('options' => $publishStatus, 'default' => 'Private'));
                     //echo $this->Form->input('User');
                     echo $this->Form->input('pdf_name', array('id' => 'xFilePath', 'class' => 'ckeditor', 'style' => 'width:500px', 'label' => 'Browse for PDF file (double click to select)'));
@@ -30,23 +36,13 @@ echo $this->Html->script('ckfinder/ckfinder');
                 <?php echo $this->Form->end(__('Submit')); ?>
             </div>
         </td>
-        <td>
-            <div>
-                <h3>Click to Choose templates below: </h3>
-                <?php
-                for ($i = 0; $i < count($templates); $i++) {
-                    echo "<div class='templateTitle' onclick='changeContent(" . $i . ")'>" . $templates[$i]['Template']['title'] . "</div>";
-                    echo "<div class='tempContent' id='temp" . $i . "'>" . $templates[$i]['Template']['content'] . "</div>";
-                }
-                ?>
-            </div>
-        </td>
+
     </tr>
 </table>
 
 <script type="text/javascript">
 //    var ck_newsContent = CKEDITOR.replace( 'news_description',{
-//        filebrowserBrowseUrl : '<?php // echo $pathForFinder   ?>/js/ckfinder/ckfinder.html',
+//        filebrowserBrowseUrl : '<?php // echo $pathForFinder    ?>/js/ckfinder/ckfinder.html',
 //        filebrowserWindowWidth : '600',
 //        filebrowserWindowHeight : '300'
 //    } ); 

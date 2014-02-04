@@ -67,15 +67,15 @@
 
  */ ?>
 <div class="actions">
-        <ul>
-            <li><?php echo $this->Html->link(__('New Personal Contact'), array('action' => 'add?redirect=add')); ?></li>
-        </ul>
-    </div>
+    <ul>
+        <li><?php echo $this->Html->link(__('New Personal Contact'), array('action' => 'add?redirect=add')); ?></li>
+    </ul>
+</div>
 <div class="contacts index">
 
     <h2><?php echo __('Personal Contacts'); ?></h2>
 
-    
+
 
 
     <table cellpadding="0" cellspacing="0" id="js-datatable">
@@ -135,7 +135,7 @@
                         <td><?php echo h($contact['Contact']['doctor']); ?>&nbsp;</td>
                         <!-- <td><?php echo h($contact['Contact']['department']); ?>&nbsp;</td> -->
                         <!-- <td><?php echo h($contact['Contact']['state']); ?>&nbsp;</td> -->
-                        <td><?php echo h($contact['Contact']['address']).","."&nbsp".h($contact['Contact']['suburb']); ?>&nbsp;</td>
+                        <td><?php echo h($contact['Contact']['address']) . "," . "&nbsp" . h($contact['Contact']['suburb']); ?>&nbsp;</td>
                         <td><?php echo h($contact['Contact']['phone']); ?>&nbsp;</td>
                         <td class="actions">
                             <?php if ($current_user['role'] == 'admin'): ?>   <?php // only admin could edit and delete contacts, member could only view ?>

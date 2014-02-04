@@ -21,13 +21,14 @@
         <tbody>
             <?php foreach ($bowels as $bowel): ?>
                 <tr>
-                    <td><?php $timestamp = strtotime($bowel['Bowel']['date']);
-            echo date('d-m-Y', $timestamp)
-                ?>&nbsp;</td>
+                    <td><?php
+                        $timestamp = strtotime($bowel['Bowel']['date']);
+                        echo date('d-m-Y', $timestamp)
+                        ?>&nbsp;</td>
                     <td><?php echo h($bowel['Bowel']['count']); ?>&nbsp;</td>
                     <td><?php echo h($bowel['Bowel']['comment']); ?>&nbsp;</td>
     <!--                    <td>
-    <?php // echo $this->Html->link($bowel['Users']['id'], array('controller' => 'users', 'action' => 'view', $bowel['Users']['id']));  ?>
+    <?php // echo $this->Html->link($bowel['Users']['id'], array('controller' => 'users', 'action' => 'view', $bowel['Users']['id']));   ?>
                     </td>-->
                     <td class="actions">
                         <?php echo $this->Html->link(__('View'), array('action' => 'view', $bowel['Bowel']['id'])); ?>

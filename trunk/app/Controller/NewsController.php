@@ -47,10 +47,10 @@ class NewsController extends AppController {
             $this->News->create();
             $this->request->data['News']['send_status'] = 'false';
             if ($this->News->save($this->request->data)) {
-                $this->Session->setFlash(__('The news has been saved'));
+                $this->Session->setFlash(__('The news has been saved'),'default', array(), 'good');
                 $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash(__('The news could not be saved. Please, try again.'), 'failure-message');
+                $this->Session->setFlash(__('The news could not be saved. Please, try again.'), 'default', array(), 'bad');
             }
         }
         $this->set(compact('users','templates'));
@@ -70,10 +70,10 @@ class NewsController extends AppController {
         }
         if ($this->request->is('post') || $this->request->is('put')) {
             if ($this->News->save($this->request->data)) {
-                $this->Session->setFlash(__('The news has been saved'));
+                $this->Session->setFlash(__('The news has been saved'),'default', array(), 'good');
                 $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash(__('The news could not be saved. Please, try again.'), 'failure-message');
+                $this->Session->setFlash(__('The news could not be saved. Please, try again.'), 'default', array(), 'bad');
             }
         } else {
             $this->request->data = $this->News->read(null, $id);
@@ -101,7 +101,7 @@ class NewsController extends AppController {
             $this->Session->setFlash(__('News deleted'));
             $this->redirect(array('action' => 'index'));
         }
-        $this->Session->setFlash(__('News was not deleted'), 'failure-message');
+        $this->Session->setFlash(__('News was not deleted'), 'default', array(), 'bad');
         $this->redirect(array('action' => 'index'));
     }
 

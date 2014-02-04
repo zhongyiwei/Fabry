@@ -7,6 +7,28 @@ echo $this->Html->script('jquery.ui.slider.js');
 echo $this->Html->script('jquery.ui.datepicker.js');
 echo $this->Html->script('jquery-ui-timepicker-addon.js');
 ?>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+
+        //limit count value to only integer
+        $('#count').keypress(function(key) {
+            if (key.charCode < 48 || key.charCode > 57)
+                return false;
+        });
+
+        $('#count').keyup(function() {
+            //limit count value to between 0 and 10
+            var thisVal = parseInt($(this).val(), 7);
+            if (!isNaN(thisVal)) {
+                thisVal = Math.max(0, Math.min(6, thisVal));
+                $(this).val(thisVal);
+            }
+        });
+    });
+</script>
+
+
 <?php echo $this->Session->flash(); ?>
 <div class="actions">
     <h3><?php echo __('Actions'); ?></h3>
@@ -16,19 +38,20 @@ echo $this->Html->script('jquery-ui-timepicker-addon.js');
     </ul>
 </div>
 <div class="bowels form">
-    <?php echo $this->Form->create('Bowel', array('novalidate' => true)); ?>
+<?php echo $this->Form->create('Bowel', array('novalidate' => true)); ?>
     <fieldset>
         <legend><?php echo __('Add Bowel Movement Entry'); ?></legend>
         <?php
         echo $this->Form2->input('Bowel.date', array('id' => 'datePickerStart', 'type' => 'text'));
-        echo $this->Form->input('count', array('min' => 0, 'max' => 6));
+        echo $this->Form->input('count', array('id' => 'count', 'label' => 'Count (on scale of 0-6)', 'min' => 0, 'max' => 6));
         echo $this->Form->input('comment');
         ?>
     </fieldset>
-    <?php echo $this->Form->end(__('Submit')); ?>
+<?php echo $this->Form->end(__('Submit')); ?>
 </div>
 
 
 <script type="text/javascript">
-    $('#datePickerStart').datepicker({dateFormat: 'dd-mm-yy'}).val()
+    $('#datePickerStart').datepicker({dateFormat: 'dd-mm-yy'}).val();
+    $( ".selector" ).datepicker({ defaultDate: NULL });
 </script>

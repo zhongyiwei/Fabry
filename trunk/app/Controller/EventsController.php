@@ -126,12 +126,12 @@ class EventsController extends AppController {
 //                        $email->subject($title);
 //                        $email->send($InviteStatus . $description);
 
-                        $this->Session->setFlash(__('The event invitation has been saved.'), 'default', array(), 'good');
+                        $this->Session->setFlash(__('The event has been saved.'), 'default', array(), 'good');
                         return $this->redirect(array('action' => 'index'));
 //                    }
                     }
                 } else {
-                    $this->Session->setFlash(__('The event invitation could not be saved. Please, try again.'), 'default', array(), 'bad');
+                    $this->Session->setFlash(__('The event could not be saved. Please, try again.'), 'default', array(), 'bad');
                 }
             } else {
                 $this->Session->setFlash(__('The start date should be earlier than end date, please choose again.'));
@@ -208,13 +208,13 @@ class EventsController extends AppController {
                     }
 
 //            if ($this->Event->save($this->request->data)) {
-//                $this->Session->setFlash(__('The event has been saved.'), 'default', array(), 'good');
+                $this->Session->setFlash(__('The event has been saved.'), 'default', array(), 'good');
                     return $this->redirect(array('action' => 'index'));
                 } else {
                     $this->Session->setFlash(__('The event could not be saved. Please, try again.'), 'default', array(), 'bad');
                 }
             } else {
-                $this->Session->setFlash(__('The start date should be earlier than end date, please choose again.'));
+                $this->Session->setFlash(__('The start date should be earlier than end date, please choose again.'),'default', array(), 'bad');
             }
         } else {
             $options = array('conditions' => array('Event.' . $this->Event->primaryKey => $id));
@@ -264,7 +264,7 @@ class EventsController extends AppController {
         }
 
         if ($this->Event->delete()) {
-            $this->Session->setFlash(__('The event has been cancelled and cancallation email has been sent.'), 'default', array(), 'good');
+            $this->Session->setFlash(__('The event has been cancelled and cancellation emails have been sent.'), 'default', array(), 'good');
         } else {
             $this->Session->setFlash(__('The event could not be cancalled. Please, try again.'), 'default', array(), 'bad');
         }
@@ -297,7 +297,7 @@ class EventsController extends AppController {
             $description = "<div>" . $event['Event']['description'] . "</div>";
             $email->subject($title);
             $email->send($description);
-        $this->Session->setFlash(__('The event invitation email has been send'), 'default', array(), 'good');
+        $this->Session->setFlash(__('The event invitations email have been sent'), 'default', array(), 'good');
         return $this->redirect(array('action' => 'index'));
     }
 

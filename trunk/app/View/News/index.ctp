@@ -1,10 +1,10 @@
 <?php echo $this->Session->flash(); ?>
 <div class="actions">
-        <h3><?php echo __('Actions'); ?></h3>
-        <ul>
-            <li><?php echo $this->Html->link(__('New Newsletter Email'), array('action' => 'add')); ?></li>
-        </ul>
-    </div
+    <h3><?php echo __('Actions'); ?></h3>
+    <ul>
+        <li><?php echo $this->Html->link(__('New Newsletter Email'), array('action' => 'add')); ?></li>
+    </ul>
+</div
 
 <div class="news index">
     <table cellpadding="0" cellspacing="0" id="js-datatable">
@@ -25,7 +25,7 @@
                     <td class="actions">
                         <?php echo $this->Html->link(__('View'), array('action' => 'view', $news['News']['id'])); ?>
                         <?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $news['News']['id'])); ?>
-                        <?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $news['News']['id']), null, __('Are you sure you want to delete the newsletter "'.$news['News']['news_title'].'"?')); ?>
+                        <?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $news['News']['id']), null, __('Are you sure you want to delete the newsletter "' . $news['News']['news_title'] . '"?')); ?>
                         <?php
                         if ($news['News']['send_status'] == 'false') {
                             echo $this->Html->link(__('Send to members'), array('action' => 'emailsubscriber', $news['News']['id']), null, __('Sending email will take some time due to large amount of subscribers, are you sure you want to proceed?'));

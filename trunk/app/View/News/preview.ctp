@@ -6,7 +6,7 @@
  */
 ?>
 <h1 class="tourHeader">
-<?php echo $news['News']['news_title']?>
+    <?php echo $news['News']['news_title'] ?>
 </h1>
 <?php echo $news['News']['news_description']; ?>
 

@@ -22,7 +22,7 @@ echo $this->Html->script('jquery-ui-timepicker-addon.js');
         <legend><?php echo __('Edit Event'); ?></legend>
         <?php
         echo $this->Form->input('id');
-        echo $this->Form->input('title',array('label'=>'Subject'));
+        echo $this->Form->input('title', array('label' => 'Subject'));
         echo $this->Form->input('description');
         echo $this->Form->input('start', array('id' => 'dateTimePickerStart', 'type' => 'text'));
         echo $this->Form->input('end', array('id' => 'dateTimePickerEnd', 'type' => 'text'));

@@ -38,7 +38,7 @@ class PainsController extends AppController {
      */
     public function view($id = null) {
         if (!$this->Pain->exists($id)) {
-            throw new NotFoundException(__('Invalid pain'));
+            throw new NotFoundException(__('Invalid pain entry'));
         }
         $options = array('conditions' => array('Pain.' . $this->Pain->primaryKey => $id));
         $this->set('pain', $this->Pain->find('first', $options));
@@ -84,7 +84,7 @@ class PainsController extends AppController {
                     $this->Session->setFlash(__('The pain entry could not be saved. Please, try again.'), 'default', array(), 'bad');
                 }
             } else {
-                $this->Session->setFlash(__('Please ensure you have chosen at least one medicine from the medication chart and you do not have a record at same day .'), 'default', array(), 'bad');
+                $this->Session->setFlash(__('Please ensure you have chosen at least one medicine from the medication chart'), 'default', array(), 'bad');
             }
         }
         $this->set(compact("medicationName"));
@@ -101,7 +101,7 @@ class PainsController extends AppController {
      */
     public function edit($id = null) {
         if (!$this->Pain->exists($id)) {
-            throw new NotFoundException(__('Invalid pain'));
+            throw new NotFoundException(__('Invalid pain entry'));
         }
 
         $medicationName = $this->Medication->find("list", array('fields' => array('id', 'medicationName')));
@@ -123,7 +123,7 @@ class PainsController extends AppController {
 //
 //                $this->PainMedi->saveMany($data);
 
-                $this->Session->setFlash(__('The pain has been saved.'), 'default', array(), 'good');
+                $this->Session->setFlash(__('The pain entry has been updated.'), 'default', array(), 'good');
                 return $this->redirect(array('action' => 'index'));
             } else {
                 $this->Session->setFlash(__('The pain data could not be saved. Please, try again.'), 'default', array(), 'bad');
