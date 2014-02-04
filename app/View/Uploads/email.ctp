@@ -2,6 +2,7 @@
 <?php echo $this->Form->create('Upload');?>
   <fieldset>
   <legend><?php echo('Enter Email Details'); ?></legend>
+  <h3 style="color:#f00;"><?php echo "*Mandatory Fields"; ?></h3>
 	 
   <?php
   echo $this->Form->input('emailto', array('label'=>'Email Address'));;

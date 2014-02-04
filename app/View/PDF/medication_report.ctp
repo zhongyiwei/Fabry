@@ -8,17 +8,17 @@ echo $this->Html->script('jquery.ui.datepicker.js');
 echo $this->Html->script('jquery-ui-timepicker-addon.js');
 ?>
 <div class="mediReport form">
-    <?php echo $this->Form->create('Report',array('url'=>'medicationReport/I')); ?>
+    <?php echo $this->Form->create('Report', array('url' => 'medicationReport/I')); ?>
     <fieldset>
         <legend><?php echo __('Create Medication Report'); ?></legend>
         <?php
-        echo $this->Form->input('start', array('id' => 'dateTimePickerStart','type'=>'text'));
-        echo $this->Form->input('end', array('id' => 'dateTimePickerEnd','type'=>'text'));
+        echo $this->Form->input('start', array('id' => 'dateTimePickerStart', 'type' => 'text'));
+        echo $this->Form->input('end', array('id' => 'dateTimePickerEnd', 'type' => 'text'));
         ?>
     </fieldset>
     <?php echo $this->Form->end(__('Generate')); ?>
 </div>
 <script type="text/javascript">
-    $('#dateTimePickerStart').datepicker({ dateFormat: 'dd-mm-yy' }).val()
-    $('#dateTimePickerEnd').datepicker({ dateFormat: 'dd-mm-yy' }).val()
+    $('#dateTimePickerStart').datepicker({dateFormat: 'dd-mm-yy'}).val()
+    $('#dateTimePickerEnd').datepicker({dateFormat: 'dd-mm-yy'}).val()
 </script>

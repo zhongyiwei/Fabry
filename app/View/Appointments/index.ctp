@@ -1,4 +1,18 @@
 <?php echo $this->Session->flash(); ?>
+<script type="text/javascript" charset="utf-8">
+    $(document).ready(function() {
+        $('#js-datatable').dataTable({
+            "aaSorting": [[0, "desc"]],
+            "aoColumns": [
+                /*   id  */  {"bSearchable": false,
+                    "bVisible": false},
+                /* date */  null,
+                /* contact */ null,
+                /* description */ null,
+                /* actions */ null,
+            ]});
+    });
+</script>
 <div class="events index">
     <h2><?php echo __('Appointments'); ?></h2>
 
@@ -12,6 +26,7 @@
     <table cellpadding="0" cellspacing="0" id="js-datatable">
         <thead>
             <tr>
+                <th>ID</th>
                 <th>Date</th>
 <!--                <th>Time</th>-->
                 <th>Contact</th>
@@ -22,7 +37,7 @@
         <tbody>
             <?php foreach ($appointments as $appointment): ?>
                 <tr>
-
+                    <td><?php echo h($appointment['Appointment']['id']); ?>&nbsp;</td>
                     <?php
                     //$timestamp = strtotime($appointment['Appointment']['date']); echo date('d-m-Y H:i:s', $timestamp);
                     /*
@@ -36,9 +51,9 @@
                         <?php echo h($start); ?>
                     </td>
 
-    <!--                    <td>
+        <!--                    <td>
                     <?php // echo h($appointment['Appointment']['time']); ?>
-                        </td>	-->
+                            </td>	-->
 
                     <td><?php echo h($appointment['Contact']['doctor']); ?>&nbsp;</td>
                     <td><?php echo h($appointment['Appointment']['description']); ?>&nbsp;</td>

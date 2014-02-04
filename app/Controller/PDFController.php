@@ -11,6 +11,7 @@ class PDF extends FPDF {
     var $I;
     var $U;
     var $HREF;
+    var $reports;
 
 // Simple table
     function BasicTable($header, $data, $width) {
@@ -38,7 +39,7 @@ class PDF extends FPDF {
         }
         $this->Ln();
 
-        for ($i = 0; $i < count($data['Bowel'])+1; $i++) {
+        for ($i = 0; $i < count($data['Bowel']) + 1; $i++) {
             if ($i == 0) {
                 $this->Cell(40, $h, "Days", 1, 0, 'L');
             } else {
@@ -478,6 +479,7 @@ class PDFController extends AppController {
                 $end = date('d-m-Y', strtotime($end));
                 $pdf->Cell(180, 10, "Patient Name: " . $userData[0]['User']['firstName'] . " " . $userData[0]['User']['lastName'], 0, 1);
                 $pdf->Cell(180, 10, "Phone Number: " . $userData[0]['User']['phone'], 0, 1);
+                $pdf->Cell(180, 10, "Email Address: " . $userData[0]['User']['email'], 0, 1);
                 $dob = date('d-m-Y', strtotime($userData[0]['User']['dob']));
                 $pdf->Cell(180, 10, "Date of Birth: " . $dob, 0, 1);
                 $pdf->Cell(180, 10, "Date: Between " . $start . " and " . $end, 0, 1);
@@ -619,6 +621,7 @@ class PDFController extends AppController {
                 $start = date('d-m-Y', strtotime($start));
                 $end = date('d-m-Y', strtotime($end));
                 $pdf->Cell(180, 10, "Patient Name: " . $userData[0]['User']['firstName'] . " " . $userData[0]['User']['lastName'], 0, 1);
+                $pdf->Cell(180, 10, "Email Address: " . $userData[0]['User']['email'], 0, 1);
                 $pdf->Cell(180, 10, "Phone Number: " . $userData[0]['User']['phone'], 0, 1);
                 $dob = date('d-m-Y', strtotime($userData[0]['User']['dob']));
                 $pdf->Cell(180, 10, "Date of Birth: " . $dob, 0, 1);
@@ -641,7 +644,7 @@ class PDFController extends AppController {
 //            $this->render('painReport');
                 $pdf->SetCreator('Fabry');
 
-                $fileName = "Bowel Report " . date("d-m-Y") . ".pdf";
+                $fileName = "Bowel Report" . date("d-m-Y") . ".pdf";
 // 				$fileName = "Bowel Report.pdf";
                 $pdf->Output($fileName, "$type");
             } else {
@@ -654,7 +657,7 @@ class PDFController extends AppController {
                 $pdf->Ln(2);
                 $pdf->SetCreator('Fabry');
 
-                $fileName = "Bowel Report " . date("d-m-Y") . ".pdf";
+                $fileName = "Bowel Report" . date("d-m-Y") . ".pdf";
 // 				$fileName = "Bowel Report.pdf";
                 $pdf->Output($fileName, "$type");
             }
@@ -721,6 +724,7 @@ class PDFController extends AppController {
                 $start = date('d-m-Y', strtotime($start));
                 $end = date('d-m-Y', strtotime($end));
                 $pdf->Cell(180, 10, "Patient Name: " . $userData[0]['User']['firstName'] . " " . $userData[0]['User']['lastName'], 0, 1);
+                $pdf->Cell(180, 10, "Email Address: " . $userData[0]['User']['email'], 0, 1);
                 $pdf->Cell(180, 10, "Phone Number: " . $userData[0]['User']['phone'], 0, 1);
                 $dob = date('d-m-Y', strtotime($userData[0]['User']['dob']));
                 $pdf->Cell(180, 10, "Date of Birth: " . $dob, 0, 1);
@@ -767,8 +771,8 @@ class PDFController extends AppController {
                 $title = 'Sorry there is no data related from your request';
                 $pdf->Cell(70, 10, $title, 0, 1);
                 $pdf->Ln(2);
-//                 $fileName = "Exercise Report" . date("d-m-Y") . ".pdf";
-				$fileName = "Exercise Report.pdf";
+                $fileName = "Exercise Report" . date("d-m-Y") . ".pdf";
+                // $fileName = "Exercise Report.pdf";
                 $pdf->Output($fileName, "$type");
             }
         }
@@ -812,6 +816,7 @@ class PDFController extends AppController {
                 $pdf->Ln(2);
                 $pdf->SetFont('Arial', '', 12);
                 $pdf->Cell(180, 10, "Patient Name: " . $userData[0]['User']['firstName'] . " " . $userData[0]['User']['lastName'], 0, 1);
+                $pdf->Cell(180, 10, "Email Address: " . $userData[0]['User']['email'], 0, 1);
                 $pdf->Cell(180, 10, "Phone Number: " . $userData[0]['User']['phone'], 0, 1);
                 $dob = date('d-m-Y', strtotime($userData[0]['User']['dob']));
                 $pdf->Cell(180, 10, "Date of Birth: " . $dob, 0, 1);
@@ -844,6 +849,8 @@ class PDFController extends AppController {
 
     public function emailPdfs() {
         $uid = $this->current_user['id'];
+        $reports = $this->request->data['Report']['reports'];
+
         $userName = $this->Contact->find("list", array('fields' => array('id', 'doctor'), 'conditions' => array('OR' => array(array('users_id' => $uid), array('isOfficial' => 1)))));
 //        $userName = $this->Contact->find("list", array('fields' => array('id', 'doctor'), 'conditions' => array('isOfficial' => 1)));
 //        $userName = Set::combine($users, '{n}.User.id', array('{0} {1} ( {2} )', '{n}.User.firstName', '{n}.User.lastName', '{n}.User.email'));
@@ -856,8 +863,9 @@ class PDFController extends AppController {
                 $end = $this->request->data['Report']['end'];
                 $start = date('Y-m-d', strtotime($start));
                 $end = date('Y-m-d', strtotime($end));
+                $startfm = date('d-m-Y', strtotime($start));
+                $endfm = date('d-m-Y', strtotime($end));
 
-                $this->Session->setFlash(__('The emails has been successfully sent.'), 'default', array(), 'good');
 
 //            $userEmails = $this->User->find('all', array('conditions' => array('role' => "admin")));
 
@@ -869,7 +877,7 @@ class PDFController extends AppController {
                     $userEmail = $this->User->find('all', array('conditions' => array('id' => $uid)));
 
 
-                    $emailTitle = "Your Patient: " . $userEmail[$i]['User']['firstName'] . " " . $userEmail[$i]['User']['lastName'] . " has sent you his/her records between " . $start . " and " . $end;
+                    $emailTitle = "Your Patient: " . $userEmail[$i]['User']['firstName'] . " " . $userEmail[$i]['User']['lastName'] . " has sent you his/her records between " . $startfm . " and " . $endfm;
                     $emailDesc = "Please check attachment to see more detailed information";
 
 //                $pdfName = $news['News']['pdf_name'];
@@ -878,8 +886,8 @@ class PDFController extends AppController {
                     $mail->isSMTP();                                      // Set mailer to use SMTP
                     $mail->Host = 'ssl://smtp.gmail.com';  // Specify main and backup server
                     $mail->SMTPAuth = true;                               // Enable SMTP authentication
-                    $mail->Username = 'team61fabry';                            // SMTP username
-                    $mail->Password = 'ieteam61';                           // SMTP password
+                    $mail->Username = 'fabry.au.monash';                            // SMTP username
+                    $mail->Password = 'Tefo123123';                             // SMTP password
                     $mail->SMTPSecure = 'tls';                            // Enable encryption, 'ssl' also accepted
                     $mail->Port = 465;
 
@@ -894,10 +902,21 @@ class PDFController extends AppController {
                     $this->exerciseReport("F");
                     $this->bowelReport("F");
 
-                    $mail->addAttachment("Medication Report" . date("d-m-Y") . ".pdf");
-                    $mail->addAttachment("Pain Report" . date("d-m-Y") . ".pdf";);
-                    $mail->addAttachment("Exercise Report" . date("d-m-Y") . ".pdf";);
-                    $mail->addAttachment("Bowel Report" . date("d-m-Y") . ".pdf";);
+                    if ($reports == "all") {
+
+                        $mail->addAttachment("Medication Report" . date("d-m-Y") . ".pdf");
+                        $mail->addAttachment("Pain Report" . date("d-m-Y") . ".pdf");
+                        $mail->addAttachment("Exercise Report" . date("d-m-Y") . ".pdf");
+                        $mail->addAttachment("Bowel Report" . date("d-m-Y") . ".pdf");
+                    } elseif ($reports == "Medication Report") {
+                        $mail->addAttachment("Medication Report" . date("d-m-Y") . ".pdf");
+                    } elseif ($reports == "Pain Report") {
+                        $mail->addAttachment("Pain Report" . date("d-m-Y") . ".pdf");
+                    } elseif ($reports == "Exercise Report") {
+                        $mail->addAttachment("Exercise Report" . date("d-m-Y") . ".pdf");
+                    } elseif ($reports == "Bowel Report") {
+                        $mail->addAttachment("Bowel Report" . date("d-m-Y") . ".pdf");
+                    }
 
                     $mail->Subject = $emailTitle;
                     $mail->Body = $emailDesc;
@@ -906,12 +925,15 @@ class PDFController extends AppController {
                     $timeLimits = 60 * 60;
                     set_time_limit($timeLimits);
 
+
                     if (!$mail->send()) {
                         echo 'Message could not be sent.';
                         echo 'Mailer Error: ' . $mail->ErrorInfo;
                         exit;
                     }
                 }
+                $this->Session->setFlash(__('The email has been sent successfully.'), 'default', array(), 'good');
+
                 $this->redirect(array('controller' => 'PDF', 'action' => 'emailPdfs'));
             } else {
                 $this->Session->setFlash(__('Please choose at least one email before sending your document.'), 'default', array(), 'bad');

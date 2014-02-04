@@ -3,7 +3,7 @@
     <ul>
 
         <li><?php echo $this->Html->link(__('Back To List of News'), array('action' => 'index')); ?></li>
-        
+
     </ul>
 </div>
 <div class="news view">

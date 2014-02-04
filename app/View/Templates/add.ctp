@@ -7,7 +7,7 @@
 		<li><?php echo $this->Html->link(__('Back to List'), array('action' => 'index')); ?></li>
 	</ul>
 </div>
-<?php echo $this->Form->create('Template'); ?>
+<?php echo $this->Form->create('Template',array('novalidate' => true)); ?>
 	<fieldset>
 		<legend><?php echo __('Add Template'); ?></legend>
 	<?php

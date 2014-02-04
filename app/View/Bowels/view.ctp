@@ -8,7 +8,7 @@
             echo $this->Form->postLink(__('Delete Entry'), array('action' => 'delete', $bowel['Bowel']['id']), null, __('Are you sure you want to delete your bowel movement entry on ' . $date . '?', $bowel['Bowel']['id']));
             ?> </li>
         <li><?php echo $this->Html->link(__('Back to List'), array('action' => 'index')); ?> </li>
-<!--		<li><?php // echo $this->Html->link(__('New Bowel'), array('action' => 'add'));  ?> </li>-->
+<!--		<li><?php // echo $this->Html->link(__('New Bowel'), array('action' => 'add'));   ?> </li>-->
     </ul>
 </div>
 <div class="bowels view">
@@ -16,7 +16,8 @@
     <dl>
         <dt><?php echo __('Date'); ?></dt>
         <dd>
-            <?php $timestamp = strtotime($bowel['Bowel']['date']);
+            <?php
+            $timestamp = strtotime($bowel['Bowel']['date']);
             echo date('d-m-Y', $timestamp)
             ?>
             &nbsp;

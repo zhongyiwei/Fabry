@@ -12,7 +12,8 @@ echo $this->Html->script('jquery-ui-timepicker-addon.js');
     <h3><?php echo __('Actions'); ?></h3>
     <ul>
 
-        <li><?php echo $this->Html->link(__('Back'), array('action' => 'index')); ?></li>
+        <li><?php echo $this->Html->link(__('Back to Calendar'), array('action' => 'calendarEvent', 'controller' => 'calendarEvents')); ?></li>
+        <li><?php echo $this->Html->link(__('Back to List'), array('action' => 'index')); ?></li>
 
     </ul>
 </div>
@@ -32,45 +33,95 @@ echo $this->Html->script('jquery-ui-timepicker-addon.js');
         }
         echo $this->Form2->input('end', array('id' => 'dateTimePickerEnd', 'type' => 'text'));
         // echo $this->Form->input('allDay',array('id' => 'checkbox','onclick'=>'changeContent()'));
-        echo $this->Form2->input('repeatTimes', array('label' => 'Repeat for how many times?', 'min' => 1));
+        echo $this->Form2->input('repeatTimes', array('id' => 'repeatTimes', 'label' => 'Repeat for how many times?', 'min' => 1));
         echo $this->Form2->input('frequency');
         ?>
     </fieldset>
     <?php echo $this->Form2->end(__('Submit')); ?>
 </div>
 
+
 <script type="text/javascript">
-    $('#dateTimePickerStart').datetimepicker({dateFormat: 'dd-mm-yy'});
-    $('#dateTimePickerEnd').datetimepicker({dateFormat: 'dd-mm-yy'});
-
-    function changeContent() {
-        if ($('#checkbox').prop('checked')) {
-            $('#dateTimePickerEnd').hide();
-        } else {
-            $('#dateTimePickerEnd').show();
-        }
-    }
     $(document).ready(function() {
-        var formattedDate = new Date($('#dateTimePickerStart').val());
-        var d = formattedDate.getDate();
-        var m = formattedDate.getMonth();
-        m += 1;  // JavaScript months are 0-11
+    $('Form2.#repeatTimes').keypress(function(key) {
+    if (key.charCode < 48 || key.charCode > 57) return false;
+    });</script>
+<script type="text/javascript">
+            $('#dateTimePickerStart').datetimepicker({dateFormat: 'dd-mm-yy'});
+            // $('#dateTimePickerEnd').datetimepicker({dateFormat: 'dd-mm-yy'});
 
-        var hour = formattedDate.getHours();
-        var minute = formattedDate.getMinutes();
+            // function changeContent() {
+            //     if ($('#checkbox').prop('checked')) {
+            //         $('#dateTimePickerEnd').hide();
+            //     } else {
+            //         $('#dateTimePickerEnd').show();
+            //     }
+            // }
+            $(document).ready(function() {
+    var formattedDate = new Date($('#dateTimePickerStart').val());
+            var d = formattedDate.getDate();
+            var m = formattedDate.getMonth();
+            m += 1; // JavaScript months are 0-11
 
-        var y = formattedDate.getFullYear();
+            var hour = formattedDate.getHours();
+            var minute = formattedDate.getMinutes();
+            var y = formattedDate.getFullYear();
+            if (d.toString().length < 2) {
+    d = "0" + d;
+    }
 
-        if (d.toString().length < 2) {
-            d = "0" + d;
-        }
+    if (m.toString().length < 2) {
+    m = "0" + m;
+    }
+    if (hour.toString().length < 2) {
+    hour = "0" + hour;
+    }
 
-        if (m.toString().length < 2) {
-            m = "0" + m;
-        }
-        var check = $('#dateTimePickerStart').val();
-        if ( check !== "") {
-            $("#dateTimePickerStart").val(d + "-" + m + "-" + y);
-        }
+    if (minute.toString().length < 2) {
+    minute = "0" + minute;
+    }
+    var check = $('#dateTimePickerStart').val();
+            if (check !== "") {
+    $("#dateTimePickerStart").val(d + "-" + m + "-" + y + " " + hour + ":" + minute);
+    }
+    });</script>
+<script type="text/javascript">
+
+            $('#dateTimePickerEnd').datetimepicker({dateFormat: 'dd-mm-yy'});
+            function changeContent() {
+            if ($('#checkbox').prop('checked')) {
+            $('#dateTimePickerEnd').hide();
+            } else {
+            $('#dateTimePickerEnd').show();
+            }
+            }
+    $(document).ready(function() {
+    var formattedDate = new Date($('#dateTimePickerEnd').val());
+            var d = formattedDate.getDate();
+            var m = formattedDate.getMonth();
+            m += 1; // JavaScript months are 0-11
+
+            var hour = formattedDate.getHours();
+            var minute = formattedDate.getMinutes();
+            var y = formattedDate.getFullYear();
+            if (d.toString().length < 2) {
+    d = "0" + d;
+    }
+
+    if (m.toString().length < 2) {
+    m = "0" + m;
+    }
+    if (hour.toString().length < 2) {
+    hour = "0" + hour;
+    }
+
+    if (minute.toString().length < 2) {
+    minute = "0" + minute;
+    }
+
+    var check = $('#dateTimePickerEnd').val();
+            if (check !== "") {
+    $("#dateTimePickerEnd").val(d + "-" + m + "-" + y + " " + hour + ":" + minute);
+    }
     });
 </script>

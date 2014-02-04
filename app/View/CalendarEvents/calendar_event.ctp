@@ -62,7 +62,7 @@ echo $medicationEvent;
         //        var m = date.getMonth();
         //        var y = date.getFullYear();
         $('#calendar').fullCalendar({
-             disableDragging: true,
+            disableDragging: true,
             //            eventClick: function(calEvent, jsEvent) {
             //                var title = prompt('Event Title:', calEvent.title, {
             //                    buttons: {
@@ -81,19 +81,18 @@ echo $medicationEvent;
                 var curr_year = date.getFullYear();
                 var finalDate = curr_year + "-" + curr_month + "-" + curr_date;
 
-//                window.location = <?php // echo "'" . $this->webroot . "calendarEvents/add?date='"   ?> + finalDate;
+//                window.location = <?php // echo "'" . $this->webroot . "calendarEvents/add?date='"    ?> + finalDate;
                 $("#dialog").dialog();
 //                finalDate = $.trim(finalDate)
                 $("#toPersonal").prop("href", "<?php echo $this->webroot . "calendarEvents/add?date=" ?>" + finalDate);
                 $("#toAppointment").prop("href", "<?php echo $this->webroot . "appointments/add?redirect=calendar&date=" ?>" + finalDate);
 <?php
 if ($current_user['role'] == "admin") {
-    $temp = '"'.$this->webroot . "events/add?date=".'"';
+    $temp = '"' . $this->webroot . "events/add?date=" . '"';
     echo "$('#toEvent').prop('href',  $temp + finalDate);";
 }
 ?>
             },
-                    
             header: {
                 left: 'prev,next today',
                 center: 'title',

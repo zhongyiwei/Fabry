@@ -13,7 +13,8 @@ echo $this->Html->script('jquery-ui-timepicker-addon.js');
     <ul>
 
         <li><?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $this->Form->value('CalendarEvent.id')), null, __('Are you sure you want to delete ' . $this->Form->value('CalendarEvent.title') . ' from the event list?')); ?></li>
-        <li><?php echo $this->Html->link(__('Back'), array('action' => 'index')); ?></li>
+        <li><?php echo $this->Html->link(__('Back to Calendar'), array('action' => 'calendarEvent', 'controller' => 'calendarEvents')); ?></li>
+        <li><?php echo $this->Html->link(__('Back to List'), array('action' => 'index')); ?></li>
 
     </ul>
 </div>
@@ -38,15 +39,13 @@ echo $this->Html->script('jquery-ui-timepicker-addon.js');
     $('#dateTimePickerStart').datetimepicker({dateFormat: 'dd-mm-yy'});
     $('#dateTimePickerEnd').datetimepicker({dateFormat: 'dd-mm-yy'});
 
-    function changeContent() {
-        if ($('#checkbox').prop('checked')) {
-            $('#dateTimePickerEnd').hide();
-        } else {
-            $('#dateTimePickerEnd').show();
-        }
-    }
-    ;
-
+    // function changeContent() {
+    //     if ($('#checkbox').prop('checked')) {
+    //         $('#dateTimePickerEnd').hide();
+    //     } else {
+    //         $('#dateTimePickerEnd').show();
+    //     }
+    // }
     $(document).ready(function() {
         var formattedDate = new Date($('#dateTimePickerStart').val());
         var d = formattedDate.getDate();
@@ -58,14 +57,6 @@ echo $this->Html->script('jquery-ui-timepicker-addon.js');
 
         var y = formattedDate.getFullYear();
 
-        if (hour.toString().length < 2) {
-            hour = "0" + hour;
-        }
-
-        if (minute.toString().length < 2) {
-            minute = "0" + minute;
-        }
-
         if (d.toString().length < 2) {
             d = "0" + d;
         }
@@ -73,10 +64,31 @@ echo $this->Html->script('jquery-ui-timepicker-addon.js');
         if (m.toString().length < 2) {
             m = "0" + m;
         }
+        if (hour.toString().length < 2) {
+            hour = "0" + hour;
+        }
 
+        if (minute.toString().length < 2) {
+            minute = "0" + minute;
+        }
+        var check = $('#dateTimePickerStart').val();
+        if (check !== "") {
+            $("#dateTimePickerStart").val(d + "-" + m + "-" + y + " " + hour + ":" + minute);
+        }
+    });
+</script>
+<script type="text/javascript">
 
-        $("#dateTimePickerStart").val(d + "-" + m + "-" + y + " " + hour + ":" + minute);
+    $('#dateTimePickerEnd').datetimepicker({dateFormat: 'dd-mm-yy'});
 
+    function changeContent() {
+        if ($('#checkbox').prop('checked')) {
+            $('#dateTimePickerEnd').hide();
+        } else {
+            $('#dateTimePickerEnd').show();
+        }
+    }
+    $(document).ready(function() {
         var formattedDate = new Date($('#dateTimePickerEnd').val());
         var d = formattedDate.getDate();
         var m = formattedDate.getMonth();
@@ -87,6 +99,13 @@ echo $this->Html->script('jquery-ui-timepicker-addon.js');
 
         var y = formattedDate.getFullYear();
 
+        if (d.toString().length < 2) {
+            d = "0" + d;
+        }
+
+        if (m.toString().length < 2) {
+            m = "0" + m;
+        }
         if (hour.toString().length < 2) {
             hour = "0" + hour;
         }
@@ -95,14 +114,9 @@ echo $this->Html->script('jquery-ui-timepicker-addon.js');
             minute = "0" + minute;
         }
 
-        if (d.toString().length < 2) {
-            d = "0" + d;
+        var check = $('#dateTimePickerEnd').val();
+        if (check !== "") {
+            $("#dateTimePickerEnd").val(d + "-" + m + "-" + y + " " + hour + ":" + minute);
         }
-
-        if (m.toString().length < 2) {
-            m = "0" + m;
-        }
-
-        $("#dateTimePickerEnd").val(d + "-" + m + "-" + y + " " + hour + ":" + minute);
     });
 </script>

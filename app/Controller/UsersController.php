@@ -157,7 +157,7 @@ class UsersController extends AppController {
             if ($this->User->save($this->request->data)) {
                 $this->Session->setFlash(__('The profile has been edited successfully.'), 'default', array(), 'good');
                 /* $userId = $current_user['id']; */
-                return $this->redirect(array('action' => 'view'));
+                 return $this->redirect(array('controller' => 'pages', 'action' => 'display', 'home'));
             } else {
                 $this->Session->setFlash(__('We cannot apply these changes. Please, try again.'), 'default', array(), 'bad');
             }

@@ -21,7 +21,10 @@ class Pain extends AppModel {
  */
 	public $validate = array(
 		'date' => array(
+					    'rule' => 'isUnique',
+				'message' => 'You cannot have more than an entry per day',
 			'date' => array(
+
 				'rule' => array('date'),
 				'message' => 'Please select a date',
 				//'allowEmpty' => false,
@@ -33,20 +36,16 @@ class Pain extends AppModel {
 		'painLevel' => array(
 			'numeric' => array(
 				'rule' => array('numeric'),
-				'message' => 'Please select a number',
+				'message' => 'Please select a number',),
+                                array(
+                                      'rule' => array('inList', array('0','1','2','3','4','5','6','7','8','9','10')),                                
+                                        'message' => 'Pain level has to be between number of 0 - 10'
 				//'allowEmpty' => false,
 				//'required' => false,
 				//'last' => false, // Stop validation after this rule
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
-			'between' => array(
-				'rule' => array('between',0,10),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
+			
 		),
 		'users_id' => array(
 			'numeric' => array(

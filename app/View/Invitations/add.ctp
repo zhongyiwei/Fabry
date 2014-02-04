@@ -8,7 +8,7 @@
 </div>
 
 <div class="invitations form">
-    <?php echo $this->Form->create('Invitation'); ?>
+    <?php echo $this->Form->create('Invitation', array('novalidate' => true)); ?>
     <fieldset>
         <legend><?php echo __('Add Invitation'); ?></legend>
         <?php

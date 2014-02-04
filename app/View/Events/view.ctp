@@ -2,7 +2,7 @@
     <h3><?php echo __('Actions'); ?></h3>
     <ul>
         <li><?php echo $this->Html->link(__('Edit Event'), array('action' => 'edit', $event['Event']['id'])); ?> </li>
-        <li><?php echo $this->Form->postLink(__('Delete Event'), array('action' => 'delete', $event['Event']['id']), null, __('Are you sure you want to delete '.$event['Event']['description'].' event ?', $event['Event']['id'])); ?> </li>
+        <li><?php echo $this->Form->postLink(__('Delete Event'), array('action' => 'delete', $event['Event']['id']), null, __('Are you sure you want to delete ' . $event['Event']['description'] . ' event ?', $event['Event']['id'])); ?> </li>
         <li><?php echo $this->Html->link(__('List Events'), array('action' => 'index')); ?> </li>
         <li><?php echo $this->Html->link(__('New Event'), array('action' => 'add')); ?> </li>
     </ul>
@@ -26,17 +26,12 @@
             <?php echo date('d-m-Y G:i', strtotime($event['Event']['end'])); ?>
             &nbsp;
         </dd>
-        <dt><?php echo __('All Day'); ?></dt>
-        <dd>
-            <?php echo h($event['Event']['allDay']); ?>
-            &nbsp;
-        </dd>
     </dl>
     <br/>
-    <?php     if ($current_user['role'] != 'member') { ?>
-    <h3>Response List</h3>
-    <?php
-    // debug($invitationData);
+    <?php if ($current_user['role'] != 'member') { ?>
+        <h3>Response List</h3>
+        <?php
+        // debug($invitationData);
 
         echo "<table id='js-datatable'>
                 <thead>

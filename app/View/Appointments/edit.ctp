@@ -11,8 +11,8 @@ echo $this->Html->script('jquery-ui-timepicker-addon.js');
 <div class="actions">
 
     <ul>
-        <li><?php echo $this->Form->postLink(__('Delete Appointment'), array('action' => 'delete', $id), null, __('Are you sure you want to delete your appointment at '.date('d-m-Y G:i', strtotime($this->Form->value('Appointment.date'))).' ?')); ?></li>
-        <li><?php echo $this->Html->link(__('Back to Calendar'), array('action' => 'calendarEvent', 'controller' => 'calendarevents')); ?></li>
+        <li><?php echo $this->Form->postLink(__('Delete Appointment'), array('action' => 'delete', $this->Form->value('Appointment.id')), null, __('Are you sure you want to delete your appointment at ' . date('d-m-Y G:i', strtotime($this->Form->value('Appointment.date'))) . ' ?')); ?></li>
+        <li><?php echo $this->Html->link(__('Back to Calendar'), array('action' => 'calendarEvent', 'controller' => 'calendarEvents')); ?></li>
         <li><?php echo $this->Html->link(__('Back to List'), array('action' => 'index')); ?></li>
     </ul>
 </div>
@@ -55,6 +55,40 @@ echo $this->Html->script('jquery-ui-timepicker-addon.js');
     <?php echo $this->Form->end(__('Submit')); ?>
 </div>
 
+
 <script type="text/javascript">
     $('#dateTimePickerStart').datetimepicker({dateFormat: 'dd-mm-yy'});
+
+    $(document).ready(function() {
+        var formattedDate = new Date($('#dateTimePickerStart').val());
+        var d = formattedDate.getDate();
+        var m = formattedDate.getMonth();
+        m += 1;  // JavaScript months are 0-11
+
+        var hour = formattedDate.getHours();
+        var minute = formattedDate.getMinutes();
+
+        var y = formattedDate.getFullYear();
+
+        if (d.toString().length < 2) {
+            d = "0" + d;
+        }
+
+        if (m.toString().length < 2) {
+            m = "0" + m;
+        }
+
+        if (hour.toString().length < 2) {
+            hour = "0" + hour;
+        }
+
+        if (minute.toString().length < 2) {
+            minute = "0" + minute;
+        }
+
+        var check = $('#dateTimePickerStart').val();
+        if (check !== "") {
+            $("#dateTimePickerStart").val(d + "-" + m + "-" + y + " " + hour + ":" + minute);
+        }
+    });
 </script>

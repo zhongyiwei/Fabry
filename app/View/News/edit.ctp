@@ -6,7 +6,7 @@ echo $this->Html->script('ckfinder/ckfinder');
     <h3><?php echo __('Actions'); ?></h3>
     <ul>
 
-        <li><?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $this->Form->value('News.id')), null, __('Are you sure you want to delete the newsletter "'.$this->Form->value('News.news_title').'"?')); ?></li>
+        <li><?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $this->Form->value('News.id')), null, __('Are you sure you want to delete the newsletter "' . $this->Form->value('News.news_title') . '"?')); ?></li>
         <li><?php echo $this->Html->link(__('Back to Newsletter Lists'), array('action' => 'index')); ?></li>
     </ul>
 </div>
@@ -17,7 +17,7 @@ echo $this->Html->script('ckfinder/ckfinder');
         <?php
 //        $publishStatus = array('Private' => 'Private', 'Published' => 'Published');
         echo $this->Form->input('id');
-        echo $this->Form->input('news_title', array('label'=>'Subject'));
+        echo $this->Form->input('news_title', array('label' => 'Subject'));
         echo $this->Form->input('news_description', array('id' => 'news_description', 'news' => 'ckeditor'));
 //        echo $this->Form->input('publish_status', array('options' => $publishStatus, 'default' => 'Private'));
         //echo $this->Form->input('User');
@@ -31,7 +31,7 @@ echo $this->Html->script('ckfinder/ckfinder');
 
 <script type="text/javascript">
 //    var ck_newsContent = CKEDITOR.replace( 'news_description',{
-//        filebrowserBrowseUrl : '<?php // echo $pathForFinder ?>/js/ckfinder/ckfinder.html',
+//        filebrowserBrowseUrl : '<?php // echo $pathForFinder  ?>/js/ckfinder/ckfinder.html',
 //        filebrowserWindowWidth : '600',
 //        filebrowserWindowHeight : '300'
 //    } ); 

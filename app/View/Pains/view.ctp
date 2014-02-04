@@ -32,7 +32,7 @@
         </dd>
         <dt><?php echo __('Medication'); ?></dt>
         <dd>
-<?php echo h($pain['Pain']['medication']); ?>
+          <?php echo h($pain['Pain']['medication'] == 1 ? "Taken" : "Not Taken");?>
             &nbsp;
         </dd>
         <dt><?php echo __('Illness'); ?></dt>

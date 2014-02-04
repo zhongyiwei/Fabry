@@ -49,10 +49,10 @@ class TemplatesController extends AppController {
 		if ($this->request->is('post')) {
 			$this->Template->create();
 			if ($this->Template->save($this->request->data)) {
-				$this->Session->setFlash(__('The template has been saved.'));
+				$this->Session->setFlash(__('The template has been saved.'),'default', array(), 'good');
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The template could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('The template could not be saved. Please, try again.'),'default', array(), 'bad');
 			}
 		}
 	}
@@ -70,10 +70,10 @@ class TemplatesController extends AppController {
 		}
 		if ($this->request->is(array('post', 'put'))) {
 			if ($this->Template->save($this->request->data)) {
-				$this->Session->setFlash(__('The template has been saved.'));
+				$this->Session->setFlash(__('The template has been saved.'),'default', array(), 'good');
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The template could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('The template could not be saved. Please, try again.'),'default', array(), 'bad');
 			}
 		} else {
 			$options = array('conditions' => array('Template.' . $this->Template->primaryKey => $id));
@@ -95,9 +95,9 @@ class TemplatesController extends AppController {
 		}
 		$this->request->onlyAllow('post', 'delete');
 		if ($this->Template->delete()) {
-			$this->Session->setFlash(__('The template has been deleted.'));
+			$this->Session->setFlash(__('The template has been deleted.'),'default', array(), 'good');
 		} else {
-			$this->Session->setFlash(__('The template could not be deleted. Please, try again.'));
+			$this->Session->setFlash(__('The template could not be deleted. Please, try again.'),'default', array(), 'bad');
 		}
 		return $this->redirect(array('action' => 'index'));
 	}}

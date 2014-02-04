@@ -14,7 +14,7 @@
                 <li><?php echo $this->Form->postLink(__('Delete Contact'), array('action' => 'delete', $contact['Contact']['id']), null, __('Are you sure you want to delete ' . $contact['Contact']['doctor'] . 'from the official list ?')); ?> </li>
                 <li><?php echo $this->Html->link(__('New Contact'), array('action' => 'admadd')); ?> </li>
 
-            <?php
+                <?php
             } elseif ($current_user['role'] == 'member' && $contact['Contact']['isOfficial'] != 1): {
                 $users_id = $current_user['id'];
                 ?>
@@ -23,7 +23,8 @@
                 <li><?php echo $this->Form->postLink(__('Delete Contact'), array('action' => 'delete', $contact['Contact']['id']), null, __('Are you sure you want to delete ' . $contact['Contact']['doctor'] . 'from the list ?')); ?> </li>
                 <li><?php echo $this->Html->link(__('New Contact'), array('action' => 'add')); ?> </li>
 
-            <?php }
+            <?php
+            }
         endif;
         ?>
     </ul>
@@ -98,7 +99,7 @@
               <?php echo $this->Html->link($contact['Users']['id'], array('controller' => 'users', 'action' => 'view', $contact['Users']['id'])); ?>
               &nbsp;
               </dd> */ ?>
-            <?php endif;
+        <?php endif;
         ?>
     </dl>
 </div>

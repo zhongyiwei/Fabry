@@ -8,7 +8,7 @@
             echo $this->Form->postLink(__('Delete Entry'), array('action' => 'delete', $exercise['Exercise']['id']), null, __('Are you sure you want to delete your exercise entry on ' . $date . '?', $exercise['Exercise']['id']));
             ?> </li>
         <li><?php echo $this->Html->link(__('Back to List'), array('action' => 'index')); ?> </li>
-        <!--<li><?php // echo $this->Html->link(__('New Exercise'), array('action' => 'add'));   ?> </li>-->
+        <!--<li><?php // echo $this->Html->link(__('New Exercise'), array('action' => 'add'));    ?> </li>-->
     </ul>
 </div>
 
